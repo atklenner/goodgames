@@ -35,14 +35,14 @@
                 </tbody>
             </table>
         </section>
-        <form class="container">
+        <form class="container" action="/new-game" method="post">
             <fieldset>
                 <label for="name">Name</label>
-                <input type="text" id="name">
+                <input type="text" id="name" name="name">
                 <label for="genre">Genre</label>
-                <input type="text" id="genre">
+                <input type="text" id="genre" name="genre">
                 <label for="rating">Rating</label>
-                <select id="rating">
+                <select id="rating" name="rating">
                     <option value="Unrated">Unrated</option>
                     <option value="Did Not Like">Did Not Like</option>
                     <option value="It Was OK">It Was OK</option>
@@ -51,7 +51,7 @@
                     <option value="Loved It">Loved It</option>
                 </select>
                 <div class="float-right">
-                    <input type="checkbox" id="completed">
+                    <input type="checkbox" id="completed" name="completed">
                     <label class="label-inline" for="completed">Completed</label>
                 </div>
                 <input type="submit" class="button-primary" value="Submit">

@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cors = require("cors");
 // const MongoClient = require("mongodb").MongoClient;
 
 // let db;
@@ -27,12 +28,8 @@ let games = [
   },
 ];
 
-// figure out how you will deal with new items
-//    on a GET request, EJS will render the page with all the new items
-//    but what about when you fill out a form to add a new game?
-//    should you use JS to add a new item(s), or refresh the page?
-
 app.set("view engine", "ejs");
+app.use(cors());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -41,6 +38,18 @@ app.use(morgan("tiny"));
 // don't forget to make these async when you actually use the DB
 app.get("/", (req, res) => {
   res.render("index", { games });
+});
+
+app.post("/new-game", (req, res) => {
+  console.log(req.body);
+  let newGame = {
+    name: req.body.name,
+    genre: req.body.genre,
+    rating: req.body.rating,
+    completed: req.body.completed || false,
+  };
+  games.push(newGame);
+  res.redirect("/");
 });
 
 app.listen(process.env.PORT, () => console.log("server is running"));
