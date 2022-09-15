@@ -36,8 +36,8 @@
                             <td><%= games[i].rating || "Unrated" %></td>
                             <td><%= (games[i].completed) ? "Yes" : "No" %></td>
                             <td>
-                                <button id=<%= `${games[i].id}` %> class="edit-btn button-small">Edit</button>
-                                <button id=<%= `${games[i].id}` %> class="delete-btn button-small">Delete</button>
+                                <button id=<%= `${games[i]._id}` %> class="edit-btn button-small">Edit</button>
+                                <button id=<%= `${games[i]._id}` %> class="delete-btn button-small">Delete</button>
                             </td>
                         </tr>
                     <% } %>
@@ -64,7 +64,8 @@
                     <input type="checkbox" id="completed" name="completed">
                     <label class="label-inline" for="completed">Completed</label>
                 </div>
-                <input type="submit" class="button-primary submit-btn" value="Submit">
+                <input type="submit" class="submit-btn" value="Submit">
+                <button class="reset-btn">Reset</button>
             </fieldset>
         </form>
     </main>
