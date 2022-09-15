@@ -13,7 +13,7 @@
 <body>
     <main class="wrapper">
         <section class="container">
-            <h1>Keep Track of What You Have Played</h1>
+            <h1>Goodreads But For Video Games</h1>
             <table>
                 <thead>
                     <tr>
@@ -21,21 +21,31 @@
                         <th>Genre</th>
                         <th>Rating</th>
                         <th>Completed</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% for(let i = 0; i < games.length; i++) {%>
                         <tr>
-                            <td><%= games[i].name %></td>
+                            <td>
+                                <strong>
+                                    <%= games[i].name %>
+                                </strong>
+                            </td>
                             <td><%= games[i].genre %></td>
                             <td><%= games[i].rating || "Unrated" %></td>
                             <td><%= (games[i].completed) ? "Yes" : "No" %></td>
+                            <td>
+                                <button id=<%= `${games[i].id}` %> class="edit-btn button-small">Edit</button>
+                                <button id=<%= `${games[i].id}` %> class="delete-btn button-small">Delete</button>
+                            </td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
         </section>
-        <form class="container" action="/new-game" method="post">
+        <form class="container" action="/api/new-game" method="post">
+            <h2 class="form-header">New Game</h2>
             <fieldset>
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name">
@@ -54,7 +64,7 @@
                     <input type="checkbox" id="completed" name="completed">
                     <label class="label-inline" for="completed">Completed</label>
                 </div>
-                <input type="submit" class="button-primary" value="Submit">
+                <input type="submit" class="button-primary submit-btn" value="Submit">
             </fieldset>
         </form>
     </main>

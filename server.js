@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
   res.render("index", { games });
 });
 
-app.post("/new-game", (req, res) => {
+app.post("/api/new-game", (req, res) => {
   console.log(req.body);
   let newGame = {
     name: req.body.name,
@@ -51,5 +51,9 @@ app.post("/new-game", (req, res) => {
   games.push(newGame);
   res.redirect("/");
 });
+
+app.put("/api/update-game/:id", (req, res) => {});
+
+app.delete("/api/delete-game/:id", (req, res) => {});
 
 app.listen(process.env.PORT, () => console.log("server is running"));
