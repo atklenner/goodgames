@@ -27,14 +27,14 @@
                 <tbody>
                     <% for(let i = 0; i < games.length; i++) {%>
                         <tr>
-                            <td>
+                            <td id=<%= `game-name-${games[i]._id}` %>>
                                 <strong>
                                     <%= games[i].name %>
                                 </strong>
                             </td>
-                            <td><%= games[i].genre %></td>
-                            <td><%= games[i].rating || "Unrated" %></td>
-                            <td><%= (games[i].completed) ? "Yes" : "No" %></td>
+                            <td id=<%= `game-genre-${games[i]._id}` %>><%= games[i].genre %></td>
+                            <td id=<%= `game-rating-${games[i]._id}` %>><%= games[i].rating || "Unrated" %></td>
+                            <td id=<%= `game-completed-${games[i]._id}` %>><%= games[i].completed || "No" %></td>
                             <td>
                                 <button id=<%= `${games[i]._id}` %> class="edit-btn button-small">Edit</button>
                                 <button id=<%= `${games[i]._id}` %> class="delete-btn button-small">Delete</button>
@@ -44,7 +44,8 @@
                 </tbody>
             </table>
         </section>
-        <form class="container" action="/api/new-game" method="post">
+        <!-- <form class="container" action="/api/new-game" method="post"> -->
+        <form class="container">
             <h2 class="form-header">New Game</h2>
             <fieldset>
                 <label for="name">Name</label>
@@ -60,10 +61,13 @@
                     <option value="Really Liked It">Really Liked It</option>
                     <option value="Loved It">Loved It</option>
                 </select>
-                <div class="float-right">
-                    <input type="checkbox" id="completed" name="completed">
-                    <label class="label-inline" for="completed">Completed</label>
-                </div>
+                <label for="completed">Completed</label>
+                <select id="completed" name="completed">
+                    <option value="No">No</option>
+                    <option value="Playing">Playing</option>
+                    <option value="Yes">Yes</option>
+                    <option value="Quit">Quit</option>
+                </select>
                 <input type="submit" class="submit-btn" value="Submit">
                 <button class="reset-btn">Reset</button>
             </fieldset>

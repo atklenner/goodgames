@@ -17,14 +17,20 @@ const cors = require("cors");
 // });
 
 let games = [
-  { _id: "0", name: "Borderlands", genre: "FPS", completed: true, rating: 4 },
-  { _id: "1", name: "Cuphead", genre: "Platformer", completed: false },
+  {
+    _id: "0",
+    name: "Borderlands",
+    genre: "FPS",
+    completed: "Yes",
+    rating: "Really Liked It",
+  },
+  { _id: "1", name: "Cuphead", genre: "Platformer", completed: "Playing" },
   {
     _id: "2",
     name: "Stardew Valley",
     genre: "Life Sim",
-    completed: true,
-    rating: 5,
+    completed: "Yes",
+    rating: "Loved It",
   },
 ];
 
