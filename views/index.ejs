@@ -5,13 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track What You Have Played</title>
-    <link rel="stylesheet" href="css/normlaize.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/milligram.min.css" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <h1>Keep Track of What You Have Played</h1>
-
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Rating</th>
+                <th>Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i = 0; i < games.length; i++) {%>
+                <tr>
+                    <th><%= games[i].name %></th>
+                    <th><%= games[i].genre %></th>
+                    <th><%= games[i].rating || "Unrated" %></th>
+                    <th><%= (games[i].completed) ? "Yes" : "No" %></th>
+                </tr>
+            <% } %>
+        </tbody>
+        </table>
     <script src="js/main.js"></script>
 </body>
 </html>
