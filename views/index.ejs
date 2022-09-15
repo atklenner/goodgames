@@ -10,27 +10,54 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <h1>Keep Track of What You Have Played</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>Rating</th>
-                <th>Completed</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for(let i = 0; i < games.length; i++) {%>
-                <tr>
-                    <th><%= games[i].name %></th>
-                    <th><%= games[i].genre %></th>
-                    <th><%= games[i].rating || "Unrated" %></th>
-                    <th><%= (games[i].completed) ? "Yes" : "No" %></th>
-                </tr>
-            <% } %>
-        </tbody>
-        </table>
+    <main class="wrapper">
+        <section class="container">
+            <h1>Keep Track of What You Have Played</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Genre</th>
+                        <th>Rating</th>
+                        <th>Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let i = 0; i < games.length; i++) {%>
+                        <tr>
+                            <td><%= games[i].name %></td>
+                            <td><%= games[i].genre %></td>
+                            <td><%= games[i].rating || "Unrated" %></td>
+                            <td><%= (games[i].completed) ? "Yes" : "No" %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </section>
+        <form class="container">
+            <fieldset>
+                <label for="name">Name</label>
+                <input type="text" id="name">
+                <label for="genre">Genre</label>
+                <input type="text" id="genre">
+                <label for="rating">Rating</label>
+                <select id="rating">
+                    <option value="Unrated">Unrated</option>
+                    <option value="Did Not Like">Did Not Like</option>
+                    <option value="It Was OK">It Was OK</option>
+                    <option value="Liked It">Liked It</option>
+                    <option value="Really Liked It">Really Liked It</option>
+                    <option value="Loved It">Loved It</option>
+                </select>
+                <div class="float-right">
+                    <input type="checkbox" id="completed">
+                    <label class="label-inline" for="completed">Completed</label>
+                </div>
+                <input type="submit" class="button-primary" value="Submit">
+            </fieldset>
+        </form>
+    </main>
+
     <script src="js/main.js"></script>
-</body>
-</html>
+    </body>
+    </html>
