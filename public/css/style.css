@@ -10,3 +10,7 @@
   line-height: 2.8rem;
   padding: 0 1.5rem;
 }
+
+.bold {
+  font-weight: bold;
+}

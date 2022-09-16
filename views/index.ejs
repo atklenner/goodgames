@@ -27,10 +27,8 @@
                 <tbody>
                     <% for(let i = 0; i < games.length; i++) {%>
                         <tr>
-                            <td id=<%= `game-name-${games[i]._id}` %>>
-                                <strong>
-                                    <%= games[i].name %>
-                                </strong>
+                            <td id=<%= `game-name-${games[i]._id}` %> class="bold">        
+                                <%= games[i].name %>
                             </td>
                             <td id=<%= `game-genre-${games[i]._id}` %>><%= games[i].genre %></td>
                             <td id=<%= `game-rating-${games[i]._id}` %>><%= games[i].rating || "Unrated" %></td>
