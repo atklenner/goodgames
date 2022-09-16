@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-const MongoClient = require("mongodb").MongoClient;
+const { MongoClient, ObjectId } = require("mongodb");
 
 let db, gamesCollection;
 
@@ -44,31 +44,44 @@ app.post("/api/new-game", async (req, res) => {
   }
 });
 
-app.put("/api/update-game/:id", (req, res) => {
+app.put("/api/update-game/:id", async (req, res) => {
   let id = req.params.id;
-  games = games.map((game) => {
-    if (game._id === id) {
-      let newGame = {
-        _id: id,
-        name: req.body.name,
-        genre: req.body.genre,
-        rating: req.body.rating,
-        completed: req.body.completed,
-      };
-      return newGame;
-    } else {
-      return game;
-    }
-  });
-  res.json("Game Updated");
+  try {
+    let updatedGame = await gamesCollection.findOneAndUpdate(
+      { _id: ObjectId(id) },
+      { $set: { name: req.body.name } }
+    );
+    console.log(updatedGame);
+  } catch (error) {
+    console.error(error);
+  }
+  // games = games.map((game) => {
+  //   if (game._id === id) {
+  //     let newGame = {
+  //       _id: id,
+  //       name: req.body.name,
+  //       genre: req.body.genre,
+  //       rating: req.body.rating,
+  //       completed: req.body.completed,
+  //     };
+  //     return newGame;
+  //   } else {
+  //     return game;
+  //   }
+  // });
+  // res.json("Game Updated");
 });
 
-app.delete("/api/delete-game/:id", (req, res) => {
+app.delete("/api/delete-game/:id", async (req, res) => {
   let id = req.params.id;
-  games = games.filter((game) => {
-    return game._id !== id;
-  });
-  res.status(200).json("Game Deleted");
+  try {
+    let deletedGame = await gamesCollection.deleteOne({
+      _id: ObjectId(id),
+    });
+    res.json(deletedGame);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 app.listen(process.env.PORT, () => console.log("server is running"));
