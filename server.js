@@ -61,7 +61,24 @@ app.post("/api/new-game", (req, res) => {
   res.json("Game Added");
 });
 
-app.put("/api/update-game/:id", (req, res) => {});
+app.put("/api/update-game/:id", (req, res) => {
+  let id = req.params.id;
+  games = games.map((game) => {
+    if (game._id === id) {
+      let newGame = {
+        _id: id,
+        name: req.body.name,
+        genre: req.body.genre,
+        rating: req.body.rating,
+        completed: req.body.completed,
+      };
+      return newGame;
+    } else {
+      return game;
+    }
+  });
+  res.json("Game Updated");
+});
 
 app.delete("/api/delete-game/:id", (req, res) => {
   let id = req.params.id;
