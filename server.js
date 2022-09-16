@@ -58,7 +58,7 @@ app.post("/api/new-game", (req, res) => {
   };
   games.push(newGame);
   nextID++;
-  res.redirect("/");
+  res.json("Game Added");
 });
 
 app.put("/api/update-game/:id", (req, res) => {});
@@ -66,7 +66,6 @@ app.put("/api/update-game/:id", (req, res) => {});
 app.delete("/api/delete-game/:id", (req, res) => {
   let id = req.params.id;
   games = games.filter((game) => {
-    console.log(game._id);
     return game._id !== id;
   });
   res.status(200).json("Game Deleted");

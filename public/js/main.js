@@ -1,4 +1,5 @@
 const form = document.querySelector("form");
+const formHeader = document.querySelector(".form-header");
 const deleteBtns = document.querySelectorAll(".delete-btn");
 const editBtns = document.querySelectorAll(".edit-btn");
 const submitBtn = document.querySelector(".submit-btn");
@@ -20,11 +21,42 @@ editBtns.forEach((button) => {
 
 resetBtn.addEventListener("click", resetForm);
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  let name = nameInput.value;
-  let genre;
-  console.log(name);
+  let game = {
+    name: nameInput.value,
+    genre: genreInput.value,
+    rating: ratingInput.value,
+    completed: completedInput.value,
+  };
+  if (editingID) {
+    try {
+      let res = await fetch(`/api/update-game/${editingID}`, {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(game),
+      });
+      let data = await res.json();
+      console.log(data);
+      location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    try {
+      let res = await fetch("/api/new-game", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(game),
+      });
+      let data = await res.json();
+      console.log(data);
+      location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  resetForm();
 });
 
 async function deleteGame(element) {
@@ -45,6 +77,7 @@ async function updateGame(element) {}
 function resetForm() {
   editing = false;
   editingID = undefined;
+  formHeader.textContent = "New Game";
   nameInput.value = "";
   genreInput.value = "";
   ratingInput.value = "Unrated";
@@ -54,6 +87,7 @@ function resetForm() {
 function fillForm(element) {
   editing = true;
   editingID = element.target.id;
+  formHeader.textContent = "Edit Game";
   let name = document.querySelector(
     `#game-name-${element.target.id}`
   ).textContent;

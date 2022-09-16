@@ -44,34 +44,35 @@
                 </tbody>
             </table>
         </section>
-        <!-- <form class="container" action="/api/new-game" method="post"> -->
-        <form class="container">
-            <h2 class="form-header">New Game</h2>
-            <fieldset>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name">
-                <label for="genre">Genre</label>
-                <input type="text" id="genre" name="genre">
-                <label for="rating">Rating</label>
-                <select id="rating" name="rating">
-                    <option value="Unrated">Unrated</option>
-                    <option value="Did Not Like">Did Not Like</option>
-                    <option value="It Was OK">It Was OK</option>
-                    <option value="Liked It">Liked It</option>
-                    <option value="Really Liked It">Really Liked It</option>
-                    <option value="Loved It">Loved It</option>
-                </select>
-                <label for="completed">Completed</label>
-                <select id="completed" name="completed">
-                    <option value="No">No</option>
-                    <option value="Playing">Playing</option>
-                    <option value="Yes">Yes</option>
-                    <option value="Quit">Quit</option>
-                </select>
-                <input type="submit" class="submit-btn" value="Submit">
-                <button class="reset-btn">Reset</button>
-            </fieldset>
-        </form>
+        <div class="container">
+            <form>
+                <h2 class="form-header">New Game</h2>
+                <fieldset>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+                    <label for="genre">Genre</label>
+                    <input type="text" id="genre" name="genre">
+                    <label for="rating">Rating</label>
+                    <select id="rating" name="rating">
+                        <option value="Unrated">Unrated</option>
+                        <option value="Did Not Like">Did Not Like</option>
+                        <option value="It Was OK">It Was OK</option>
+                        <option value="Liked It">Liked It</option>
+                        <option value="Really Liked It">Really Liked It</option>
+                        <option value="Loved It">Loved It</option>
+                    </select>
+                    <label for="completed">Completed</label>
+                    <select id="completed" name="completed">
+                        <option value="No">No</option>
+                        <option value="Playing">Playing</option>
+                        <option value="Yes">Yes</option>
+                        <option value="Quit">Quit</option>
+                    </select>
+                    <input type="submit" class="submit-btn" value="Submit">
+                    <button class="reset-btn">Reset</button>
+                </fieldset>
+            </form>
+        </div>
     </main>
 
     <script src="js/main.js"></script>
