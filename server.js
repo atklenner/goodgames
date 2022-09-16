@@ -49,27 +49,19 @@ app.put("/api/update-game/:id", async (req, res) => {
   try {
     let updatedGame = await gamesCollection.findOneAndUpdate(
       { _id: ObjectId(id) },
-      { $set: { name: req.body.name } }
+      {
+        $set: {
+          name: req.body.name,
+          genre: req.body.genre,
+          rating: req.body.rating,
+          completed: req.body.completed,
+        },
+      }
     );
-    console.log(updatedGame);
+    res.json(updatedGame);
   } catch (error) {
     console.error(error);
   }
-  // games = games.map((game) => {
-  //   if (game._id === id) {
-  //     let newGame = {
-  //       _id: id,
-  //       name: req.body.name,
-  //       genre: req.body.genre,
-  //       rating: req.body.rating,
-  //       completed: req.body.completed,
-  //     };
-  //     return newGame;
-  //   } else {
-  //     return game;
-  //   }
-  // });
-  // res.json("Game Updated");
 });
 
 app.delete("/api/delete-game/:id", async (req, res) => {
