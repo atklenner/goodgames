@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const MongoClient = require("mongodb").MongoClient;
 
-let db;
+let db, gamesCollection;
 
 MongoClient.connect(process.env.DB_STRING, {
   useNewUrlParser: true,
@@ -13,29 +13,10 @@ MongoClient.connect(process.env.DB_STRING, {
 })
   .then((client) => {
     console.log(`Connected to database`);
-    db = client.db("video_games");
+    db = client.db("video_game_tracker");
+    gamesCollection = db.collection("games");
   })
   .catch((error) => console.error(error));
-
-let games = [
-  {
-    _id: "0",
-    name: "Borderlands",
-    genre: "FPS",
-    completed: "Yes",
-    rating: "Really Liked It",
-  },
-  { _id: "1", name: "Cuphead", genre: "Platformer", completed: "Playing" },
-  {
-    _id: "2",
-    name: "Stardew Valley",
-    genre: "Life Sim",
-    completed: "Yes",
-    rating: "Loved It",
-  },
-];
-
-let nextID = 3;
 
 app.set("view engine", "ejs");
 app.use(cors());
@@ -44,22 +25,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("tiny"));
 
-// don't forget to make these async when you actually use the DB
-app.get("/", (req, res) => {
-  res.render("index", { games });
+app.get("/", async (req, res) => {
+  try {
+    let games = await gamesCollection.find().toArray();
+    res.render("index", { games });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
-app.post("/api/new-game", (req, res) => {
-  let newGame = {
-    _id: String(nextID),
-    name: req.body.name,
-    genre: req.body.genre,
-    rating: req.body.rating,
-    completed: req.body.completed,
-  };
-  games.push(newGame);
-  nextID++;
-  res.json("Game Added");
+app.post("/api/new-game", async (req, res) => {
+  try {
+    let newGame = req.body;
+    let addedGame = await gamesCollection.insertOne(newGame);
+    res.json(addedGame);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 app.put("/api/update-game/:id", (req, res) => {
