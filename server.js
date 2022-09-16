@@ -3,18 +3,19 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-// const MongoClient = require("mongodb").MongoClient;
+const MongoClient = require("mongodb").MongoClient;
 
-// let db;
+let db;
 
-// MongoClient.connect(process.env.DB_STRING, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// }).then((err, client) => {
-//   if (err) return console.err(err);
-//   console.log(`Connected to database`);
-//   db = client.db("video_games");
-// });
+MongoClient.connect(process.env.DB_STRING, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then((client) => {
+    console.log(`Connected to database`);
+    db = client.db("video_games");
+  })
+  .catch((error) => console.error(error));
 
 let games = [
   {
@@ -54,7 +55,7 @@ app.post("/api/new-game", (req, res) => {
     name: req.body.name,
     genre: req.body.genre,
     rating: req.body.rating,
-    completed: req.body.completed || false,
+    completed: req.body.completed,
   };
   games.push(newGame);
   nextID++;
