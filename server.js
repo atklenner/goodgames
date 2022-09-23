@@ -30,46 +30,4 @@ app.use(morgan("tiny"));
 app.use("/", indexRouter);
 app.use("/api", apiRouter);
 
-app.post("/api/new-game", async (req, res) => {
-  try {
-    let newGame = req.body;
-    let addedGame = await gamesCollection.insertOne(newGame);
-    res.json(addedGame);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-app.put("/api/update-game/:id", async (req, res) => {
-  let id = req.params.id;
-  try {
-    let updatedGame = await gamesCollection.findOneAndUpdate(
-      { _id: ObjectId(id) },
-      {
-        $set: {
-          name: req.body.name,
-          genre: req.body.genre,
-          rating: req.body.rating,
-          completed: req.body.completed,
-        },
-      }
-    );
-    res.json(updatedGame);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
-app.delete("/api/delete-game/:id", async (req, res) => {
-  let id = req.params.id;
-  try {
-    let deletedGame = await gamesCollection.deleteOne({
-      _id: ObjectId(id),
-    });
-    res.json(deletedGame);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 app.listen(process.env.PORT, () => console.log("server is running"));
