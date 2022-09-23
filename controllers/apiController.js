@@ -1,8 +1,9 @@
+const Game = require("../models/Game");
+
 module.exports = {
   addNewGame: async (req, res) => {
     try {
-      let newGame = req.body;
-      let addedGame = await gamesCollection.insertOne(newGame);
+      let addedGame = await Game.create(req.body);
       res.json(addedGame);
     } catch (error) {
       console.error(error);
@@ -11,17 +12,10 @@ module.exports = {
   updateGame: async (req, res) => {
     let id = req.params.id;
     try {
-      let updatedGame = await gamesCollection.findOneAndUpdate(
-        { _id: ObjectId(id) },
-        {
-          $set: {
-            name: req.body.name,
-            genre: req.body.genre,
-            rating: req.body.rating,
-            completed: req.body.completed,
-          },
-        }
-      );
+      let updatedGame = await Game.findByIdAndUpdate(id, req.body, {
+        new: true,
+        runValidators: true,
+      });
       res.json(updatedGame);
     } catch (error) {
       console.error(error);
@@ -30,9 +24,7 @@ module.exports = {
   deleteGame: async (req, res) => {
     let id = req.params.id;
     try {
-      let deletedGame = await gamesCollection.deleteOne({
-        _id: ObjectId(id),
-      });
+      let deletedGame = await Game.findByIdAndRemove(id);
       res.json(deletedGame);
     } catch (error) {
       console.error(error);
