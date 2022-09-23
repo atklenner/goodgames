@@ -3,22 +3,17 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-const { MongoClient, ObjectId } = require("mongodb");
+const mongoose = require("mongoose");
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
 
-let db, gamesCollection;
-
-MongoClient.connect(process.env.DB_STRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then((client) => {
-    console.log(`Connected to database`);
-    db = client.db("video_game_tracker");
-    gamesCollection = db.collection("games");
-  })
-  .catch((error) => console.error(error));
+mongoose.connect(process.env.DB_STRING, (err) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  console.log("connected to DB");
+});
 
 app.set("view engine", "ejs");
 app.use(cors());
