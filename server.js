@@ -4,6 +4,8 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const { MongoClient, ObjectId } = require("mongodb");
+const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api");
 
 let db, gamesCollection;
 
@@ -25,14 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("tiny"));
 
-app.get("/", async (req, res) => {
-  try {
-    let games = await gamesCollection.find().toArray();
-    res.render("index", { games });
-  } catch (error) {
-    console.error(error);
-  }
-});
+app.use("/", indexRouter);
+app.use("/api", apiRouter);
 
 app.post("/api/new-game", async (req, res) => {
   try {
