@@ -31,7 +31,7 @@ form.addEventListener("submit", async (event) => {
   };
   if (editingID) {
     try {
-      let res = await fetch(`/api/update-game/${editingID}`, {
+      let res = await fetch(`games/update-game/${editingID}`, {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(game),
@@ -44,7 +44,7 @@ form.addEventListener("submit", async (event) => {
     }
   } else {
     try {
-      let res = await fetch("/api/new-game", {
+      let res = await fetch("games/new-game", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(game),
@@ -61,7 +61,7 @@ form.addEventListener("submit", async (event) => {
 
 async function deleteGame(element) {
   try {
-    const res = await fetch(`api/delete-game/${element.target.id}`, {
+    const res = await fetch(`games/delete-game/${element.target.id}`, {
       method: "delete",
     });
     const data = await res.json();

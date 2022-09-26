@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const indexRouter = require("./routes/index");
-const apiRouter = require("./routes/api");
+const gamesRouter = require("./routes/games");
 
 mongoose.connect(process.env.DB_STRING, (err) => {
   if (err) {
@@ -23,6 +23,6 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 app.use("/", indexRouter);
-app.use("/api", apiRouter);
+app.use("/games", gamesRouter);
 
 app.listen(process.env.PORT, () => console.log("server is running"));
