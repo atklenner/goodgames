@@ -3,17 +3,11 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-const mongoose = require("mongoose");
+const database = require("./config/database");
 const indexRouter = require("./routes/index");
 const gamesRouter = require("./routes/games");
 
-mongoose.connect(process.env.DB_STRING, (err) => {
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
-  console.log("connected to DB");
-});
+database();
 
 app.set("view engine", "ejs");
 app.use(cors());
