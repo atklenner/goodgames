@@ -1,15 +1,17 @@
-require("dotenv").config();
+require("dotenv").config({ path: "./config/.env" });
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const connectDB = require("./config/database");
 const indexRouter = require("./routes/index");
+const profileRouter = require("./routes/profile");
 const gamesRouter = require("./routes/games");
 const passport = require("passport");
-const session = require("express-session");
 const mongoose = require("mongoose");
+const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const flash = require("express-flash");
 
 require("./config/passport")(passport);
 
@@ -26,14 +28,17 @@ app.use(
     secret: "my very good secret",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: MongoStore.create(mongoose.connection),
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
+
 app.use("/", indexRouter);
+app.use("/profile", profileRouter);
 app.use("/games", gamesRouter);
 
 app.listen(process.env.PORT, () => console.log("server is running"));
