@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const cors = require("cors");
 const connectDB = require("./config/database");
 const indexRouter = require("./routes/index");
-const profileRouter = require("./routes/profile");
 const gamesRouter = require("./routes/games");
 const passport = require("passport");
 const mongoose = require("mongoose");
@@ -38,7 +37,6 @@ app.use(passport.session());
 app.use(flash());
 
 app.use("/", indexRouter);
-app.use("/profile", profileRouter);
 app.use("/games", gamesRouter);
 
 app.listen(process.env.PORT, () => console.log("server is running"));
