@@ -6,3 +6,5 @@ const listSchema = new Schema({
   userId: { type: mongoose.ObjectId, required: true },
   listItems: [{ type: mongoose.ObjectId }],
 });
+
+module.exports = new mongoose.model("List", listSchema);

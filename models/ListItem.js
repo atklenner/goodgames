@@ -16,4 +16,4 @@ const listItemSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Game", listItemSchema);
+module.exports = mongoose.model("ListItem", listItemSchema);
