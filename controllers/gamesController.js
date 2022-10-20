@@ -1,6 +1,22 @@
 const Game = require("../models/Game");
 
 module.exports = {
+  getAllGames: async (req, res) => {
+    try {
+      let games = await Game.find();
+      res.render("allGames", { games });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  getOneGame: async (req, res) => {
+    try {
+      let game = await Game.findById(req.params.id);
+      res.render("gamePage", { game });
+    } catch (error) {
+      console.error(error);
+    }
+  },
   addNewGame: async (req, res) => {
     try {
       let addedGame = await Game.create(req.body);

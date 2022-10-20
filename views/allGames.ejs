@@ -1,0 +1,9 @@
+<%- include("./partials/header.ejs") %> <%- include("./partials/navbar.ejs") %>
+<main class="container">
+  <h1>ALL GAMES</h1>
+  <p><%= games %></p>
+  <% if (games.length === 0) { %>
+  <p>THERE ARE NO GAMES!!!</p>
+  <% } %>
+</main>
+<%- include("./partials/footer.ejs") %>
