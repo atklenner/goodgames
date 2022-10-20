@@ -1,11 +1,32 @@
 <%- include("./partials/header") %>
-<main>
-    <form action="/login" method="post">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <button>Login</button>
-    </form>
+<main class="container">
+  <div class="columns mt-6">
+    <div class="column is-half is-offset-one-quarter">
+      <h1 class="title is-1">Login</h1>
+      <div class="box">
+        <form action="/login" method="post">
+          <div class="field">
+            <label class="label" for="email">Email</label>
+            <div class="control">
+              <input class="input" type="email" name="email" id="email" />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="password">Password</label>
+            <div class="control">
+              <input
+                class="input"
+                type="password"
+                name="password"
+                id="password"
+              />
+            </div>
+          </div>
+          <button class="button is-primary">Login</button>
+        </form>
+        <p>Don't have an account?<a href="/signup"> Sign Up</a></p>
+      </div>
+    </div>
+  </div>
 </main>
 <%- include("./partials/footer") %>
