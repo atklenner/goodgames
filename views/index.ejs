@@ -1,8 +1,38 @@
-<%- include("./partials/header.ejs") %>
-<main>
-    <h1>Index</h1>
-    <a href="/login">Log In</a>
-    <a href="/signup">Sign Up</a>    
+<%- include("./partials/header.ejs") %> <%- include("./partials/navbar.ejs") %>
+<main class="container">
+  <h1>Index</h1>
+  <p>USER: <%= user %></p>
+  <p>USER LISTS:</p>
+  <ul>
+    <% for (let list of lists) { %>
+    <li>
+      <p><%= list %></p>
+    </li>
+    <% } %>
+  </ul>
+  <p>ALL LIST ITEMS:</p>
+  <ul>
+    <% for (let listItem of listItems) { %>
+    <li>
+      <p><%= listItem %></p>
+    </li>
+    <% } %>
+  </ul>
+  <p>ALL GAMES:</p>
+  <ul>
+    <% for (let game of games) { %>
+    <li>
+      <p><%= game %></p>
+    </li>
+    <% } %>
+  </ul>
+  <p>ALL USERS:</p>
+  <ul>
+    <% for (let user of users) { %>
+    <li>
+      <p><%= user %></p>
+    </li>
+    <% } %>
+  </ul>
 </main>
-<script src="js/main.js"></script>
 <%- include("./partials/footer.ejs") %>
