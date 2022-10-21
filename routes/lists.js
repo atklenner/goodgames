@@ -6,6 +6,8 @@ router.get("/", listsController.getAllLists);
 
 router.get("/:id", listsController.getOneList);
 
+router.get("/my-lists", listsController.getLoggedInUserLists);
+
 router.post("/new-list", listsController.addNewList);
 
 router.put("/update-game/:id", listsController.updateList);

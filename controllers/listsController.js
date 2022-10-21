@@ -19,6 +19,14 @@ module.exports = {
       console.error(error);
     }
   },
+  getLoggedInUserLists: async (req, res) => {
+    try {
+      let lists = await List.findById(req.user.id);
+      res.render("allLists", lists);
+    } catch (error) {
+      console.error(error);
+    }
+  },
   addNewList: async (req, res) => {
     try {
       let addedList = await List.create(req.body);
