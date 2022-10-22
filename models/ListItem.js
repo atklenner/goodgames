@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const listItemSchema = new Schema({
-  name: { type: String, required: true },
-  genre: { type: String, required: true },
+  gameId: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
+  listId: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
   rating: {
     type: String,
     default: "Unrated",
