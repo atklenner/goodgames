@@ -4,8 +4,8 @@ const List = require("../models/List");
 module.exports = {
   getAllLists: async (req, res) => {
     try {
-      let lists = await List.find();
-      res.render("allLists", { lists });
+      let lists = await List.find().lean();
+      res.render("allLists", { lists, title: "All Lists" });
     } catch (error) {
       console.error(error);
     }
@@ -13,7 +13,7 @@ module.exports = {
   getOneList: async (req, res) => {
     let id = req.params.id;
     try {
-      let list = await List.findById(id).populate("listItems");
+      let list = await List.findById(id).lean();
       res.render("listPage", { list });
     } catch (error) {
       console.error(error);
@@ -21,8 +21,8 @@ module.exports = {
   },
   getLoggedInUserLists: async (req, res) => {
     try {
-      let lists = await List.findById(req.user.id);
-      res.render("allLists", lists);
+      let lists = await List.find().lean();
+      res.render("allLists", { lists, title: "My Lists" });
     } catch (error) {
       console.error(error);
     }

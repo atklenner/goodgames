@@ -4,9 +4,9 @@ const listsController = require("../controllers/listsController");
 
 router.get("/", listsController.getAllLists);
 
-router.get("/:id", listsController.getOneList);
-
 router.get("/my-lists", listsController.getLoggedInUserLists);
+
+router.get("/:id", listsController.getOneList);
 
 router.post("/new-list", listsController.addNewList);
 
