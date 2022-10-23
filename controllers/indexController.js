@@ -6,16 +6,21 @@ const User = require("../models/User");
 module.exports = {
   getHomePage: async (req, res) => {
     try {
-      let userLists = await List.find({ userID: req.user._id });
-      let listItems = await ListItem.find();
-      let games = await Game.find();
-      let users = await User.find();
+      let userLists = await List.find({ userId: req.user._id }).lean();
+      let playingList = await List.findOne({
+        userId: req.user._id,
+        name: "Currently Playing",
+      }).lean();
+      let playingListItems = await ListItem.find({
+        listId: playingList._id,
+      })
+        .limit(5)
+        .populate("gameId")
+        .lean();
       res.render("index", {
         user: req.user,
         lists: userLists,
-        listItems,
-        games,
-        users,
+        currentGames: playingListItems,
       });
     } catch (error) {
       console.error(error);

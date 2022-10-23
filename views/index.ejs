@@ -1,38 +1,29 @@
 <%- include("./partials/header.ejs") %> <%- include("./partials/navbar.ejs") %>
 <main class="container">
-  <h1>Index</h1>
   <p>USER: <%= user %></p>
-  <p>USER LISTS:</p>
-  <ul>
-    <% for (let list of lists) { %>
-    <li>
-      <p><%= list %></p>
-    </li>
-    <% } %>
-  </ul>
-  <p>ALL LIST ITEMS:</p>
-  <ul>
-    <% for (let listItem of listItems) { %>
-    <li>
-      <p><%= listItem %></p>
-    </li>
-    <% } %>
-  </ul>
-  <p>ALL GAMES:</p>
-  <ul>
-    <% for (let game of games) { %>
-    <li>
-      <p><%= game %></p>
-    </li>
-    <% } %>
-  </ul>
-  <p>ALL USERS:</p>
-  <ul>
-    <% for (let user of users) { %>
-    <li>
-      <p><%= user %></p>
-    </li>
-    <% } %>
-  </ul>
+  <div class="tile is-ancestor">
+    <div class="tile is-4 is-parent is-danger">
+      <div class="tile is-child box">
+        <h2 class="title">Currently Playing</h2>
+        <ul>
+          <% for (let game of currentGames) { %>
+          <li><a href=<%- `/games/${game.gameId._id}` %>><%= game.gameId.name %></a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+    <div class="tile is-8 is-parent is-info">
+      <div class="tile is-child box">
+        <h2 class="title">Your Lists</h2>
+        <ul>
+          <% for (let list of lists) { %>
+          <li>
+            <a href=<%- `/lists/${list._id}` %>><%= list.name %></a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </main>
 <%- include("./partials/footer.ejs") %>
