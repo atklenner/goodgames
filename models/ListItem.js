@@ -14,6 +14,7 @@ const listItemSchema = new Schema({
     default: "No",
     enum: ["No", "Playing", "Yes", "Quit"],
   },
+  dateAdded: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("ListItem", listItemSchema);
