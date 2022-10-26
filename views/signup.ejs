@@ -5,6 +5,10 @@
       <h1 class="title is-1">Sign Up</h1>
       <div class="box">
         <form action="/signup" method="post">
+          <% if (locals.messages.errors) { %> <% messages.errors.forEach( el =>
+          { %>
+          <div class="notification is-danger"><%= el.msg %></div>
+          <% }) %> <% } %>
           <div class="field">
             <label class="label" for="username">Username</label>
             <div class="control">

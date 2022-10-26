@@ -5,6 +5,10 @@
       <h1 class="title is-1">Login</h1>
       <div class="box">
         <form action="/login" method="post">
+          <% if (locals.messages.errors) { %> <% messages.errors.forEach( el =>
+          { %>
+          <div class="notification is-danger"><%= el.msg %></div>
+          <% }) %> <% } %>
           <div class="field">
             <label class="label" for="email">Email</label>
             <div class="control">
