@@ -13,6 +13,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
+const methodOverride = require("method-override");
 
 require("./config/passport")(passport);
 
@@ -24,6 +25,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("tiny"));
+app.use(methodOverride("_method"));
 app.use(
   session({
     secret: "my very good secret",
