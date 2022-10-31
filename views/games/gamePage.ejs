@@ -1,10 +1,20 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
 <main class="container">
-  <h1>GAME</h1>
-  <p><%= game %></p>
   <% if (!game) { %>
   <p>THERE IS NO GAME!!!</p>
+  <% } else { %>
+  <div class="columns">
+    <div class="column is-half">
+      <figure class="image">
+        <img src=<%-`${game.image}`%> alt=<%-`${game.name}`%> ></img>
+      </figure>
+    </div>
+    <div class="column is-half">
+      <h2 class="title"><%= game.name %></h2>
+      <h3 class="subtitle"><%= game.genre %></h3>
+    </div>
+  </div>
   <% } %>
 </main>
 <%- include("../partials/footer.ejs") %>
