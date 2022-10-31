@@ -4,7 +4,7 @@ module.exports = {
   getAllGames: async (req, res) => {
     try {
       let games = await Game.find();
-      res.render("allGames", { games });
+      res.render("games/allGames", { games });
     } catch (error) {
       console.error(error);
     }
@@ -12,7 +12,7 @@ module.exports = {
   getOneGame: async (req, res) => {
     try {
       let game = await Game.findById(req.params.id);
-      res.render("gamePage", { game });
+      res.render("games/gamePage", { game });
     } catch (error) {
       console.error(error);
     }
