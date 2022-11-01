@@ -51,4 +51,8 @@ app.use("/games", gamesRouter);
 app.use("/users", usersRouter);
 app.use("/lists", listsRouter);
 
+app.all("*", (req, res) => {
+  res.status(404).render("404.ejs");
+});
+
 app.listen(process.env.PORT, () => console.log("server is running"));
