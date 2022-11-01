@@ -6,10 +6,9 @@ const gameSchema = new Schema({
   genre: { type: String, required: true },
   image: {
     type: String,
-    default:
-      "https://res.cloudinary.com/dvrfafdas/image/upload/v1664577624/v524oiqgy1w0syflt2a3.jpg",
+    required: true,
   },
-  cloudinaryId: { type: String, default: "v524oiqgy1w0syflt2a3" },
+  cloudinaryId: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Game", gameSchema);
