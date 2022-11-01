@@ -23,8 +23,14 @@ module.exports = {
   },
   addNewGame: async (req, res) => {
     try {
-      let addedGame = await Game.create(req.body);
-      res.json(addedGame);
+      let image = await cloudinary.uploader.upload(req.file.path);
+      let addedGame = await Game.create({
+        name: req.body.name,
+        genre: req.body.genre,
+        image: image.secure_url,
+        cloudinaryId: image.public_id,
+      });
+      res.redirect(`/games/${addedGame._id}`);
     } catch (error) {
       console.error(error);
     }
