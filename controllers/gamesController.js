@@ -49,10 +49,10 @@ module.exports = {
   },
   deleteGame: async (req, res) => {
     try {
-      let game = await Game.findById(req.params.id);
+      let game = await Game.findById({ _id: req.params.id });
       await cloudinary.uploader.destroy(game.cloudinaryId);
       await Game.remove({ _id: req.params.id });
-      res.redirect("games/allGames");
+      res.redirect("/games");
     } catch (error) {
       console.error(error);
     }
