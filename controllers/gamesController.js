@@ -1,4 +1,5 @@
 const Game = require("../models/Game");
+const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
   getAllGames: async (req, res) => {
@@ -16,6 +17,9 @@ module.exports = {
     } catch (error) {
       console.error(error);
     }
+  },
+  addGamePage: (req, res) => {
+    res.render("games/gameForm");
   },
   addNewGame: async (req, res) => {
     try {
@@ -38,10 +42,11 @@ module.exports = {
     }
   },
   deleteGame: async (req, res) => {
-    let id = req.params.id;
     try {
-      let deletedGame = await Game.findByIdAndRemove(id);
-      res.json(deletedGame);
+      let game = await Game.findById(req.params.id);
+      await cloudinary.uploader.destroy(game.cloudinaryId);
+      await Game.remove({ _id: req.params.id });
+      res.redirect("games/allGames");
     } catch (error) {
       console.error(error);
     }
