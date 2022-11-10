@@ -1,4 +1,5 @@
 const Game = require("../models/Game");
+const Review = require("../models/Review");
 const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
@@ -12,8 +13,15 @@ module.exports = {
   },
   getOneGame: async (req, res) => {
     try {
-      let game = await Game.findById(req.params.id);
-      res.render("games/gamePage", { game });
+      // these are concurrent
+      let game = await Game.findById(req.params.id).lean();
+      let allReviews = await Review.find({ gameId: req.params.id }).lean();
+      let userReview = await Review.findOne({
+        gameId: req.params.id,
+        userId: req.user._id,
+      }).lean();
+      console.log(userReview);
+      res.render("games/gamePage", { game, allReviews, userReview });
     } catch (error) {
       console.error(error);
     }

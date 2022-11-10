@@ -11,10 +11,37 @@
       </figure>
     </div>
     <div class="column is-half">
-      <h2 class="title"><%= game.name %></h2>
-      <h3 class="subtitle"><%= game.genre %></h3>
-      <!-- <a href=<%= `update-game/${game._id}` %> class="button"><strong>Update</strong></a> -->
-      <button data-target="delete-modal" class="button delete-button is-primary"><strong>Delete</strong></button>
+      <div class="box">
+        <h2 class="title"><%= game.name %></h2>
+        <h3 class="subtitle"><%= game.genre %></h3>
+        <a href=<%= `update-game/${game._id}` %> class="button"><strong>Update</strong></a>
+        <button data-target="delete-modal" class="button delete-button is-primary"><strong>Delete</strong></button>
+      </div>
+      <div class="box">
+        <% if (userReview) { %>
+          <h2 class="title">Your Review</h2>
+          <p>Rating: <%= userReview.rating %></p>
+          <p>Completed: <%= userReview.completed %></p>
+          <p>Review Text: <%= userReview.body %></p>
+          <p>Review Date: <%= userReview.dateReviewed.toLocaleString() %></p>
+        <% } else { %>
+          <h2 class="title">You haven't written a review of this game</h2>
+          <a href=<%- `/reviews/new-review/${game._id}` %> class="button is-primary">Write a Review</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-half">
+      <h2 class="title">All Reviews</h2>
+      <% for (let review of allReviews) { %>
+        <div class="box">
+          <p><%= review.rating %></p>
+          <p><%= review.completed %></p>
+          <p><%= review.body %></p>
+          <p><%= review.dateReviewed.toLocaleString() %></p>
+        </div>
+      <% } %>
     </div>
   </div>
   <div id="delete-modal" class="modal">
