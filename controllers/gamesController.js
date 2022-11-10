@@ -20,7 +20,6 @@ module.exports = {
         gameId: req.params.id,
         userId: req.user._id,
       }).lean();
-      console.log(userReview);
       res.render("games/gamePage", { game, allReviews, userReview });
     } catch (error) {
       console.error(error);
