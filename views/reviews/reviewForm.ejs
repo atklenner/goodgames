@@ -1,0 +1,44 @@
+<%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
+%>
+<main class="container">
+  <h1 class="title is-1">Review Form</h1>
+  <form action=<%= `/reviews/new-review/${gameId}` %> method="post">
+    <div class="field">
+      <label for="rating" class="label">Rating</label>
+      <div class="control">
+          <div class="select">
+            <select name="rating" id="rating">
+              <option value="Unrated">Unrated</option>
+              <option value="Did Not Like">Did Not Like</option>
+              <option value="It Was OK">It Was OK</option>
+              <option value="Liked It">Liked It</option>
+              <option value="Loved It">Loved It</option>
+            </select>
+          </div>
+      </div>
+    </div>
+    <div class="field">
+      <label for="completed" class="label">Completed</label>
+      <div class="control">
+          <div class="select">
+            <select name="completed" id="completed">
+              <option value="No">No</option>
+              <option value="Playing">Playing</option>
+              <option value="Yes">Yes</option>
+              <option value="Quit">Quite</option>
+            </select>
+          </div>
+      </div>
+    </div>
+    <div class="field">
+        <label for="body" class="label">Review Text</label>
+        <div class="control">
+            <textarea name="body" id="" cols="30" rows="10" class="textarea"></textarea>
+        </div>
+    </div>
+    <button class="button is-primary" type="submit">
+      <strong>Submit</strong>
+    </button>
+  </form>
+</main>
+<%- include("../partials/footer.ejs") %>
