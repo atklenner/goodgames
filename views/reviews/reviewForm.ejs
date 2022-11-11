@@ -2,17 +2,22 @@
 %>
 <main class="container">
   <h1 class="title is-1">Review Form</h1>
-  <form action=<%= `/reviews/new-review/${gameId}` %> method="post">
+  <% if (_id) { %>
+    <form action=<%= `/reviews/update-review/${_id}?_method=PUT` %> method="post">
+  <% } else { %>
+    <form action=<%= `/reviews/new-review/${gameId}` %> method="post">
+  <% } %>
     <div class="field">
       <label for="rating" class="label">Rating</label>
       <div class="control">
           <div class="select">
             <select name="rating" id="rating">
-              <option value="Unrated">Unrated</option>
-              <option value="Did Not Like">Did Not Like</option>
-              <option value="It Was OK">It Was OK</option>
-              <option value="Liked It">Liked It</option>
-              <option value="Loved It">Loved It</option>
+                <option value="Unrated" <%- rating === "Unrated" ? "selected=selected" : "" %>>Unrated</option>
+                <option value="Did Not Like" <%- rating === "Did Not Like" ? "selected=selected" : "" %>>Did Not Like</option>
+                <option value="It Was OK" <%- rating === "It Was OK" ? "selected=selected" : "" %>>It Was OK</option>
+                <option value="Liked It" <%- rating === "Liked It" ? "selected=selected" : "" %>>Liked It</option>
+                <option value="Really Liked It" <%- rating === "Really Liked It" ? "selected=selected" : "" %>>Really Liked It</option>
+                <option value="Loved It" <%- rating === "Loved It" ? "selected=selected" : "" %>>Loved It</option>
             </select>
           </div>
       </div>
@@ -22,10 +27,9 @@
       <div class="control">
           <div class="select">
             <select name="completed" id="completed">
-              <option value="No">No</option>
-              <option value="Playing">Playing</option>
-              <option value="Yes">Yes</option>
-              <option value="Quit">Quite</option>
+              <% for (let value of completedValues) { %>
+                <option value=<%= value %> <%- value === completed ? "selected=selected" : "" %>><%= value %></option>
+              <% } %>
             </select>
           </div>
       </div>
@@ -33,7 +37,7 @@
     <div class="field">
         <label for="body" class="label">Review Text</label>
         <div class="control">
-            <textarea name="body" id="" cols="30" rows="10" class="textarea"></textarea>
+            <textarea name="body" id="" cols="30" rows="10" class="textarea"><%- body %></textarea>
         </div>
     </div>
     <button class="button is-primary" type="submit">
