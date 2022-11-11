@@ -7,7 +7,14 @@ let reviewSchema = new Schema({
   rating: {
     type: String,
     default: "Unrated",
-    enum: ["Unrated", "Did Not Like", "It Was OK", "Liked It", "Loved It"],
+    enum: [
+      "Unrated",
+      "Did Not Like",
+      "It Was OK",
+      "Liked It",
+      "Really Liked It",
+      "Loved It",
+    ],
   },
   completed: {
     type: String,
