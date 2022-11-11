@@ -56,6 +56,26 @@ module.exports = {
       console.log(error);
     }
   },
-  updateReview: () => {},
+  updateReview: async (req, res) => {
+    try {
+      console.log(req.body.rating, req.body.completed, req.body.body);
+      let review = await Review.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          rating: req.body.rating,
+          completed: req.body.completed,
+          body: req.body.body,
+          dateReviewed: Date.now(),
+        },
+        {
+          upsert: true,
+          lean: true,
+        }
+      );
+      res.redirect(`/reviews/${review._id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  },
   deleteReview: () => {},
 };
