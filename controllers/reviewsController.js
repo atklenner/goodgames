@@ -1,8 +1,38 @@
 const Review = require("../models/Review");
+// let ratingValues = [
+//   "Unrated",
+//   "Did Not Like",
+//   "It Was OK",
+//   "Liked It",
+//   "Loved It",
+// ];
+// EJS is being a pain
+let completedValues = ["No", "Playing", "Yes", "Quit"];
 
 module.exports = {
-  addReviewPage: (req, res) => {
-    res.render("./reviews/reviewForm", { gameId: req.params.gameId });
+  addReviewPage: async (req, res) => {
+    try {
+      let review = await Review.findOne({
+        gameId: req.params.gameId,
+        userId: req.user._id,
+      }).lean();
+      if (!review) {
+        review = {
+          gameId: req.params.gameId,
+          rating: "Unrated",
+          completed: "No",
+          body: "",
+          _id: false,
+        };
+      }
+      res.render("./reviews/reviewForm", {
+        ...review,
+        // ratingValues,
+        completedValues,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   },
   getReview: async (req, res) => {
     try {
