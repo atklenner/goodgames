@@ -11,6 +11,7 @@
         <p class="subtitle">Rating: <%= review.rating %></p>
         <p class="subtitle">Completed: <%= review.completed %></p>
         <p><%= review.body %></p>
+        <a href=<%- `/reviews/edit-review/${review.gameId}` %> class="button is-primary"><strong>Update Review</strong></a>
       </div>
     </div>
   </div>
