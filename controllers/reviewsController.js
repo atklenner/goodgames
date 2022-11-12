@@ -77,5 +77,12 @@ module.exports = {
       console.log(error);
     }
   },
-  deleteReview: () => {},
+  deleteReview: async (req, res) => {
+    try {
+      let review = await Review.findByIdAndRemove({ _id: req.params.id });
+      res.redirect(`/games/${review.gameId}`);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
