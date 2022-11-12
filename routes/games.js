@@ -5,7 +5,7 @@ const gamesController = require("../controllers/gamesController");
 
 router.get("/", gamesController.getAllGames);
 
-router.get("/new-game", gamesController.addGamePage);
+router.get("/edit-game", gamesController.addGamePage);
 
 router.get("/:id", gamesController.getOneGame);
 
