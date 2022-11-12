@@ -55,7 +55,6 @@ module.exports = {
   },
   updateReview: async (req, res) => {
     try {
-      console.log(req.body.rating, req.body.completed, req.body.body);
       let review = await Review.findOneAndUpdate(
         { _id: req.params.id },
         {
@@ -67,6 +66,7 @@ module.exports = {
         {
           upsert: true,
           lean: true,
+          runValidators: true,
         }
       );
       res.redirect(`/reviews/${review._id}`);
