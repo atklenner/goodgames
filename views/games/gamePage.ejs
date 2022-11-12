@@ -14,8 +14,7 @@
       <div class="box">
         <h2 class="title"><%= game.name %></h2>
         <h3 class="subtitle"><%= game.genre %></h3>
-        <a href=<%= `update-game/${game._id}` %> class="button"><strong>Update</strong></a>
-        <button data-target="delete-modal" class="button delete-button is-primary"><strong>Delete</strong></button>
+        <a href=<%= `edit-game/${game._id}` %> class="button"><strong>Update</strong></a>
       </div>
       <div class="box">
         <% if (userReview) { %>
@@ -45,23 +44,6 @@
         </div>
       <% } %>
     </div>
-  </div>
-  <div id="delete-modal" class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="box">
-        <h2 class="title">Are you sure you want to delete this game?</h2>
-        <div class="buttons">
-          <form action=<%- `delete-game/${game._id}?_method=DELETE` %> method="post">
-            <button class="button is-primary">
-              <strong>Yes</strong>
-            </button>
-          </form>
-          <button class="button no-button"><strong>No</strong></button>
-        </div>
-      </div>
-    </div>
-    <button class="modal-close is-large" aria-label="close"></button>
   </div>
   <% } %>
 </main>
