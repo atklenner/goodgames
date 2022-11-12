@@ -20,9 +20,6 @@ module.exports = {
         review = {
           gameId: req.params.gameId,
           rating: "Unrated",
-          completed: "No",
-          body: "",
-          _id: false,
         };
       }
       res.render("./reviews/reviewForm", {

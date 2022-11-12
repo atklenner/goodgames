@@ -2,7 +2,7 @@
 %>
 <main class="container">
   <h1 class="title is-1">Review Form</h1>
-  <% if (_id) { %>
+  <% if (locals._id) { %>
     <form action=<%= `/reviews/update-review/${_id}?_method=PUT` %> method="post">
   <% } else { %>
     <form action=<%= `/reviews/new-review/${gameId}` %> method="post">
@@ -28,7 +28,7 @@
           <div class="select">
             <select name="completed" id="completed">
               <% for (let value of completedValues) { %>
-                <option value=<%= value %> <%- value === completed ? "selected=selected" : "" %>><%= value %></option>
+                <option value=<%= value %> <%- value === locals.completed ? "selected=selected" : "" %>><%= value %></option>
               <% } %>
             </select>
           </div>
@@ -37,14 +37,14 @@
     <div class="field">
         <label for="body" class="label">Review Text</label>
         <div class="control">
-            <textarea name="body" id="" cols="30" rows="10" class="textarea"><%- body %></textarea>
+            <textarea name="body" id="" cols="30" rows="10" class="textarea"><%- locals.body %></textarea>
         </div>
     </div>
     <button class="button is-primary" type="submit">
       <strong>Submit</strong>
     </button>
   </form>
-  <% if (_id) { %>
+  <% if (locals._id) { %>
  <button data-target="delete-modal" class="button delete-button is-danger"><strong>Delete</strong></button>
   <div id="delete-modal" class="modal">
     <div class="modal-background"></div>
