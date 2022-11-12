@@ -42,14 +42,39 @@ module.exports = {
       console.error(error);
     }
   },
-  updateGame: async (req, res) => {
-    let id = req.params.id;
+  updateGamePage: async (req, res) => {
     try {
-      let updatedGame = await Game.findByIdAndUpdate(id, req.body, {
-        new: true,
-        runValidators: true,
-      });
-      res.json(updatedGame);
+      let game = await Game.findById({ _id: req.params.id }).lean();
+      if (game) {
+        res.render("games/gameForm", { ...game });
+      } else {
+        res.render("404");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  updateGame: async (req, res) => {
+    try {
+      let game = { name: req.body.name, genre: req.body.genre };
+      if (req.file) {
+        let image = await cloudinary.uploader.upload(req.file.path);
+        game = {
+          ...game,
+          image: image.secure_url,
+          cloudinaryId: image.public_id,
+        };
+      }
+      let updatedGame = await Game.findOneAndUpdate(
+        { _id: req.params.id },
+        game,
+        {
+          new: true,
+          runValidators: true,
+          lean: true,
+        }
+      );
+      res.redirect(`/games/${updatedGame._id}`);
     } catch (error) {
       console.error(error);
     }
