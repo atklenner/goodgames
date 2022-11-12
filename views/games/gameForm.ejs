@@ -1,18 +1,41 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
 <main class="container">
-  <h1 class="title is-1">Add Game Form</h1>
-  <form action="/games/new-game" enctype="multipart/form-data" method="post">
+  <% if (locals._id) { %>
+    <h1 class="title is-1">Update Game Info</h1>
+    <form action=<%- `/games/update-game/${_id}?_method=PUT` %> enctype="multipart/form-data" method="post">
+  <% } else { %>
+    <h1 class="title is-1">Add Game Form</h1>
+    <form action="/games/new-game" enctype="multipart/form-data" method="post">
+  <% } %>
     <div class="field">
       <label for="name" class="label">Name</label>
       <div class="control">
-        <input type="text" class="input" id="name" name="name" />
+        <!-- prettier-ignore -->
+        <input
+          type="text"
+          class="input"
+          id="name"
+          name="name"
+          <% if (locals.name) { %>
+            value=<%- name %>
+          <% } %>
+        />
       </div>
     </div>
     <div class="field">
       <label for="genre" class="label">Genre</label>
       <div class="control">
-        <input type="text" class="input" id="genre" name="genre" />
+        <!-- prettier-ignore -->
+        <input
+          type="text"
+          class="input"
+          id="genre"
+          name="genre"
+          <% if (locals.genre) { %>
+            value=<%- genre %>
+          <% } %>
+        />
       </div>
     </div>
     <div class="field">
@@ -23,7 +46,9 @@
             type="file"
             name="image"
             accept="image/png, image/jpeg"
-            required
+            <% if (!locals._id) { %>
+              required
+            <% } %>
           />
           <span class="file-cta">
             <span class="file-icon">
@@ -39,6 +64,26 @@
       <strong>Submit</strong>
     </button>
   </form>
+  <% if (locals._id) { %>
+    <button data-target="delete-modal" class="button delete-button is-danger"><strong>Delete</strong></button>
+  <div id="delete-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h2 class="title">Are you sure you want to delete this game?</h2>
+        <div class="buttons">
+          <form action=<%- `/games/delete-game/${_id}?_method=DELETE` %> method="post">
+            <button class="button is-danger">
+              <strong>Yes</strong>
+            </button>
+          </form>
+          <button class="button no-button"><strong>No</strong></button>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+  <% } %>
 </main>
 <script src="/js/photoUpload.js"></script>
 <%- include("../partials/footer.ejs") %>
