@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
-  listCount: { type: Number, default: 0 },
+  mainList: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
   lists: [
     {
       name: { type: String, default: "Unnamed List" },
