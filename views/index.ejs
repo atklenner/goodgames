@@ -4,17 +4,22 @@
   <div class="tile is-ancestor">
     <div class="tile is-4 is-parent is-danger">
       <div class="tile is-child box">
-        <h2 class="title">Currently Playing</h2>
-        <ul>
-          <% for (let game of currentGames) { %>
-          <li><a href=<%- `/games/${game.gameId._id}` %>><%= game.gameId.name %></a></li>
-          <% } %>
-        </ul>
+        <% if (locals.mainList) { %>
+          <h2 class="title">Currently Playing</h2>
+          <ul>
+            <% for (let game of mainList.games) { %>
+            <li><a href=<%- `/games/${game.gameId._id}` %>><%= game.gameId.name %></a></li>
+            <% } %>
+          </ul>
+        <% } else { %>
+          <h2 class="title">No Main List</h2>
+        <% } %>
       </div>
     </div>
     <div class="tile is-8 is-parent is-info">
       <div class="tile is-child box">
         <h2 class="title">Your Lists</h2>
+        <a href="/lists/edit-list" class="button is-primary"><strong>Create a New List</strong></a>
         <ul>
           <% for (let list of lists) { %>
           <li>
