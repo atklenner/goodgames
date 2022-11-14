@@ -1,6 +1,10 @@
-<%- include("./partials/header.ejs") %> <%- include("./partials/navbar.ejs") %>
+<%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
+%>
 <main class="container">
   <h1 class="title"><%= title %></h1>
+  <a href="/lists/edit-list" class="button is-primary"
+    ><strong>Make a New List</strong></a
+  >
   <ul>
     <% for (let list of lists) { %>
     <li><%= list.name %></li>
@@ -9,4 +13,4 @@
   <p>THERE ARE NO LISTS!!!</p>
   <% } %>
 </main>
-<%- include("./partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>
