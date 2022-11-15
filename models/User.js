@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  userName: { type: String, unique: true },
+  username: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
   mainList: { type: mongoose.Schema.Types.ObjectId, ref: "List" },

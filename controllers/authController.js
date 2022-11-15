@@ -63,6 +63,10 @@ exports.postSignup = (req, res, next) => {
     validationErrors.push({
       msg: "Password must be at least 8 characters long",
     });
+  if (!validator.isLength(req.body.username, { min: 3 }))
+    validationErrors.push({
+      msg: "Username must be at least 3 characters long",
+    });
   if (req.body.password !== req.body.confirmPassword)
     validationErrors.push({ msg: "Passwords do not match" });
 
@@ -75,13 +79,13 @@ exports.postSignup = (req, res, next) => {
   });
 
   const user = new User({
-    userName: req.body.userName,
+    username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });
 
   User.findOne(
-    { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
+    { $or: [{ email: req.body.email }, { username: req.body.username }] },
     (err, existingUser) => {
       if (err) {
         return next(err);
