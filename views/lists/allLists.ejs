@@ -1,16 +1,20 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
 <main class="container">
-  <h1 class="title"><%= title %></h1>
-  <a href="/lists/edit-list" class="button is-primary"
-    ><strong>Make a New List</strong></a
-  >
-  <ul>
-    <% for (let list of lists) { %>
-    <li><%= list.name %></li>
-    <% } %> <% if (lists.length === 0) { %>
-  </ul>
-  <p>THERE ARE NO LISTS!!!</p>
-  <% } %>
+  <div class="content">
+    <h1 class="title"><%= title %></h1>
+    <a href="/lists/edit-list" class="button is-primary">
+      <strong>Make a New List</strong>
+    </a>
+      <% for (let list of lists) { %>
+        <div class="box">
+          <a href=<%- `/lists/${list._id}` %>>
+            <h2 class="title"><%= list.name %></h2>
+          </a>
+        </div>
+      <% } %> <% if (lists.length === 0) { %>
+    <p>THERE ARE NO LISTS!!!</p>
+    <% } %>
+  </div>
 </main>
 <%- include("../partials/footer.ejs") %>
