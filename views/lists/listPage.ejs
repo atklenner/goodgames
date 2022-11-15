@@ -5,6 +5,11 @@
     <h1 class="title"><%= list.name %></h1>
     <p class="subtitle"><%= list.description %></p>
     <p class="subtitle"><%= list.userId.username %></p>
+    <% if (list.userId._id.toString() === user._id.toString()) { %>
+      <a href=<%- `/lists/edit-list/${list._id}` %> class="button is-primary">
+        <strong>Edit List</strong>
+      </a>
+    <% } %>
     <% for (let game of list.games) { %>
       <div class="box">
         <a href=<%- `/games/%{game._id}` %>>
