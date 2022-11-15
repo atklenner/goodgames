@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let deleteButton = document.querySelector(".delete-button");
-  if (deleteButton) {
-    deleteButton.addEventListener("click", () => {
-      let modal = document.getElementById(deleteButton.dataset.target);
+  let modalButton = document.querySelector(".modal-button");
+  if (modalButton) {
+    modalButton.addEventListener("click", () => {
+      let modal = document.getElementById(modalButton.dataset.target);
       modal.classList.add("is-active");
     });
   }
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelectorAll(".modal-background, .modal-close, .no-button")
     .forEach((elt) => {
       elt.addEventListener("click", () => {
-        let modal = document.getElementById(deleteButton.dataset.target);
+        let modal = document.getElementById(modalButton.dataset.target);
         modal.classList.remove("is-active");
       });
     });
