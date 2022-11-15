@@ -13,8 +13,8 @@ module.exports = {
   getOneList: async (req, res) => {
     let id = req.params.id;
     try {
-      let list = await List.findById(id).lean();
-      res.render("lists/listPage", { list });
+      let list = await List.findById(id).populate("userId").lean();
+      res.render("lists/listPage", { list, user: req.user });
     } catch (error) {
       console.error(error);
     }
@@ -30,7 +30,7 @@ module.exports = {
   getListForm: async (req, res) => {
     try {
       if (req.params.id) {
-        let list = await List.findById(req.params._id).lean();
+        let list = await List.findById(req.params.id).lean();
         res.render("lists/listForm", { ...list });
       } else {
         res.render("lists/listForm");
@@ -55,22 +55,34 @@ module.exports = {
     }
   },
   updateList: async (req, res) => {
-    let id = req.params.id;
     try {
-      let updatedList = await List.findByIdAndUpdate(id, req.body, {
+      let updatedList = await List.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
       });
-      res.json(updatedList);
+      let user = await User.findById(req.user._id);
+      if (req.body.mainList) {
+        await User.findByIdAndUpdate(req.user._id, {
+          mainList: updatedList._id,
+        });
+        user.mainList = updatedList._id;
+      }
+      user.lists = user.lists.map((list) => {
+        if (list._id.toString() === updatedList._id.toString()) {
+          return { name: req.body.name, _id: updatedList._id };
+        }
+        return list;
+      });
+      await user.save();
+      res.redirect(`/lists/${updatedList._id}`);
     } catch (error) {
       console.error(error);
     }
   },
   deleteList: async (req, res) => {
-    let id = req.params.id;
     try {
-      let deletedList = await List.findByIdAndRemove(id);
-      res.json(deletedList);
+      let deletedList = await List.findByIdAndRemove(req.params.id);
+      res.redirect("/lists/my-lists");
     } catch (error) {
       console.error(error);
     }
