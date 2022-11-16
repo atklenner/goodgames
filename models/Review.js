@@ -9,11 +9,11 @@ let reviewSchema = new Schema({
     default: "Unrated",
     enum: [
       "Unrated",
-      "Did-Not-Like",
-      "It-Was-OK",
-      "Liked-It",
-      "Really-Liked-It",
-      "Loved-It",
+      "Did Not Like",
+      "It Was OK",
+      "Liked It",
+      "Really Liked It",
+      "Loved It",
     ],
   },
   completed: {

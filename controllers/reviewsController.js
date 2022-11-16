@@ -1,11 +1,11 @@
 const Review = require("../models/Review");
 let ratingValues = [
   "Unrated",
-  "Did-Not-Like",
-  "It-Was-OK",
-  "Liked-It",
-  "Really-Liked-It",
-  "Loved-It",
+  "Did Not Like",
+  "It Was OK",
+  "Liked It",
+  "Really Liked It",
+  "Loved It",
 ];
 let completedValues = ["No", "Playing", "Yes", "Quit"];
 

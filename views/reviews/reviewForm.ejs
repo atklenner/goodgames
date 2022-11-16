@@ -13,7 +13,7 @@
           <div class="select">
             <select name="rating" id="rating">
               <% for (let value of ratingValues) { %>
-                <option value=<%- value %> <%- rating === value ? "selected=selected": "" %>><%= value.replaceAll("-", " ") %></option>
+                <option value="<%= value %>" <%- rating === value ? "selected=selected": "" %>><%= value %></option>
               <% } %>
             </select>
           </div>
@@ -25,7 +25,7 @@
           <div class="select">
             <select name="completed" id="completed">
               <% for (let value of completedValues) { %>
-                <option value=<%= value %> <%- value === locals.completed ? "selected=selected" : "" %>><%= value %></option>
+                <option value="<%= value %>" <%- value === locals.completed ? "selected=selected" : "" %>><%= value %></option>
               <% } %>
             </select>
           </div>

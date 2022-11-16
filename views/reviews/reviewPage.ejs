@@ -8,7 +8,7 @@
         <p class="subtitle">
           Date Reviewed: <%= review.dateReviewed.toLocaleString() %>
         </p>
-        <p class="subtitle">Rating: <%= review.rating.replaceAll("-", " ") %></p>
+        <p class="subtitle">Rating: <%= review.rating %></p>
         <p class="subtitle">Completed: <%= review.completed %></p>
         <p><%= review.body %></p>
         <a href=<%- `/reviews/edit-review/${review.gameId}` %> class="button is-primary"><strong>Update Review</strong></a>
