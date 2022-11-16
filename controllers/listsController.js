@@ -1,5 +1,6 @@
 const List = require("../models/List");
 const User = require("../models/User");
+const Game = require("../models/Game");
 
 module.exports = {
   getAllLists: async (req, res) => {
@@ -77,6 +78,21 @@ module.exports = {
       res.redirect(`/lists/${updatedList._id}`);
     } catch (error) {
       console.error(error);
+    }
+  },
+  addListGame: async (req, res) => {
+    try {
+      let list = await List.findById(req.body.listId);
+      let game = await Game.findById(req.params.gameId);
+      if (
+        !list.games.find((elt) => elt._id.toString() === game._id.toString())
+      ) {
+        list.games.push({ name: game.name, genre: game.genre, _id: game._id });
+        await list.save();
+      }
+      res.redirect(`/games/${game._id}`);
+    } catch (error) {
+      console.log(error);
     }
   },
   deleteList: async (req, res) => {
