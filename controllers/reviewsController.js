@@ -1,12 +1,12 @@
 const Review = require("../models/Review");
-// let ratingValues = [
-//   "Unrated",
-//   "Did Not Like",
-//   "It Was OK",
-//   "Liked It",
-//   "Loved It",
-// ];
-// EJS is being a pain
+let ratingValues = [
+  "Unrated",
+  "Did-Not-Like",
+  "It-Was-OK",
+  "Liked-It",
+  "Really-Liked-It",
+  "Loved-It",
+];
 let completedValues = ["No", "Playing", "Yes", "Quit"];
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
       }
       res.render("./reviews/reviewForm", {
         ...review,
-        // ratingValues,
+        ratingValues,
         completedValues,
       });
     } catch (error) {
