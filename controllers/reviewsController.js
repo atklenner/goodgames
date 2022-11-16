@@ -34,7 +34,7 @@ module.exports = {
   getReview: async (req, res) => {
     try {
       const review = await Review.findOne({ _id: req.params.id });
-      res.render("./reviews/reviewPage", { review });
+      res.render("./reviews/reviewPage", { review, user: req.user });
     } catch (error) {
       console.log(error);
     }
