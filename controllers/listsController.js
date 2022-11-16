@@ -97,10 +97,23 @@ module.exports = {
   },
   deleteList: async (req, res) => {
     try {
-      let deletedList = await List.findByIdAndRemove(req.params.id);
+      await List.findByIdAndRemove(req.params.id);
       res.redirect("/lists/my-lists");
     } catch (error) {
       console.error(error);
+    }
+  },
+  removeListGame: async (req, res) => {
+    try {
+      let list = await List.findById(req.params.id);
+      list.games = list.games.filter((elt) => {
+        if (elt._id.toString() !== req.params.gameId) return true;
+        return false;
+      });
+      await list.save();
+      res.redirect(`/lists/${req.params.id}`);
+    } catch (error) {
+      console.log(error);
     }
   },
 };
