@@ -12,10 +12,10 @@
     <% } %>
     <% for (let game of list.games) { %>
       <div class="box">
-        <a href=<%- `/games/%{game._id}` %>>
+        <a href=<%- `/games/${game._id}` %>>
           <h2 class="title"><%= game.name %></h2>
-          <p class="subtitle"><%= game.genre %></p>
         </a>
+        <p class="subtitle"><%= game.genre %></p>
       </div>
     <% } %>
     <% if (list.games.length === 0) { %>
