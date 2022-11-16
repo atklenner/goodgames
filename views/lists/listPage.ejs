@@ -16,6 +16,9 @@
           <h2 class="title"><%= game.name %></h2>
         </a>
         <p class="subtitle"><%= game.genre %></p>
+        <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
+          <button class="delete"></button>
+        </form>
       </div>
     <% } %>
     <% if (list.games.length === 0) { %>
