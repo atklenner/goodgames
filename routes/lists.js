@@ -20,4 +20,6 @@ router.put("/add-list-game/:gameId", listsController.addListGame);
 
 router.delete("/delete-list/:id", listsController.deleteList);
 
+router.delete("/remove-list-game/:id/:gameId", listsController.removeListGame);
+
 module.exports = router;
