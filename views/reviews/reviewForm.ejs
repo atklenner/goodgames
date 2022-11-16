@@ -12,12 +12,9 @@
       <div class="control">
           <div class="select">
             <select name="rating" id="rating">
-                <option value="Unrated" <%- rating === "Unrated" ? "selected=selected" : "" %>>Unrated</option>
-                <option value="Did Not Like" <%- rating === "Did Not Like" ? "selected=selected" : "" %>>Did Not Like</option>
-                <option value="It Was OK" <%- rating === "It Was OK" ? "selected=selected" : "" %>>It Was OK</option>
-                <option value="Liked It" <%- rating === "Liked It" ? "selected=selected" : "" %>>Liked It</option>
-                <option value="Really Liked It" <%- rating === "Really Liked It" ? "selected=selected" : "" %>>Really Liked It</option>
-                <option value="Loved It" <%- rating === "Loved It" ? "selected=selected" : "" %>>Loved It</option>
+              <% for (let value of ratingValues) { %>
+                <option value=<%- value %> <%- rating === value ? "selected=selected": "" %>><%= value.replaceAll("-", " ") %></option>
+              <% } %>
             </select>
           </div>
       </div>
