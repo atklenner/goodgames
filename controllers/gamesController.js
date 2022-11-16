@@ -1,5 +1,6 @@
 const Game = require("../models/Game");
 const Review = require("../models/Review");
+const User = require("../models/User")
 const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
@@ -20,7 +21,8 @@ module.exports = {
         gameId: req.params.id,
         userId: req.user._id,
       }).lean();
-      res.render("games/gamePage", { game, allReviews, userReview });
+      let user = await User.findById(req.user._id);
+      res.render("games/gamePage", { game, allReviews, userReview, lists: user.lists });
     } catch (error) {
       console.error(error);
     }
