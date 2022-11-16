@@ -8,7 +8,7 @@
           <h2 class="title">Currently Playing</h2>
           <ul>
             <% for (let game of mainList.games) { %>
-            <li><a href=<%- `/games/${game.gameId._id}` %>><%= game.gameId.name %></a></li>
+            <li><a href=<%- `/games/${game._id}` %>><%= game.name %></a></li>
             <% } %>
           </ul>
         <% } else { %>
