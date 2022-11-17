@@ -1,4 +1,5 @@
 const Review = require("../models/Review");
+const Game = require("../models/Game");
 let ratingValues = [
   "Unrated",
   "Did Not Like",
@@ -13,12 +14,12 @@ module.exports = {
   addReviewPage: async (req, res) => {
     try {
       let review = await Review.findOne({
-        gameId: req.params.gameId,
-        userId: req.user._id,
+        "game._id": req.params.gameId,
+        "user._id": req.user._id,
       }).lean();
       if (!review) {
         review = {
-          gameId: req.params.gameId,
+          game: { _id: req.params.gameId },
           rating: "Unrated",
         };
       }
@@ -41,9 +42,10 @@ module.exports = {
   },
   addReview: async (req, res) => {
     try {
-      let newReview = await Review.create({
-        userId: req.user._id,
-        gameId: req.params.gameId,
+      let game = await Game.findById(req.params.gameId);
+      await Review.create({
+        user: { _id: req.user._id, name: req.user.username },
+        game: { _id: game._id, name: game.name },
         rating: req.body.rating,
         completed: req.body.completed,
         body: req.body.body,

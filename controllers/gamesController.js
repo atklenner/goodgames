@@ -1,6 +1,6 @@
 const Game = require("../models/Game");
 const Review = require("../models/Review");
-const User = require("../models/User")
+const User = require("../models/User");
 const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
@@ -16,13 +16,18 @@ module.exports = {
     try {
       // these are concurrent
       let game = await Game.findById(req.params.id).lean();
-      let allReviews = await Review.find({ gameId: req.params.id }).lean();
+      let allReviews = await Review.find({ "game._id": req.params.id }).lean();
       let userReview = await Review.findOne({
-        gameId: req.params.id,
+        "game._id": req.params.id,
         userId: req.user._id,
       }).lean();
       let user = await User.findById(req.user._id);
-      res.render("games/gamePage", { game, allReviews, userReview, lists: user.lists });
+      res.render("games/gamePage", {
+        game,
+        allReviews,
+        userReview,
+        lists: user.lists,
+      });
     } catch (error) {
       console.error(error);
     }

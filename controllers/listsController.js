@@ -12,9 +12,8 @@ module.exports = {
     }
   },
   getOneList: async (req, res) => {
-    let id = req.params.id;
     try {
-      let list = await List.findById(id).populate("userId").lean();
+      let list = await List.findById(req.params.id).lean();
       res.render("lists/listPage", { list, user: req.user });
     } catch (error) {
       console.error(error);
@@ -45,7 +44,7 @@ module.exports = {
       let addedList = await List.create({
         name: req.body.name,
         description: req.body.description,
-        userId: req.user._id,
+        user: { _id: req.user._id, name: req.user.username },
       });
       let user = await User.findById(req.user._id);
       user.lists.push({ name: addedList.name, _id: addedList._id });
