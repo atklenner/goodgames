@@ -4,8 +4,8 @@
   <div class="content">
     <h1 class="title"><%= list.name %></h1>
     <p class="subtitle"><%= list.description %></p>
-    <p class="subtitle"><%= list.userId.username %></p>
-    <% if (list.userId._id.toString() === user._id.toString()) { %>
+    <p class="subtitle"><%= list.user.name %></p>
+    <% if (list.user._id.toString() === user._id.toString()) { %>
       <a href=<%- `/lists/edit-list/${list._id}` %> class="button is-primary">
         <strong>Edit List</strong>
       </a>

@@ -4,15 +4,15 @@
   <div class="columns">
     <div class="column is-half is-offset-one-quarter">
       <div class="box">
-        <h1 class="title">Game Review</h1>
+        <h1 class="title"><a href=<%- `/games/${review.game._id}` %>><%= review.game.name %></a> Review</h1>
         <p class="subtitle">
           Date Reviewed: <%= review.dateReviewed.toLocaleString() %>
         </p>
         <p class="subtitle">Rating: <%= review.rating %></p>
         <p class="subtitle">Completed: <%= review.completed %></p>
         <p><%= review.body %></p>
-        <% if (review.userId.toString() === user._id.toString()) { %>
-          <a href=<%- `/reviews/edit-review/${review.gameId}` %> class="button is-primary"><strong>Update Review</strong></a>
+        <% if (review.user._id.toString() === user._id.toString()) { %>
+          <a href=<%- `/reviews/edit-review/${review.game._id}` %> class="button is-primary"><strong>Update Review</strong></a>
         <% } %>
       </div>
     </div>
