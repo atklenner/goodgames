@@ -2,8 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let reviewSchema = new Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  gameId: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
+  user: {
+    _id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    name: { type: String },
+  },
+  game: {
+    _id: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
+    name: { type: String },
+  },
   rating: {
     type: String,
     default: "Unrated",

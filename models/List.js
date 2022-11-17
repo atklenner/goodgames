@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const listSchema = new Schema({
   name: { type: String, default: "Untitled" },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  user: {
+    _id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    name: { type: String },
+  },
   description: { type: String },
   games: [
     {
@@ -15,6 +18,3 @@ const listSchema = new Schema({
 });
 
 module.exports = new mongoose.model("List", listSchema);
-
-// what if instead of userId I just had user and it contained
-// the name and _id of the user???
