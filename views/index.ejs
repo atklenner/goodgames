@@ -5,7 +5,9 @@
     <div class="tile is-4 is-parent is-danger">
       <div class="tile is-child box">
         <% if (locals.mainList) { %>
-          <h2 class="title">Currently Playing</h2>
+          <a href=<%- `/lists/${mainList._id}` %>>
+            <h2 class="title"><%= mainList.name %></h2>
+          </a>
           <ul>
             <% for (let game of mainList.games) { %>
             <li><a href=<%- `/games/${game._id}` %>><%= game.name %></a></li>
