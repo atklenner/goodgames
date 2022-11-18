@@ -2,10 +2,12 @@
 %>
 <main class="container">
   <div class="content">
-    <h1 class="title"><%= title %></h1>
-    <a href="/lists/edit-list" class="button is-primary">
-      <strong>Make a New List</strong>
-    </a>
+    <div class="is-flex is-justify-content-space-between">
+      <h1 class="title"><%= title %></h1>
+      <a href="/lists/edit-list" class="button is-primary">
+        <strong>Make a New List</strong>
+      </a>
+    </div>
       <% for (let list of lists) { %>
         <div class="box">
           <a href=<%- `/lists/${list._id}` %>>

@@ -1,8 +1,10 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
 <main class="container">
-  <h1 class="title is-1">ALL GAMES</h1>
-  <a href="games/edit-game" class="button is-primary"><strong>Add A Game</strong></a>
+  <div class="is-flex is-justify-content-space-between">
+    <h1 class="title">All Games</h1>
+    <a href="games/edit-game" class="button is-primary"><strong>Add A Game</strong></a>
+  </div>
   <% for (let game of games) { %>
   <div class="box">
     <div class="media">

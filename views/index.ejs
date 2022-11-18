@@ -20,8 +20,10 @@
     </div>
     <div class="tile is-8 is-parent is-info">
       <div class="tile is-child box">
-        <h2 class="title">Your Lists</h2>
-        <a href="/lists/edit-list" class="button is-primary"><strong>Create a New List</strong></a>
+        <div class="is-flex is-justify-content-space-between">
+          <h2 class="title">Your Lists</h2>
+          <a href="/lists/edit-list" class="button is-primary"><strong>Create a New List</strong></a>
+        </div>
         <ul>
           <% for (let list of lists) { %>
           <li>
