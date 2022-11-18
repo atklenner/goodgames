@@ -5,7 +5,7 @@ const listSchema = new Schema({
   name: { type: String, default: "Untitled" },
   user: {
     _id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    name: { type: String },
+    username: { type: String },
   },
   description: { type: String },
   games: [

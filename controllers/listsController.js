@@ -44,7 +44,7 @@ module.exports = {
       let addedList = await List.create({
         name: req.body.name,
         description: req.body.description,
-        user: { _id: req.user._id, name: req.user.username },
+        user: { _id: req.user._id, username: req.user.username },
       });
       let user = await User.findById(req.user._id);
       user.lists.push({ name: addedList.name, _id: addedList._id });
@@ -102,6 +102,7 @@ module.exports = {
         if (list._id.toString() !== req.params.id) return true;
         return false;
       });
+      user.save();
       res.redirect("/lists/my-lists");
     } catch (error) {
       console.error(error);
