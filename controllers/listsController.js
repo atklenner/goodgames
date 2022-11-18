@@ -48,6 +48,9 @@ module.exports = {
       });
       let user = await User.findById(req.user._id);
       user.lists.push({ name: addedList.name, _id: addedList._id });
+      if (req.body.mainList) {
+        user.mainList = { _id: addedList._id, name: addedList.name };
+      }
       await user.save();
       res.redirect("/lists/my-lists");
     } catch (error) {
@@ -62,10 +65,7 @@ module.exports = {
       });
       let user = await User.findById(req.user._id);
       if (req.body.mainList) {
-        await User.findByIdAndUpdate(req.user._id, {
-          mainList: updatedList._id,
-        });
-        user.mainList = updatedList._id;
+        user.mainList = { _id: updatedList._id, name: updatedList.name };
       }
       user.lists = user.lists.map((list) => {
         if (list._id.toString() === updatedList._id.toString()) {
@@ -97,6 +97,11 @@ module.exports = {
   deleteList: async (req, res) => {
     try {
       await List.findByIdAndRemove(req.params.id);
+      let user = await User.findById(req.user._id);
+      user.lists = user.lists.filter((list) => {
+        if (list._id.toString() !== req.params.id) return true;
+        return false;
+      });
       res.redirect("/lists/my-lists");
     } catch (error) {
       console.error(error);
