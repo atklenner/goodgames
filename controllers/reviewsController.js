@@ -44,7 +44,7 @@ module.exports = {
     try {
       let game = await Game.findById(req.params.gameId);
       await Review.create({
-        user: { _id: req.user._id, name: req.user.username },
+        user: { _id: req.user._id, username: req.user.username },
         game: { _id: game._id, name: game.name },
         rating: req.body.rating,
         completed: req.body.completed,
@@ -79,7 +79,7 @@ module.exports = {
   deleteReview: async (req, res) => {
     try {
       let review = await Review.findByIdAndRemove({ _id: req.params.id });
-      res.redirect(`/games/${review.gameId}`);
+      res.redirect(`/games/${review.game._id}`);
     } catch (error) {
       console.log(error);
     }
