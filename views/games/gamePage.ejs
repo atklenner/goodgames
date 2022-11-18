@@ -14,24 +14,32 @@
       <div class="box">
         <h2 class="title"><%= game.name %></h2>
         <h3 class="subtitle"><%= game.genre %></h3>
-        <div class="buttons">
           <form action=<%- `/lists/add-list-game/${game._id}?_method=PUT` %> method="post">
-            <div class="field">
-              <label for="listId" class="label">List</label>
-              <div class="control">
-                <div class="select">
-                  <select name="listId" id="listId">
-                    <% for (let list of lists) { %>
-                      <option value=<%- `${list._id}` %>><%= list.name %></option>
-                    <% } %>
-                  </select>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+                <label for="listId" class="label">List</label>
+              </div>
+              <div class="field-body">
+                <div class="field has-addons">
+                  <div class="control is-expanded">
+                    <div class="select is-fullwidth">
+                      <select name="listId" id="listId">
+                        <% for (let list of lists) { %>
+                          <option value=<%- `${list._id}` %>><%= list.name %></option>
+                        <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <button data-target="add-game-modal" class="button is-primary">
+                      <strong>Add Game</strong>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <button data-target="add-game-modal" class="button is-primary"><strong>Add Game to List</strong></button>
           </form>
           <a href=<%= `edit-game/${game._id}` %> class="button"><strong>Update Game Info</strong></a>
-        </div>
       </div>
       <div class="box">
         <% if (userReview) { %>
