@@ -14,14 +14,19 @@ module.exports = {
   },
   getOneGame: async (req, res) => {
     try {
-      // these are concurrent
-      let game = await Game.findById(req.params.id).lean();
-      let allReviews = await Review.find({ "game._id": req.params.id }).lean();
-      let userReview = await Review.findOne({
+      let gameReq = Game.findById(req.params.id).lean();
+      let allReviewsReq = Review.find({ "game._id": req.params.id }).lean();
+      let userReviewReq = Review.findOne({
         "game._id": req.params.id,
         userId: req.user._id,
       }).lean();
-      let user = await User.findById(req.user._id);
+      let userReq = User.findById(req.user._id);
+      let [game, allReviews, userReview, user] = await Promise.all([
+        gameReq,
+        allReviewsReq,
+        userReviewReq,
+        userReq,
+      ]);
       res.render("games/gamePage", {
         game,
         allReviews,
@@ -88,9 +93,8 @@ module.exports = {
   },
   deleteGame: async (req, res) => {
     try {
-      let game = await Game.findById({ _id: req.params.id });
+      let game = await Game.findByIdAndRemove({ _id: req.params.id });
       await cloudinary.uploader.destroy(game.cloudinaryId);
-      await Game.remove({ _id: req.params.id });
       res.redirect("/games");
     } catch (error) {
       console.error(error);
