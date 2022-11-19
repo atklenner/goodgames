@@ -13,7 +13,7 @@
         <p class="subtitle">User: <%= review.user.username %></p>
         <p><%= review.body %></p>
         <% if (review.user._id.toString() === user._id.toString()) { %>
-          <a href=<%- `/reviews/edit-review/${review.game._id}` %> class="button is-primary"><strong>Update Review</strong></a>
+          <a href=<%- `/reviews/edit-review/${review.game._id}` %> class="button is-primary has-text-weight-bold">Update Review</a>
         <% } %>
       </div>
     </div>

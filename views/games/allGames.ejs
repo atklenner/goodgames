@@ -3,7 +3,7 @@
 <main class="container">
   <div class="is-flex is-justify-content-space-between">
     <h1 class="title">All Games</h1>
-    <a href="games/edit-game" class="button is-primary"><strong>Add A Game</strong></a>
+    <a href="games/edit-game" class="button is-primary has-text-weight-bold">Add A Game</a>
   </div>
   <% for (let game of games) { %>
   <div class="box">
@@ -19,7 +19,7 @@
       <div class="media-content">
         <div class="content">
           <p>
-            <a href=<%- `/games/${game._id}` %>><strong><%= game.name %></strong></a>
+            <a class="has-text-weight-bold" href=<%- `/games/${game._id}` %>><%= game.name %></a>
             <br />
             <%= game.genre %>
           </p>
