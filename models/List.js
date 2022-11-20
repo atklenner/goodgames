@@ -16,7 +16,6 @@ const listSchema = new Schema({
     },
   ],
   private: { type: Boolean, default: false },
-  mainList: { type: Boolean, default: false },
   likes: { type: Number, default: 0 },
 });
 

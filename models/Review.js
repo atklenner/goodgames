@@ -29,6 +29,10 @@ let reviewSchema = new Schema({
   },
   body: { type: String },
   dateReviewed: { type: Date, default: Date.now },
+  dateGameStarted: { type: Date },
+  dateGameCompleted: { type: Date },
+  timeSpentPlaying: { type: Number },
+  likes: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model("Review", reviewSchema);
