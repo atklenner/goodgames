@@ -58,7 +58,7 @@ module.exports = {
       });
       let user = await User.findById(req.user._id);
       user.lists.push({ name: addedList.name, _id: addedList._id });
-      if (mainList) {
+      if (req.body.mainList) {
         user.mainList = { _id: addedList._id, name: addedList.name };
       }
       await user.save();
@@ -129,6 +129,14 @@ module.exports = {
         return false;
       });
       await list.save();
+      res.redirect(`/lists/${req.params.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  likeList: async (req, res) => {
+    try {
+      await List.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } });
       res.redirect(`/lists/${req.params.id}`);
     } catch (error) {
       console.log(error);

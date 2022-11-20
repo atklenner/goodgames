@@ -27,6 +27,7 @@ module.exports = {
         ...review,
         ratingValues,
         completedValues,
+        user: req.user,
       });
     } catch (error) {
       console.log(error);
@@ -80,6 +81,14 @@ module.exports = {
     try {
       let review = await Review.findByIdAndRemove({ _id: req.params.id });
       res.redirect(`/games/${review.game._id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  likeReview: async (req, res) => {
+    try {
+      await Review.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } });
+      res.redirect(`/reviews/${req.params.id}`);
     } catch (error) {
       console.log(error);
     }
