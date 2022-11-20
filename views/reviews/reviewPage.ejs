@@ -4,17 +4,30 @@
   <div class="columns">
     <div class="column is-half is-offset-one-quarter">
       <div class="box">
-        <h1 class="title"><a href=<%- `/games/${review.game._id}` %>><%= review.game.name %></a> Review</h1>
-        <p class="subtitle">
+        <div class="is-flex is-justify-content-space-between">
+          <h1 class="title">
+            <a href=<%- `/games/${review.game._id}` %>>
+              <%= review.game.name %>
+            </a> Review
+          </h1>
+          <% if (review.user._id.toString() === user._id.toString()) { %>
+            <a href=<%- `/reviews/edit-review/${review.game._id}` %> class="button is-primary has-text-weight-bold">Update Review</a>
+          <% } else { %>
+            <form action=<%- `/reviews/like-review/${review._id}?_method=PUT` %> method="post">
+              <button class="button is-primary has-text-weight-bold" type="submit">
+                Like
+              </button>
+            </form>
+          <% } %>
+        </div>
+        <p class="">
           Date Reviewed: <%= review.dateReviewed.toLocaleString() %>
         </p>
-        <p class="subtitle">Rating: <%= review.rating %></p>
-        <p class="subtitle">Completed: <%= review.completed %></p>
-        <p class="subtitle">User: <%= review.user.username %></p>
+        <p class="">Rating: <%= review.rating %></p>
+        <p class="">Completed: <%= review.completed %></p>
+        <p class="">User: <%= review.user.username %></p>
+        <p>Likes: <%= review.likes %></p>
         <p><%= review.body %></p>
-        <% if (review.user._id.toString() === user._id.toString()) { %>
-          <a href=<%- `/reviews/edit-review/${review.game._id}` %> class="button is-primary has-text-weight-bold">Update Review</a>
-        <% } %>
       </div>
     </div>
   </div>

@@ -13,6 +13,7 @@
           <a href=<%- `/lists/${list._id}` %>>
             <h2 class="title"><%= list.name %></h2>
           </a>
+          <p>Likes: <%= list.likes %></p>
         </div>
       <% } %> <% if (lists.length === 0) { %>
     <p>THERE ARE NO LISTS!!!</p>

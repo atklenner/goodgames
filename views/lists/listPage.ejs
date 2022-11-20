@@ -8,11 +8,16 @@
         <a href=<%- `/lists/edit-list/${list._id}` %> class="button is-primary has-text-weight-bold">
           Edit List
         </a>
+      <% } else { %>
+      <form action=<%- `/lists/like-list/${list._id}?_method=PUT` %> method="post">
+        <button class="button is-primary has-text-weight-bold" type="submit">Like</button>
+      </form>
       <% } %>
     </div>
-    <p class="subtitle"><%= list.description %></p>
-    <p class="subtitle"><%= list.user.username %></p>
-    <p class="subtitle"><%= list.private ? "private list" : "" %></p>
+    <p class=""><%= list.description %></p>
+    <p class=""><%= list.user.username %></p>
+    <p class=""><%= list.private ? "private list" : "public list" %></p>
+    <p>Likes: <%= list.likes %></p>
     <% for (let game of list.games) { %>
       <div class="box">
         <div class="is-flex is-justify-content-space-between">
