@@ -54,6 +54,11 @@
 
       <div class="navbar-end">
         <div class="navbar-item">
+          <a href=<%- `/users/${user._id}` %>>
+          <%= user.username %>
+          </a>
+        </div>
+        <div class="navbar-item">
           <a href="/logout" class="button is-primary has-text-weight-bold">
             Logout
           </a>
