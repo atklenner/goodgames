@@ -4,7 +4,7 @@ module.exports = {
   getAllUsers: async (req, res) => {
     try {
       let users = await User.find();
-      res.render("allUsers", { users });
+      res.render("users/allUsers", { users });
     } catch (error) {
       console.error(error);
     }
@@ -12,7 +12,7 @@ module.exports = {
   getOneUser: async (req, res) => {
     try {
       let user = await User.findById(req.params.id);
-      res.render("userProfile", { user });
+      res.render("users/userProfile", { user });
     } catch (error) {
       console.error(error);
     }
