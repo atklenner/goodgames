@@ -7,7 +7,7 @@ module.exports = {
   getAllGames: async (req, res) => {
     try {
       let games = await Game.find();
-      res.render("games/allGames", { games });
+      res.render("games/allGames", { games, user: req.user });
     } catch (error) {
       console.error(error);
     }
@@ -32,13 +32,14 @@ module.exports = {
         allReviews,
         userReview,
         lists: user.lists,
+        user: req.user,
       });
     } catch (error) {
       console.error(error);
     }
   },
   addGamePage: (req, res) => {
-    res.render("games/gameForm");
+    res.render("games/gameForm", { user: req.user });
   },
   addNewGame: async (req, res) => {
     try {
@@ -58,7 +59,7 @@ module.exports = {
     try {
       let game = await Game.findById({ _id: req.params.id }).lean();
       if (game) {
-        res.render("games/gameForm", { ...game });
+        res.render("games/gameForm", { ...game, user: req.user });
       } else {
         res.render("404");
       }

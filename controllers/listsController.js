@@ -6,7 +6,11 @@ module.exports = {
   getAllLists: async (req, res) => {
     try {
       let lists = await List.find({ private: false }).lean();
-      res.render("lists/allLists", { lists, title: "All Lists" });
+      res.render("lists/allLists", {
+        lists,
+        title: "All Lists",
+        user: req.user,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -22,7 +26,11 @@ module.exports = {
   getLoggedInUserLists: async (req, res) => {
     try {
       let user = await User.findById(req.user._id).lean();
-      res.render("lists/allLists", { lists: user.lists, title: "My Lists" });
+      res.render("lists/allLists", {
+        lists: user.lists,
+        title: "My Lists",
+        user: req.user,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -31,9 +39,9 @@ module.exports = {
     try {
       if (req.params.id) {
         let list = await List.findById(req.params.id).lean();
-        res.render("lists/listForm", { list });
+        res.render("lists/listForm", { list, user: req.user });
       } else {
-        res.render("lists/listForm");
+        res.render("lists/listForm", { user: req.user });
       }
     } catch (error) {
       console.error(error);
