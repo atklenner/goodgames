@@ -1,7 +1,7 @@
 <%- include("../partials/header.ejs") %> 
 <%- include("../partials/navbar.ejs") %>
 <main class="container">
-  <% if (list._id) { %>
+  <% if (locals.list) { %>
     <h1 class="title is-1">Update List Info</h1>
     <form action=<%- `/lists/update-list/${list._id}?_method=PUT` %> method="post"> 
   <% } else { %>
@@ -16,7 +16,7 @@
             class="input"
             id="name"
             name="name"
-            <% if (list.name) { %>
+            <% if (locals.list?.name) { %>
             value="<%= list.name %>" 
             <% } %> />
       </div>
@@ -29,7 +29,7 @@
             class="input"
             id="description"
             name="description"
-            <% if (list.description) { %>
+            <% if (locals.list?.description) { %>
             value="<%= list.description %>" 
             <% } %> />
       </div>
@@ -53,7 +53,7 @@
             type="checkbox" 
             name="private" 
             id="private"
-            <% if (list.private) { %>
+            <% if (locals.list?.private) { %>
               checked="checked"
             <% } %>
           >
@@ -67,7 +67,7 @@
           Submit
         </button>
       </div>
-      <% if (list._id) { %>
+      <% if (locals.list) { %>
       <div class="control">
         <button
           type="button"
@@ -80,7 +80,7 @@
       <% } %>
     </div>
   </form>
-  <% if (list._id) { %> 
+  <% if (locals.list) { %> 
     <%- include("../partials/modal.ejs", { type: "list", _id: list._id }) %> 
   <% } %>
 </main>
