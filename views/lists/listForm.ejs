@@ -1,44 +1,63 @@
-<%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
-%>
+<%- include("../partials/header.ejs") %> 
+<%- include("../partials/navbar.ejs") %>
 <main class="container">
-  <% if (locals._id) { %>
-  <h1 class="title is-1">Update List Info</h1>
-  <form action=<%- `/lists/update-list/${_id}?_method=PUT` %> method="post"> <%
-  } else { %>
-  <h1 class="title is-1">New List Form</h1>
-  <form action="/lists/new-list" method="post">
-    <% } %>
+  <% if (list._id) { %>
+    <h1 class="title is-1">Update List Info</h1>
+    <form action=<%- `/lists/update-list/${list._id}?_method=PUT` %> method="post"> 
+  <% } else { %>
+    <h1 class="title is-1">New List Form</h1>
+    <form action="/lists/new-list" method="post">
+  <% } %>
     <div class="field">
       <label for="name" class="label">Name</label>
       <div class="control">
-        <!-- prettier-ignore -->
         <input
             type="text"
             class="input"
             id="name"
             name="name"
-            <% if (locals.name) { %>
-        value="<%= name %>" <% } %> />
+            <% if (list.name) { %>
+            value="<%= list.name %>" 
+            <% } %> />
       </div>
     </div>
     <div class="field">
       <label for="description" class="label">Description</label>
       <div class="control">
-        <!-- prettier-ignore -->
         <input
             type="text"
             class="input"
             id="description"
             name="description"
-            <% if (locals.description) { %>
-        value="<%= description %>" <% } %> />
+            <% if (list.description) { %>
+            value="<%= list.description %>" 
+            <% } %> />
       </div>
     </div>
     <div class="field">
       <div class="control">
         <label for="mainList" class="checkbox">
-          <input type="checkbox" name="mainList" id="mainList" />
-          Make this list your main list?
+          <input 
+            type="checkbox" 
+            name="mainList" 
+            id="mainList" 
+          />
+          Make this list your main list? (this will replace your previous main list)
+        </label>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <label for="private" class="checkbox">
+          <input 
+            type="checkbox" 
+            name="private" 
+            id="private"
+            <% if (list.private) { %>
+              checked="checked"
+            <% } %>
+          >
+          Make list private?
         </label>
       </div>
     </div>
@@ -48,7 +67,7 @@
           Submit
         </button>
       </div>
-      <% if (locals._id) { %>
+      <% if (list._id) { %>
       <div class="control">
         <button
           type="button"
@@ -61,7 +80,8 @@
       <% } %>
     </div>
   </form>
-  <% if (locals._id) { %> <%- include("../partials/modal.ejs", { type: "list",
-  _id }) %> <% } %>
+  <% if (list._id) { %> 
+    <%- include("../partials/modal.ejs", { type: "list", _id: list._id }) %> 
+  <% } %>
 </main>
 <%- include("../partials/footer.ejs") %>

@@ -15,6 +15,9 @@ const listSchema = new Schema({
       _id: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
     },
   ],
+  private: { type: Boolean, default: false },
+  mainList: { type: Boolean, default: false },
+  likes: { type: Number, default: 0 },
 });
 
 module.exports = new mongoose.model("List", listSchema);

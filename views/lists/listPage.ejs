@@ -2,25 +2,30 @@
 %>
 <main class="container">
   <div class="content">
-    <h1 class="title"><%= list.name %></h1>
+    <div class="is-flex is-justify-content-space-between">
+      <h1 class="title"><%= list.name %></h1>
+      <% if (list.user._id.toString() === user._id.toString()) { %>
+        <a href=<%- `/lists/edit-list/${list._id}` %> class="button is-primary has-text-weight-bold">
+          Edit List
+        </a>
+      <% } %>
+    </div>
     <p class="subtitle"><%= list.description %></p>
     <p class="subtitle"><%= list.user.username %></p>
-    <% if (list.user._id.toString() === user._id.toString()) { %>
-      <a href=<%- `/lists/edit-list/${list._id}` %> class="button is-primary has-text-weight-bold">
-        Edit List
-      </a>
-    <% } %>
+    <p class="subtitle"><%= list.private ? "private list" : "" %></p>
     <% for (let game of list.games) { %>
       <div class="box">
-        <a href=<%- `/games/${game._id}` %>>
-          <h2 class="title"><%= game.name %></h2>
-        </a>
+        <div class="is-flex is-justify-content-space-between">
+          <a href=<%- `/games/${game._id}` %>>
+            <h2 class="title"><%= game.name %></h2>
+          </a>
+          <% if (list.user._id.toString() === user._id.toString()) { %>
+            <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
+              <button class="delete"></button>
+            </form>
+          <% } %>
+        </div>
         <p class="subtitle"><%= game.genre %></p>
-        <% if (list.user._id.toString() === user._id.toString()) { %>
-          <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
-            <button class="delete"></button>
-          </form>
-        <% } %>
       </div>
     <% } %>
     <% if (list.games.length === 0) { %>

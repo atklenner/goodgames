@@ -5,7 +5,7 @@ const Game = require("../models/Game");
 module.exports = {
   getAllLists: async (req, res) => {
     try {
-      let lists = await List.find().lean();
+      let lists = await List.find({ private: false }).lean();
       res.render("lists/allLists", { lists, title: "All Lists" });
     } catch (error) {
       console.error(error);
@@ -31,7 +31,7 @@ module.exports = {
     try {
       if (req.params.id) {
         let list = await List.findById(req.params.id).lean();
-        res.render("lists/listForm", { ...list });
+        res.render("lists/listForm", { list });
       } else {
         res.render("lists/listForm");
       }
@@ -40,15 +40,17 @@ module.exports = {
     }
   },
   addNewList: async (req, res) => {
+    let private = req.body.private ? true : false;
     try {
       let addedList = await List.create({
         name: req.body.name,
         description: req.body.description,
         user: { _id: req.user._id, username: req.user.username },
+        private,
       });
       let user = await User.findById(req.user._id);
       user.lists.push({ name: addedList.name, _id: addedList._id });
-      if (req.body.mainList) {
+      if (mainList) {
         user.mainList = { _id: addedList._id, name: addedList.name };
       }
       await user.save();
@@ -58,6 +60,9 @@ module.exports = {
     }
   },
   updateList: async (req, res) => {
+    req.body = req.body.private
+      ? { ...req.body, private: true }
+      : { ...req.body, private: false };
     try {
       let updatedList = await List.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
