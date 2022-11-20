@@ -10,6 +10,8 @@ router.post("/new-review/:gameId", reviewsController.addReview);
 
 router.put("/update-review/:id", reviewsController.updateReview);
 
+router.put("/like-review/:id", reviewsController.likeReview);
+
 router.delete("/delete-review/:id", reviewsController.deleteReview);
 
 module.exports = router;

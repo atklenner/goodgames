@@ -16,6 +16,8 @@ router.post("/new-list", listsController.addNewList);
 
 router.put("/update-list/:id", listsController.updateList);
 
+router.put("/like-list/:id", listsController.likeList);
+
 router.put("/add-list-game/:gameId", listsController.addListGame);
 
 router.delete("/delete-list/:id", listsController.deleteList);
