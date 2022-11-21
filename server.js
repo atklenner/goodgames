@@ -15,6 +15,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const methodOverride = require("method-override");
+const helpers = require("./helpers/helpers");
 
 require("./config/passport")(passport);
 
@@ -46,6 +47,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
+
+helpers(app);
 
 app.use("/", indexRouter);
 app.use("/games", gamesRouter);

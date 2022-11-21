@@ -7,7 +7,7 @@
   <div class="columns">
     <div class="column is-half">
       <figure class="image">
-        <img src=<%-`${game.image}`%> alt=<%-`${game.name}`%> />
+        <img src=<%-`${game.image}`%> alt="<%-`${game.name}`%>" />
       </figure>
     </div>
     <div class="column is-half">
@@ -28,7 +28,9 @@
                     <div class="select is-fullwidth">
                       <select name="listId" id="listId">
                         <% for (let list of lists) { %>
-                          <option value=<%- `${list._id}` %>><%= list.name %></option>
+                          <option value=<%- `${list._id}` %>>
+                            <%= list.name %>
+                          </option>
                         <% } %>
                       </select>
                     </div>
@@ -48,7 +50,7 @@
           <h2 class="title">Your Review</h2>
           <p>Rating: <%= userReview.rating %></p>
           <p>Completed: <%= userReview.completed %></p>
-          <p>Review Text: <%= userReview.body %></p>
+          <p>Review Text: <%= truncate(userReview.body, 300) %></p>
           <p>Review Date: <%= userReview.dateReviewed.toLocaleString() %></p>
           <p>Likes: <%= userReview.likes %></p>
           <a href=<%- `/reviews/${userReview._id}` %> class="button is-primary has-text-weight-bold">Read Full Review</a>
@@ -66,7 +68,7 @@
         <div class="box">
           <p>Rating: <%= review.rating %></p>
           <p>Completed:<%= review.completed %></p>
-          <p>Review Text: <%= review.body %></p>
+          <p>Review Text: <%= truncate(review.body, 300) %></p>
           <p>Date Reviewd: <%= review.dateReviewed.toLocaleString() %></p>
           <p>Likes: <%= review.likes %></p>
           <a href=<%- `/reviews/${review._id}` %> class="button is-primary has-text-weight-bold">Read Full Review</a>
