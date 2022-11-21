@@ -8,13 +8,7 @@ const listSchema = new Schema({
     username: { type: String },
   },
   description: { type: String },
-  games: [
-    {
-      name: { type: String, default: "Untitled" },
-      genre: { type: String, default: "No Genre Given" },
-      _id: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
-    },
-  ],
+  games: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }],
   private: { type: Boolean, default: false },
   likes: { type: Number, default: 0 },
 });

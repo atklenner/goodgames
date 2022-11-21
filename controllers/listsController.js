@@ -17,7 +17,7 @@ module.exports = {
   },
   getOneList: async (req, res) => {
     try {
-      let list = await List.findById(req.params.id).lean();
+      let list = await List.findById(req.params.id).populate("games").lean();
       res.render("lists/listPage", { list, user: req.user });
     } catch (error) {
       console.error(error);
@@ -77,9 +77,9 @@ module.exports = {
         runValidators: true,
       });
       if (req.body.mainList) {
-        let user = await User.findById(req.user._id);
-        user.mainList = updatedList._id;
-        await user.save();
+        await User.findByIdAndUpdate(req.user._id, {
+          mainList: updatedList._id,
+        });
       }
       res.redirect(`/lists/${updatedList._id}`);
     } catch (error) {
@@ -93,7 +93,7 @@ module.exports = {
       if (
         !list.games.find((elt) => elt._id.toString() === game._id.toString())
       ) {
-        list.games.push({ name: game.name, genre: game.genre, _id: game._id });
+        list.games.push(game._id);
         await list.save();
       }
       res.redirect(`/games/${game._id}`);
@@ -104,12 +104,6 @@ module.exports = {
   deleteList: async (req, res) => {
     try {
       await List.findByIdAndRemove(req.params.id);
-      let user = await User.findById(req.user._id);
-      user.lists = user.lists.filter((list) => {
-        if (list.toString() !== req.params.id) return true;
-        return false;
-      });
-      user.save();
       res.redirect("/lists/my-lists");
     } catch (error) {
       console.error(error);
@@ -119,7 +113,7 @@ module.exports = {
     try {
       let list = await List.findById(req.params.id);
       list.games = list.games.filter((elt) => {
-        if (elt._id.toString() !== req.params.gameId) return true;
+        if (elt.toString() !== req.params.gameId) return true;
         return false;
       });
       await list.save();
