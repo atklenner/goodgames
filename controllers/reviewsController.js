@@ -50,6 +50,7 @@ module.exports = {
         rating: req.body.rating,
         completed: req.body.completed,
         body: req.body.body,
+        timeSpentPlaying: req.body.timeSpentPlaying,
       });
       res.redirect(`/games/${req.params.gameId}`);
     } catch (error) {
@@ -57,6 +58,7 @@ module.exports = {
     }
   },
   updateReview: async (req, res) => {
+    console.log(req.body.timeSpentPlaying);
     try {
       let review = await Review.findOneAndUpdate(
         { _id: req.params.id },
@@ -65,6 +67,7 @@ module.exports = {
           completed: req.body.completed,
           body: req.body.body,
           dateReviewed: Date.now(),
+          timeSpentPlaying: req.body.timeSpentPlaying,
         },
         {
           upsert: true,
