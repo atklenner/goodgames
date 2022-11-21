@@ -5,16 +5,8 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
-  mainList: {
-    _id: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
-    name: { type: String },
-  },
-  lists: [
-    {
-      name: { type: String, default: "Unnamed List" },
-      _id: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
-    },
-  ],
+  mainList: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
+  lists: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
 });
 
 // Password hash middleware.
