@@ -25,7 +25,7 @@ module.exports = {
   },
   getLoggedInUserLists: async (req, res) => {
     try {
-      let user = await User.findById(req.user._id).lean();
+      let user = await User.findById(req.user._id).populate("lists").lean();
       res.render("lists/allLists", {
         lists: user.lists,
         title: "My Lists",
@@ -57,9 +57,9 @@ module.exports = {
         private,
       });
       let user = await User.findById(req.user._id);
-      user.lists.push({ name: addedList.name, _id: addedList._id });
+      user.lists.push(addedList._id);
       if (req.body.mainList) {
-        user.mainList = { _id: addedList._id, name: addedList.name };
+        user.mainList = addedList._id;
       }
       await user.save();
       res.redirect("/lists/my-lists");
@@ -76,17 +76,11 @@ module.exports = {
         new: true,
         runValidators: true,
       });
-      let user = await User.findById(req.user._id);
       if (req.body.mainList) {
-        user.mainList = { _id: updatedList._id, name: updatedList.name };
+        let user = await User.findById(req.user._id);
+        user.mainList = updatedList._id;
+        await user.save();
       }
-      user.lists = user.lists.map((list) => {
-        if (list._id.toString() === updatedList._id.toString()) {
-          return { name: req.body.name, _id: updatedList._id };
-        }
-        return list;
-      });
-      await user.save();
       res.redirect(`/lists/${updatedList._id}`);
     } catch (error) {
       console.error(error);
@@ -112,7 +106,7 @@ module.exports = {
       await List.findByIdAndRemove(req.params.id);
       let user = await User.findById(req.user._id);
       user.lists = user.lists.filter((list) => {
-        if (list._id.toString() !== req.params.id) return true;
+        if (list.toString() !== req.params.id) return true;
         return false;
       });
       user.save();

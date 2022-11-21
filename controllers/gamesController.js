@@ -20,7 +20,7 @@ module.exports = {
         "game._id": req.params.id,
         userId: req.user._id,
       }).lean();
-      let userReq = User.findById(req.user._id);
+      let userReq = User.findById(req.user._id).populate("lists");
       let [game, allReviews, userReview, user] = await Promise.all([
         gameReq,
         allReviewsReq,
