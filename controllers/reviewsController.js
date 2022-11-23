@@ -1,22 +1,11 @@
 const Review = require("../models/Review");
 const Game = require("../models/Game");
-let ratingValues = [
-  "Unrated",
-  "Did Not Like",
-  "It Was OK",
-  "Liked It",
-  "Really Liked It",
-  "Loved It",
-];
-let completedValues = ["No", "Playing", "Yes", "Quit"];
 
 module.exports = {
   addReviewPage: async (req, res) => {
     try {
-      let review = await Review.findOne({
-        game: req.params.gameId,
-        "user._id": req.user._id,
-      }).lean();
+      let review = await Review.findById(req.params.id).lean();
+      console.log(review);
       if (!review) {
         review = {
           game: req.params.gameId,
@@ -25,8 +14,6 @@ module.exports = {
       }
       res.render("./reviews/reviewForm", {
         ...review,
-        ratingValues,
-        completedValues,
         user: req.user,
       });
     } catch (error) {
