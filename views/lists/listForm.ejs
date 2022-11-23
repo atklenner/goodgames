@@ -10,33 +10,8 @@
   <% } %>
     <%- include("../partials/textInput.ejs", { name: "name", data: locals.name, type: "text", label: "Name" }) %>
     <%- include("../partials/textInput.ejs", { name: "description", data: locals.description, type: "text", label: "Description" }) %> 
-    <div class="field">
-      <div class="control">
-        <label for="mainList" class="checkbox">
-          <input 
-            type="checkbox" 
-            name="mainList" 
-            id="mainList" 
-          />
-          Make this list your main list? (this will replace your previous main list)
-        </label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <label for="private" class="checkbox">
-          <input 
-            type="checkbox" 
-            name="private" 
-            id="private"
-            <% if (locals.private) { %>
-              checked="checked"
-            <% } %>
-          >
-          Make list private?
-        </label>
-      </div>
-    </div>
+    <%- include("../partials/checkboxInput.ejs", { name: "mainList", text: "Make this list your main list? (this will replace your previous main list)"}) %>
+    <%- include("../partials/checkboxInput.ejs", { name: "private", text: "Make list private?", checked: locals.private }) %>
     <div class="field is-grouped is-justify-content-space-between">
       <%- button("submit") %>
       <% if (locals._id) { %>
