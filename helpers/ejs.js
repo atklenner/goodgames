@@ -50,4 +50,21 @@ module.exports = {
       })
       .join("");
   },
+  button: (type) => {
+    if (type === "submit") {
+      return `<div class="control">
+        <button class="button is-primary has-text-weight-bold" type="submit">
+          Submit
+        </button>
+      </div>`;
+    } else if (type === "delete") {
+      return `<div class="control">
+        <button type="button" data-target="delete-modal" class="button modal-button is-danger has-text-weight-bold">
+          Delete
+        </button>
+      </div>`;
+    } else {
+      return "";
+    }
+  },
 };

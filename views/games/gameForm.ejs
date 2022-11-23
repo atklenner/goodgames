@@ -11,7 +11,6 @@
     <div class="field">
       <label for="name" class="label">Name</label>
       <div class="control">
-        <!-- prettier-ignore -->
         <input
           type="text"
           class="input"
@@ -24,7 +23,6 @@
     <div class="field">
       <label for="genre" class="label">Genre</label>
       <div class="control">
-        <!-- prettier-ignore -->
         <input
           type="text"
           class="input"
@@ -37,7 +35,6 @@
     <div class="field">
       <div class="file has-name">
         <label class="file-label">
-          <!-- prettier-ignore -->
           <input
             class="file-input"
             type="file"
@@ -56,25 +53,14 @@
       </div>
     </div>
     <div class="field is-grouped is-justify-content-space-between">
-      <div class="control">
-        <button class="button is-primary has-text-weight-bold" type="submit">
-          Submit
-        </button>
-      </div>
+      <%- button("submit") %>
       <% if (locals._id) { %>
-      <div class="control">
-        <button
-          type="button"
-          data-target="delete-modal"
-          class="button modal-button is-danger has-text-weight-bold"
-        >
-          Delete
-        </button>
-      </div>
+        <%- button("delete") %>
       <% } %>
     </div>
   </form>
-  <% if (locals._id) { %> <%- include("../partials/modal.ejs", { type: "game",
-  _id }) %> <% } %>
+  <% if (locals._id) { %> 
+    <%- include("../partials/modal.ejs", { type: "game", _id }) %> 
+  <% } %>
 </main>
 <%- include("../partials/footer.ejs") %>

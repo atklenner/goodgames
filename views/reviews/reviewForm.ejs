@@ -40,17 +40,9 @@
         </div>
     </div>
     <div class="field is-grouped is-justify-content-space-between">
-      <div class="control">
-        <button class="button is-primary has-text-weight-bold" type="submit">
-          Submit
-        </button>
-      </div>
+      <%- button("submit") %>
       <% if (locals._id) { %>
-      <div class="control">
-        <button type="button" data-target="delete-modal" class="button modal-button is-danger has-text-weight-bold">
-          Delete
-        </button>
-      </div>
+        <%- button("delete") %>
       <% } %>
     </div>
   </form>
