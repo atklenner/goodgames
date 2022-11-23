@@ -1,0 +1,19 @@
+<div class="field">
+    <label for="<%- name %>" class="label">
+        <%= label %>
+    </label>
+    <div class="control">
+    <input
+        type="<%- type %>"
+        class="input"
+        id="<%- name %>"
+        name="<%- name %>"
+        <% if (locals.data) { %>
+            value="<%= data %>" 
+        <% } %> 
+    />
+    </div>
+    <% if (locals.help) { %>
+        <p class="help"><%= help %></p>
+    <% } %>
+</div>

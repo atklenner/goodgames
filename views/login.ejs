@@ -5,27 +5,15 @@
       <h1 class="title is-1">Login</h1>
       <div class="box">
         <form action="/login" method="post">
-          <% if (locals.messages.errors) { %> <% messages.errors.forEach( el =>
-          { %>
-          <div class="notification is-danger"><%= el.msg %></div>
-          <% }) %> <% } %>
-          <div class="field">
-            <label class="label" for="email">Email</label>
-            <div class="control">
-              <input class="input" type="email" name="email" id="email" />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label" for="password">Password</label>
-            <div class="control">
-              <input
-                class="input"
-                type="password"
-                name="password"
-                id="password"
-              />
-            </div>
-          </div>
+          <% if (locals.messages.errors) { %> 
+            <% messages.errors.forEach( el => { %>
+              <div class="notification is-danger">
+                <%= el.msg %>
+              </div>
+            <% }) %> 
+          <% } %>
+          <%- include("./partials/textInput.ejs", { name: "email", type: "email", label: "Email" }) %>
+          <%- include("./partials/textInput.ejs", { name: "password", type: "password", label: "Password" }) %>
           <%- button("submit") %>
         </form>
         <p>Don't have an account?<a href="/signup"> Sign Up</a></p>
