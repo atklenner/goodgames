@@ -4,15 +4,7 @@
   <div class="content">
     <div class="is-flex is-justify-content-space-between">
       <h1 class="title"><%= list.name %></h1>
-      <% if (list.user._id.toString() === user._id.toString()) { %>
-        <a href=<%- `/lists/edit-list/${list._id}` %> class="button is-primary has-text-weight-bold">
-          Edit List
-        </a>
-      <% } else { %>
-      <form action=<%- `/lists/like-list/${list._id}?_method=PUT` %> method="post">
-        <button class="button is-primary has-text-weight-bold" type="submit">Like</button>
-      </form>
-      <% } %>
+      <%- editLikeButton(list, user, "list") %>
     </div>
     <p class=""><%= list.description %></p>
     <p class=""><%= list.user.username %></p>

@@ -10,15 +10,7 @@
               <%= review.game.name %>
             </a> Review
           </h1>
-          <% if (review.user._id.toString() === user._id.toString()) { %>
-            <a href=<%- `/reviews/edit-review/${review.game._id}` %> class="button is-primary has-text-weight-bold">Update Review</a>
-          <% } else { %>
-            <form action=<%- `/reviews/like-review/${review._id}?_method=PUT` %> method="post">
-              <button class="button is-primary has-text-weight-bold" type="submit">
-                Like
-              </button>
-            </form>
-          <% } %>
+          <%- editLikeButton(review, user, "review") %>
         </div>
         <p class="">
           Date Reviewed: <%= review.dateReviewed.toLocaleString() %>
