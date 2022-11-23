@@ -39,7 +39,7 @@ module.exports = {
     try {
       if (req.params.id) {
         let list = await List.findById(req.params.id).lean();
-        res.render("lists/listForm", { list, user: req.user });
+        res.render("lists/listForm", { ...list, user: req.user });
       } else {
         res.render("lists/listForm", { user: req.user });
       }
