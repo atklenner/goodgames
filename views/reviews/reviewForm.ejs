@@ -27,12 +27,7 @@
           </div>
       </div>
     </div>
-    <div class="field">
-      <label for="timeSpentPlaying" class="label">Time Played</label>
-      <div class="control">
-        <input type="number" class="input" name="timeSpentPlaying" id="timeSpentPlaying" min="0" step="0.1" value="<%- locals.timeSpentPlaying %>">
-      </div>
-    </div>
+    <%- include("../partials/textInput.ejs", { type: "number", name: "timeSpentPlaying", label: "Time Played", data: locals.timeSpentPlaying }) %>
     <div class="field">
         <label for="body" class="label">Review Text</label>
         <div class="control">
