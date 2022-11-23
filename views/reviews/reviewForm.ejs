@@ -7,26 +7,8 @@
   <% } else { %>
     <form action=<%= `/reviews/new-review/${game}` %> method="post">
   <% } %>
-    <div class="field">
-      <label for="rating" class="label">Rating</label>
-      <div class="control">
-          <div class="select">
-            <select name="rating" id="rating">
-              <%- options("rating", locals.rating) %>
-            </select>
-          </div>
-      </div>
-    </div>
-    <div class="field">
-      <label for="completed" class="label">Completed</label>
-      <div class="control">
-          <div class="select">
-            <select name="completed" id="completed">
-              <%- options("completed", locals.completed) %>
-            </select>
-          </div>
-      </div>
-    </div>
+    <%- include("../partials/selectInput.ejs", { name: "rating", label: "Rating", value: locals.rating }) %>
+    <%- include("../partials/selectInput.ejs", { name: "completed", label: "Completed", value: locals.completed }) %>
     <%- include("../partials/textInput.ejs", { type: "number", name: "timeSpentPlaying", label: "Time Played", data: locals.timeSpentPlaying }) %>
     <div class="field">
         <label for="body" class="label">Review Text</label>

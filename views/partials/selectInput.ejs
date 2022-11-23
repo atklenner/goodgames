@@ -1,0 +1,12 @@
+<div class="field">
+    <label for="<%- name %>" class="label">
+        <%= label %>
+    </label>
+    <div class="control">
+        <div class="select">
+        <select name="<%- name %>" id="<%- name %>">
+            <%- options(name, locals.value) %>
+        </select>
+        </div>
+    </div>
+</div>
