@@ -22,7 +22,7 @@ module.exports = {
     if (data.user._id.toString() === user._id.toString()) {
       return `<a href=/${type}s/edit-${type}/${data._id}
         class="button is-primary has-text-weight-bold"
-      >Edit List</a>`;
+      >Edit ${type[0].toUpperCase() + type.slice(1)}</a>`;
     } else {
       return `<form action=/${type}s/like-${type}/${data._id}?_method=PUT %> method="post">
         <button class="button is-primary has-text-weight-bold" type="submit">Like</button>
