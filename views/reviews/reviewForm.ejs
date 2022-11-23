@@ -12,7 +12,7 @@
       <div class="control">
           <div class="select">
             <select name="rating" id="rating">
-              <%- options("ratings", locals.rating) %>
+              <%- options("rating", locals.rating) %>
             </select>
           </div>
       </div>
@@ -36,7 +36,7 @@
     <div class="field">
         <label for="body" class="label">Review Text</label>
         <div class="control">
-            <textarea name="body" id="" cols="30" rows="10" class="textarea"><%- locals.body %></textarea>
+            <textarea name="body" id="body" cols="30" rows="10" class="textarea"><%- locals.body %></textarea>
         </div>
     </div>
     <div class="field is-grouped is-justify-content-space-between">

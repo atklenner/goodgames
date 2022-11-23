@@ -32,7 +32,7 @@ module.exports = {
   options: (optionsName, option) => {
     let values;
     switch (optionsName) {
-      case "ratings":
+      case "rating":
         values = ratingValues;
         break;
       case "completed":
