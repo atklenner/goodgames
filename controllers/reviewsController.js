@@ -5,7 +5,6 @@ module.exports = {
   addReviewPage: async (req, res) => {
     try {
       let review = await Review.findById(req.params.id).lean();
-      console.log(review);
       if (!review) {
         review = {
           game: req.params.gameId,

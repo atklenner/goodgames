@@ -39,7 +39,7 @@ module.exports = {
         values = completedValues;
         break;
       default:
-        values = ratingValues;
+        values = [];
         break;
     }
     return values
