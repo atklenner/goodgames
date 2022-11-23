@@ -14,12 +14,12 @@ module.exports = {
   addReviewPage: async (req, res) => {
     try {
       let review = await Review.findOne({
-        "game._id": req.params.gameId,
+        game: req.params.gameId,
         "user._id": req.user._id,
       }).lean();
       if (!review) {
         review = {
-          game: { _id: req.params.gameId },
+          game: req.params.gameId,
           rating: "Unrated",
         };
       }
@@ -35,7 +35,9 @@ module.exports = {
   },
   getReview: async (req, res) => {
     try {
-      const review = await Review.findOne({ _id: req.params.id });
+      const review = await Review.findOne({ _id: req.params.id })
+        .populate("game")
+        .lean();
       res.render("./reviews/reviewPage", { review, user: req.user });
     } catch (error) {
       console.log(error);
@@ -46,7 +48,7 @@ module.exports = {
       let game = await Game.findById(req.params.gameId);
       await Review.create({
         user: { _id: req.user._id, username: req.user.username },
-        game: { _id: game._id, name: game.name },
+        game: game._id,
         rating: req.body.rating,
         completed: req.body.completed,
         body: req.body.body,
@@ -58,7 +60,6 @@ module.exports = {
     }
   },
   updateReview: async (req, res) => {
-    console.log(req.body.timeSpentPlaying);
     try {
       let review = await Review.findOneAndUpdate(
         { _id: req.params.id },

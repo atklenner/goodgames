@@ -6,10 +6,7 @@ let reviewSchema = new Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     username: { type: String },
   },
-  game: {
-    _id: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
-    name: { type: String },
-  },
+  game: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
   rating: {
     type: String,
     default: "Unrated",

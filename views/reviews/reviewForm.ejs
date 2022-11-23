@@ -5,7 +5,7 @@
   <% if (locals._id) { %>
     <form action=<%= `/reviews/update-review/${_id}?_method=PUT` %> method="post">
   <% } else { %>
-    <form action=<%= `/reviews/new-review/${game._id}` %> method="post">
+    <form action=<%= `/reviews/new-review/${game}` %> method="post">
   <% } %>
     <div class="field">
       <label for="rating" class="label">Rating</label>

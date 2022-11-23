@@ -15,10 +15,10 @@ module.exports = {
   getOneGame: async (req, res) => {
     try {
       let gameReq = Game.findById(req.params.id).lean();
-      let allReviewsReq = Review.find({ "game._id": req.params.id }).lean();
+      let allReviewsReq = Review.find({ game: req.params.id }).lean();
       let userReviewReq = Review.findOne({
-        "game._id": req.params.id,
-        userId: req.user._id,
+        game: req.params.id,
+        "user._id": req.user._id,
       }).lean();
       let userReq = User.findById(req.user._id).populate("lists");
       let [game, allReviews, userReview, user] = await Promise.all([
