@@ -89,14 +89,11 @@ module.exports = {
   addListGame: async (req, res) => {
     try {
       let list = await List.findById(req.body.listId);
-      let game = await Game.findById(req.params.gameId);
-      if (
-        !list.games.find((elt) => elt._id.toString() === game._id.toString())
-      ) {
-        list.games.push(game._id);
+      if (!list.games.find((elt) => elt._id == req.params.gameId)) {
+        list.games.push(req.params.gameId);
         await list.save();
       }
-      res.redirect(`/games/${game._id}`);
+      res.redirect(`/games/${req.params.gameId}`);
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +110,7 @@ module.exports = {
     try {
       let list = await List.findById(req.params.id);
       list.games = list.games.filter((elt) => {
-        if (elt.toString() !== req.params.gameId) return true;
+        if (elt._id != req.params.gameId) return true;
         return false;
       });
       await list.save();

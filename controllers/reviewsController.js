@@ -5,13 +5,8 @@ module.exports = {
   addReviewPage: async (req, res) => {
     try {
       let review = await Review.findById(req.params.id).lean();
-      if (!review) {
-        review = {
-          game: req.params.gameId,
-          rating: "Unrated",
-        };
-      }
       res.render("./reviews/reviewForm", {
+        game: req.params.id, // if there is no review then the id is for the game not a review
         ...review,
         user: req.user,
       });
@@ -31,14 +26,10 @@ module.exports = {
   },
   addReview: async (req, res) => {
     try {
-      let game = await Game.findById(req.params.gameId);
       await Review.create({
         user: { _id: req.user._id, username: req.user.username },
-        game: game._id,
-        rating: req.body.rating,
-        completed: req.body.completed,
-        body: req.body.body,
-        timeSpentPlaying: req.body.timeSpentPlaying,
+        game: req.params.gameId,
+        ...req.body,
       });
       res.redirect(`/games/${req.params.gameId}`);
     } catch (error) {
@@ -50,11 +41,8 @@ module.exports = {
       let review = await Review.findOneAndUpdate(
         { _id: req.params.id },
         {
-          rating: req.body.rating,
-          completed: req.body.completed,
-          body: req.body.body,
+          ...req.body,
           dateReviewed: Date.now(),
-          timeSpentPlaying: req.body.timeSpentPlaying,
         },
         {
           upsert: true,
