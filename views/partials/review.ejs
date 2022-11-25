@@ -1,0 +1,14 @@
+<div class="is-flex is-justify-content-space-between mb-2">
+<div class="">
+    <a href=<%- `/users/${review.user._id}` %>>
+    <span class=""><%= review.user.username %></span>
+    </a>
+    rated it <%= review.rating %>
+</div>
+<p><%= review.dateReviewed.toLocaleDateString() %></p>
+</div>
+<p><%= truncate(review.body, 300) %></p>
+<div class="is-flex is-justify-content-space-between mt-2">
+<a href=<%- `/reviews/${review._id}` %> class="has-text-weight-bold">Read Full Review</a>
+<span><%- likes(review.likes) %></span>
+</div>

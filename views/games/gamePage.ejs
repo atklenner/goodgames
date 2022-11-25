@@ -17,10 +17,12 @@
           <a href=<%= `edit-game/${game._id}` %> class="button has-text-weight-bold">Update Game Info</a>
         </div>
         <h3 class="subtitle"><%= game.genre %></h3>
+      </div>
+        <div class="box">
           <form action=<%- `/lists/add-list-game/${game._id}?_method=PUT` %> method="post">
             <div class="field is-horizontal">
               <div class="field-label is-normal">
-                <label for="listId" class="label">List</label>
+                <label for="listId" class="label">Add to List</label>
               </div>
               <div class="field-body">
                 <div class="field has-addons">
@@ -37,23 +39,18 @@
                   </div>
                   <div class="control">
                     <button data-target="add-game-modal" class="button is-primary has-text-weight-bold">
-                      Add Game
+                      add
                     </button>
                   </div>
                 </div>
               </div>
             </div>
           </form>
-      </div>
+        </div>
       <div class="box">
         <% if (userReview) { %>
           <h2 class="title">Your Review</h2>
-          <p>Rating: <%= userReview.rating %></p>
-          <p>Completed: <%= userReview.completed %></p>
-          <p>Review Text: <%= truncate(userReview.body, 300) %></p>
-          <p>Review Date: <%= userReview.dateReviewed.toLocaleString() %></p>
-          <p>Likes: <%= userReview.likes %></p>
-          <a href=<%- `/reviews/${userReview._id}` %> class="button is-primary has-text-weight-bold">Read Full Review</a>
+          <%- include("../partials/review.ejs", { review: userReview }) %>
         <% } else { %>
           <h2 class="title">You haven't written a review of this game</h2>
           <a href=<%- `/reviews/edit-review/${game._id}` %> class="button is-primary has-text-weight-bold">Write a Review</a>
@@ -62,16 +59,11 @@
     </div>
   </div>
   <div class="columns">
-    <div class="column is-half">
+    <div class="column is-two-thirds">
       <h2 class="title">All Reviews</h2>
       <% for (let review of allReviews) { %>
         <div class="box">
-          <p>Rating: <%= review.rating %></p>
-          <p>Completed:<%= review.completed %></p>
-          <p>Review Text: <%= truncate(review.body, 300) %></p>
-          <p>Date Reviewd: <%= review.dateReviewed.toLocaleString() %></p>
-          <p>Likes: <%= review.likes %></p>
-          <a href=<%- `/reviews/${review._id}` %> class="button is-primary has-text-weight-bold">Read Full Review</a>
+          <%- include("../partials/review.ejs", { review }) %>
         </div>
       <% } %>
     </div>
