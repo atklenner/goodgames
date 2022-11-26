@@ -29,9 +29,9 @@ module.exports = {
       </form>`;
     }
   },
-  likes: (num) => {
-    if (num === 1) return "1 Like";
-    return `${num} Likes`;
+  shouldThereBeAnS: (num, word) => {
+    if (num === 1) return `1 ${word}`;
+    return `${num} ${word}s`;
   },
   options: (optionsName, option) => {
     let values;

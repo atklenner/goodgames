@@ -10,5 +10,5 @@
 <p class="block"><%= truncate(review.body, 300) %></p>
 <div class="is-flex is-justify-content-space-between block">
     <a href=<%- `/reviews/${review._id}` %> class="has-text-weight-bold">Read Full Review</a>
-    <span><%- likes(review.likes) %></span>
+    <span><%- shouldThereBeAnS(review.likes, "Like") %></span>
 </div>
