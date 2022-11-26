@@ -2,25 +2,33 @@
 %>
 <main class="container">
   <div class="columns">
-    <div class="column is-half is-offset-one-quarter">
+    <div class="column is-two-thirds is-offset-2">
       <div class="box">
-        <div class="is-flex is-justify-content-space-between">
-          <h1 class="title">
-            <a href=<%- `/games/${review.game._id}` %>>
-              <%= review.game.name %>
-            </a> Review
-          </h1>
-          <%- editLikeButton(review, user, "review") %>
+        <div class="is-flex is-justify-content-space-between block">
+          <div>
+            <h1 class="title">
+              <a href=<%- `/games/${review.game._id}` %>>
+                <%= review.game.name %>
+              </a> Review
+            </h1>
+            <p class="subtitle">
+              <%= review.dateReviewed.toLocaleDateString() %>
+            </p>
+          </div>
+          <div class="is-flex is-align-items-baseline">
+            <span class="mr-4"><%= shouldThereBeAnS(review.likes, "Like") %> </span>
+            <%- editLikeButton(review, user, "review") %>
+          </div>
         </div>
-        <p class="">
-          Date Reviewed: <%= review.dateReviewed.toLocaleString() %>
-        </p>
-        <p class="">Rating: <%= review.rating %></p>
-        <p class="">Completed: <%= review.completed %></p>
-        <p class="">User: <%= review.user.username %></p>
-        <p>Time Played: <%= review.timeSpentPlaying %></p>
-        <p>Likes: <%= review.likes %></p>
-        <p><%= review.body %></p>
+
+        <div class="block">
+            <a href=<%- `/users/${review.user._id}` %>>
+            <span class="has-text-weight-bold"><%= review.user.username %></span>
+            </a>
+            rated it <span class="has-text-weight-bold"><%= review.rating %></span>
+        </div>
+        <p class="block"><%= review.body %></p>
+        <p class="block">Played for <%- shouldThereBeAnS(review.timeSpentPlaying, "hour") %></p>
       </div>
     </div>
   </div>
