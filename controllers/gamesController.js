@@ -45,8 +45,7 @@ module.exports = {
     try {
       let image = await cloudinary.uploader.upload(req.file.path);
       let addedGame = await Game.create({
-        name: req.body.name,
-        genre: req.body.genre,
+        ...req.body,
         image: image.secure_url,
         cloudinaryId: image.public_id,
       });
@@ -69,7 +68,7 @@ module.exports = {
   },
   updateGame: async (req, res) => {
     try {
-      let game = { name: req.body.name, genre: req.body.genre };
+      let game = { ...req.body };
       if (req.file) {
         let image = await cloudinary.uploader.upload(req.file.path);
         game = {

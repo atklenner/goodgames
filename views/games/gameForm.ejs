@@ -1,44 +1,51 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
 <main class="container">
-  <% if (locals._id) { %>
-    <h1 class="title is-1">Update Game Info</h1>
-    <form action=<%- `/games/update-game/${_id}?_method=PUT` %>
-          enctype="multipart/form-data" method="post"> 
-  <% } else { %>
-    <h1 class="title is-1">Add Game Form</h1>
-    <form action="/games/new-game" enctype="multipart/form-data" method="post">
-  <% } %>
-    <%- include("../partials/textInput.ejs", { name: "name", data: locals.name, type: "text", label: "Name" }) %>
-    <%- include("../partials/textInput.ejs", { name: "genre", data: locals.genre, type: "text", label: "Genre" }) %>
-    <div class="field">
-      <div class="file has-name">
-        <label class="file-label">
-          <input
-            class="file-input"
-            type="file"
-            name="image"
-            accept="image/png, image/jpeg"
-          />
-          <span class="file-cta">
-            <span class="file-icon">
-              <i class="fas fa-upload"></i>
-            </span>
-            <span class="file-label"> Choose an image… </span>
-          </span>
-          <span class="file-name"> No file uploaded </span>
-        </label>
-      </div>
-    </div>
-    <div class="field is-grouped is-justify-content-space-between">
-      <%- button("submit") %>
+  <div class="columns">
+    <div class="column is-two-thirds is-offset-2 box p-5">
       <% if (locals._id) { %>
-        <%- button("delete") %>
+        <h1 class="title is-1">Update Game Info</h1>
+        <form action=<%- `/games/update-game/${_id}?_method=PUT` %>
+              enctype="multipart/form-data" method="post"> 
+      <% } else { %>
+        <h1 class="title is-1">Add Game Form</h1>
+        <form action="/games/new-game" enctype="multipart/form-data" method="post">
+      <% } %>
+        <%- include("../partials/textInput.ejs", { name: "name", data: locals.name, type: "text", label: "Name" }) %>
+        <%- include("../partials/textInput.ejs", { name: "genre", data: locals.genre, type: "text", label: "Genre" }) %>
+        <%- include("../partials/textInput.ejs", { name: "developer", data: locals.developer, type: "text", label: "Developer" }) %>
+        <%- include("../partials/textInput.ejs", { name: "publisher", data: locals.publisher, type: "text", label: "Publisher" }) %>
+        <%- include("../partials/selectInput.ejs", { name: "rating" , value: locals.rating, label: "ESRB Rating", }) %>
+        <div class="field">
+          <div class="file has-name">
+            <label class="file-label">
+              <input
+                class="file-input"
+                type="file"
+                name="image"
+                accept="image/png, image/jpeg"
+              />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label"> Choose an image… </span>
+              </span>
+              <span class="file-name"> No file uploaded </span>
+            </label>
+          </div>
+        </div>
+        <div class="field is-grouped is-justify-content-space-between">
+          <%- button("submit") %>
+          <% if (locals._id) { %>
+            <%- button("delete") %>
+          <% } %>
+        </div>
+      </form>
+      <% if (locals._id) { %> 
+        <%- include("../partials/modal.ejs", { type: "game", _id }) %> 
       <% } %>
     </div>
-  </form>
-  <% if (locals._id) { %> 
-    <%- include("../partials/modal.ejs", { type: "game", _id }) %> 
-  <% } %>
+  </div>
 </main>
 <%- include("../partials/footer.ejs") %>
