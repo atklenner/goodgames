@@ -1,4 +1,4 @@
-let ratingValues = [
+let scoreValues = [
   "Unrated",
   "Did Not Like",
   "It Was OK",
@@ -6,7 +6,14 @@ let ratingValues = [
   "Really Liked It",
   "Loved It",
 ];
-let completedValues = ["No", "Playing", "Yes", "Quit"];
+let ratingValues = [
+  "Rating Pending",
+  "Everyone",
+  "Everyone 10+",
+  "Teen",
+  "Mature 17+",
+  "Adults Only 18+",
+];
 
 module.exports = {
   truncate: (str, limit) => {
@@ -36,11 +43,11 @@ module.exports = {
   options: (optionsName, option) => {
     let values;
     switch (optionsName) {
+      case "score":
+        values = scoreValues;
+        break;
       case "rating":
         values = ratingValues;
-        break;
-      case "completed":
-        values = completedValues;
         break;
       default:
         values = [];
