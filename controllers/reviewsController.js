@@ -25,6 +25,7 @@ module.exports = {
     }
   },
   addReview: async (req, res) => {
+    req.body.completed = req.body.completed === "on" ? true : false;
     try {
       await Review.create({
         user: { _id: req.user._id, username: req.user.username },
@@ -37,6 +38,7 @@ module.exports = {
     }
   },
   updateReview: async (req, res) => {
+    req.body.completed = req.body.completed === "on" ? true : false;
     try {
       let review = await Review.findOneAndUpdate(
         { _id: req.params.id },

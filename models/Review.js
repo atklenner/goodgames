@@ -7,7 +7,7 @@ let reviewSchema = new Schema({
     username: { type: String },
   },
   game: { type: mongoose.Schema.Types.ObjectId, ref: "Game" },
-  rating: {
+  score: {
     type: String,
     default: "Unrated",
     enum: [
@@ -19,11 +19,7 @@ let reviewSchema = new Schema({
       "Loved It",
     ],
   },
-  completed: {
-    type: String,
-    default: "No",
-    enum: ["No", "Playing", "Yes", "Quit"],
-  },
+  completed: { type: Boolean, default: false },
   body: { type: String },
   dateReviewed: { type: Date, default: Date.now },
   dateGameStarted: { type: Date },
