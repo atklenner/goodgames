@@ -1,6 +1,6 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
-<main class="container">
+<main class="container section">
   <div class="columns">
     <div class="column is-two-thirds is-offset-2">
       <div class="box">
@@ -25,7 +25,7 @@
             <a href=<%- `/users/${review.user._id}` %>>
             <span class="has-text-weight-bold"><%= review.user.username %></span>
             </a>
-            rated it <span class="has-text-weight-bold"><%= review.score %></span>
+            <%- scoreStars(review.score) %>
         </div>
         <p class="block"><%= review.body %></p>
         <p class="block">Played for <%- shouldThereBeAnS(review.timeSpentPlaying, "hour") %></p>

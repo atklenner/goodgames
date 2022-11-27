@@ -78,4 +78,16 @@ module.exports = {
       return "";
     }
   },
+  scoreStars: (score) => {
+    if (score === "Unrated") return "did not rate the game";
+    let [scoreVal, scoreName] = score.split(" - ");
+    let html = "";
+    for (let i = 0; i < +scoreVal; i++) {
+      html += '<i class="fa-solid fa-star"></i>';
+    }
+    for (let j = +scoreVal; j < 5; j++) {
+      html += '<i class="fa-regular fa-star"></i>';
+    }
+    return `rated it <span aria-label="${scoreName}">${html}</span>`;
+  },
 };

@@ -4,6 +4,7 @@ const {
   shouldThereBeAnS,
   options,
   button,
+  scoreStars,
 } = require("./ejs");
 
 module.exports = (app) => {
@@ -12,4 +13,5 @@ module.exports = (app) => {
   app.locals.shouldThereBeAnS = shouldThereBeAnS;
   app.locals.options = options;
   app.locals.button = button;
+  app.locals.scoreStars = scoreStars;
 };

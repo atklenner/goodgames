@@ -3,7 +3,7 @@
         <a href=<%- `/users/${review.user._id}` %>>
         <span class="has-text-weight-bold"><%= review.user.username %></span>
         </a>
-        rated it <span class="has-text-weight-bold"><%= review.score %></span>
+        <%- scoreStars(review.score) %>
     </div>
     <p><%= review.dateReviewed.toLocaleDateString() %></p>
 </div>
