@@ -1,26 +1,30 @@
 <%- include("../partials/header.ejs") %> 
 <%- include("../partials/navbar.ejs") %>
-<main class="container">
-  <% if (locals._id) { %>
-    <h1 class="title is-1">Update List Info</h1>
-    <form action=<%- `/lists/update-list/${_id}?_method=PUT` %> method="post"> 
-  <% } else { %>
-    <h1 class="title is-1">New List Form</h1>
-    <form action="/lists/new-list" method="post">
-  <% } %>
-    <%- include("../partials/textInput.ejs", { name: "name", data: locals.name, type: "text", label: "Name" }) %>
-    <%- include("../partials/textInput.ejs", { name: "description", data: locals.description, type: "text", label: "Description" }) %> 
-    <%- include("../partials/checkboxInput.ejs", { name: "mainList", text: "Make this list your main list? (this will replace your previous main list)"}) %>
-    <%- include("../partials/checkboxInput.ejs", { name: "private", text: "Make list private?", checked: locals.private }) %>
-    <div class="field is-grouped is-justify-content-space-between">
-      <%- button("submit") %>
+<main class="section container">
+  <div class="columns">
+    <div class="column is-two-thirds is-offset-2 box p-5">
       <% if (locals._id) { %>
-        <%- button("delete") %>
+        <h1 class="title is-1">Update List Info</h1>
+        <form action=<%- `/lists/update-list/${_id}?_method=PUT` %> method="post"> 
+      <% } else { %>
+        <h1 class="title is-1">New List Form</h1>
+        <form action="/lists/new-list" method="post">
+      <% } %>
+        <%- include("../partials/textInput.ejs", { name: "name", data: locals.name, type: "text", label: "Name" }) %>
+        <%- include("../partials/textInput.ejs", { name: "description", data: locals.description, type: "text", label: "Description" }) %> 
+        <%- include("../partials/checkboxInput.ejs", { name: "mainList", text: "Make this list your main list? (this will replace your previous main list)"}) %>
+        <%- include("../partials/checkboxInput.ejs", { name: "private", text: "Make list private?", checked: locals.private }) %>
+        <div class="field is-grouped is-justify-content-space-between">
+          <%- button("submit") %>
+          <% if (locals._id) { %>
+            <%- button("delete") %>
+          <% } %>
+        </div>
+      </form>
+      <% if (locals._id) { %> 
+        <%- include("../partials/modal.ejs", { type: "list", _id }) %> 
       <% } %>
     </div>
-  </form>
-  <% if (locals._id) { %> 
-    <%- include("../partials/modal.ejs", { type: "list", _id }) %> 
-  <% } %>
+  </div>
 </main>
 <%- include("../partials/footer.ejs") %>
