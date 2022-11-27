@@ -1,23 +1,25 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
-<main class="container">
-  <div class="content">
-    <div class="is-flex is-justify-content-space-between">
-      <h1 class="title"><%= title %></h1>
-      <a href="/lists/edit-list" class="button is-primary has-text-weight-bold">
-        Make a New List
-      </a>
+<main class="section">
+  <div class="container">
+    <div class="content">
+      <div class="is-flex is-justify-content-space-between">
+        <h1 class="title"><%= title %></h1>
+        <a href="/lists/edit-list" class="button is-primary has-text-weight-bold">
+          Make a New List
+        </a>
+      </div>
+        <% for (let list of lists) { %>
+          <div class="box">
+            <a href=<%- `/lists/${list._id}` %>>
+              <h2 class="title"><%= list.name %></h2>
+            </a>
+            <p>Likes: <%= list.likes %></p>
+          </div>
+        <% } %> <% if (lists.length === 0) { %>
+      <p>THERE ARE NO LISTS!!!</p>
+      <% } %>
     </div>
-      <% for (let list of lists) { %>
-        <div class="box">
-          <a href=<%- `/lists/${list._id}` %>>
-            <h2 class="title"><%= list.name %></h2>
-          </a>
-          <p>Likes: <%= list.likes %></p>
-        </div>
-      <% } %> <% if (lists.length === 0) { %>
-    <p>THERE ARE NO LISTS!!!</p>
-    <% } %>
   </div>
 </main>
 <%- include("../partials/footer.ejs") %>

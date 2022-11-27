@@ -1,33 +1,37 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
-<main class="container section">
-  <div class="columns">
-    <div class="column is-two-thirds is-offset-2 box p-5">
-      <h1 class="title is-1">Review Form</h1>
-      <% if (locals._id) { %>
-        <form action=<%= `/reviews/update-review/${_id}?_method=PUT` %> method="post">
-      <% } else { %>
-        <form action=<%= `/reviews/new-review/${game}` %> method="post">
-      <% } %>
-        <%- include("../partials/selectInput.ejs", { name: "score", label: "Score", value: locals.score }) %>
-        <%- include("../partials/textInput.ejs", { type: "number", name: "timeSpentPlaying", label: "Time Played", data: locals.timeSpentPlaying }) %>
-        <div class="field">
-            <label for="body" class="label">Review Text</label>
-            <div class="control">
-                <textarea name="body" id="body" cols="30" rows="10" class="textarea"><%- locals.body %></textarea>
-            </div>
-        </div>
-        <%- include("../partials/checkboxInput.ejs", { name: "completed", checked: locals.completed, text: "Completed"}) %>
-        <div class="field is-grouped is-justify-content-space-between">
-          <%- button("submit") %>
+<main class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-two-thirds is-offset-2">
+        <div class="box p-5">
+          <h1 class="title is-1">Review Form</h1>
           <% if (locals._id) { %>
-            <%- button("delete") %>
+            <form action=<%= `/reviews/update-review/${_id}?_method=PUT` %> method="post">
+          <% } else { %>
+            <form action=<%= `/reviews/new-review/${game}` %> method="post">
+          <% } %>
+            <%- include("../partials/selectInput.ejs", { name: "score", label: "Score", value: locals.score }) %>
+            <%- include("../partials/textInput.ejs", { type: "number", name: "timeSpentPlaying", label: "Time Played", data: locals.timeSpentPlaying }) %>
+            <div class="field">
+                <label for="body" class="label">Review Text</label>
+                <div class="control">
+                    <textarea name="body" id="body" cols="30" rows="10" class="textarea"><%- locals.body %></textarea>
+                </div>
+            </div>
+            <%- include("../partials/checkboxInput.ejs", { name: "completed", checked: locals.completed, text: "Completed"}) %>
+            <div class="field is-grouped is-justify-content-space-between">
+              <%- button("submit") %>
+              <% if (locals._id) { %>
+                <%- button("delete") %>
+              <% } %>
+            </div>
+          </form>
+          <% if (locals._id) { %>
+            <%- include("../partials/modal.ejs", { type: "review", _id }) %>
           <% } %>
         </div>
-      </form>
-      <% if (locals._id) { %>
-        <%- include("../partials/modal.ejs", { type: "review", _id }) %>
-      <% } %>
+      </div>
     </div>
   </div>
 </main>

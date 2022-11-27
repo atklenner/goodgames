@@ -1,22 +1,24 @@
 <%- include("./partials/header") %>
-<main class="container">
-  <div class="columns mt-6">
-    <div class="column is-half is-offset-one-quarter">
-      <h1 class="title is-1">Login</h1>
-      <div class="box">
-        <form action="/login" method="post">
-          <% if (locals.messages.errors) { %> 
-            <% messages.errors.forEach( el => { %>
-              <div class="notification is-danger">
-                <%= el.msg %>
-              </div>
-            <% }) %> 
-          <% } %>
-          <%- include("./partials/textInput.ejs", { name: "email", type: "email", label: "Email" }) %>
-          <%- include("./partials/textInput.ejs", { name: "password", type: "password", label: "Password" }) %>
-          <%- button("submit") %>
-        </form>
-        <p>Don't have an account?<a href="/signup"> Sign Up</a></p>
+<main class="section">
+  <div class="container">
+    <div class="columns mt-6">
+      <div class="column is-half is-offset-one-quarter">
+        <h1 class="title is-1">Login</h1>
+        <div class="box">
+          <form action="/login" method="post">
+            <% if (locals.messages.errors) { %> 
+              <% messages.errors.forEach( el => { %>
+                <div class="notification is-danger">
+                  <%= el.msg %>
+                </div>
+              <% }) %> 
+            <% } %>
+            <%- include("./partials/textInput.ejs", { name: "email", type: "email", label: "Email" }) %>
+            <%- include("./partials/textInput.ejs", { name: "password", type: "password", label: "Password" }) %>
+            <%- button("submit") %>
+          </form>
+          <p>Don't have an account?<a href="/signup"> Sign Up</a></p>
+        </div>
       </div>
     </div>
   </div>

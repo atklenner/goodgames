@@ -1,96 +1,98 @@
 <%- include("../partials/header.ejs") %>
 <%- include("../partials/navbar.ejs") %>
-<main class="container">
-  <% if (!game) { %>
-  <p>THERE IS NO GAME!!!</p>
-  <% } else { %>
-  <div class="columns">
-    <div class="column is-half">
-      <figure class="image">
-        <img src=<%-`${game.image}`%> alt="<%-`${game.name}`%>" />
-      </figure>
-    </div>
-    <div class="column is-half">
-      <div class="box">
-        <div class="is-flex is-justify-content-space-between">
-          <h2 class="title"><%= game.name %></h2>
-          <a href=<%= `edit-game/${game._id}` %> class="button has-text-weight-bold">Update Game Info</a>
-        </div>
-        <table class="table is-fullwidth">
-          <tbody>
-            <tr>
-              <th>Released</th>
-              <td><%= %></td>
-            </tr>
-            <tr>
-              <th>Genre</th>
-              <td><%= game.genre %></td>
-            </tr>
-            <tr>
-              <th>Developer</th>
-              <td><%= game.developer %></td>
-            </tr>
-            <tr>
-              <th>Publisher</th>
-              <td><%= game.publisher %></td>
-            </tr>
-            <tr>
-              <th>ESRB Rating</th>
-              <td><%= game.rating %></td>
-            </tr>
-          </tbody>
-        </table>
+<main class="section">
+  <div class="container">
+    <% if (!game) { %>
+    <p>THERE IS NO GAME!!!</p>
+    <% } else { %>
+    <div class="columns">
+      <div class="column is-half">
+        <figure class="image">
+          <img src=<%-`${game.image}`%> alt="<%-`${game.name}`%>" />
+        </figure>
       </div>
+      <div class="column is-half">
         <div class="box">
-          <form action=<%- `/lists/add-list-game/${game._id}?_method=PUT` %> method="post">
-            <div class="field is-horizontal">
-              <div class="field-label is-normal">
-                <label for="listId" class="label">Add to List</label>
-              </div>
-              <div class="field-body">
-                <div class="field has-addons">
-                  <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                      <select name="listId" id="listId">
-                        <% for (let list of lists) { %>
-                          <option value=<%- `${list._id}` %>>
-                            <%= list.name %>
-                          </option>
-                        <% } %>
-                      </select>
+          <div class="is-flex is-justify-content-space-between">
+            <h2 class="title"><%= game.name %></h2>
+            <a href=<%= `edit-game/${game._id}` %> class="button has-text-weight-bold">Update Game Info</a>
+          </div>
+          <table class="table is-fullwidth">
+            <tbody>
+              <tr>
+                <th>Released</th>
+                <td><%= %></td>
+              </tr>
+              <tr>
+                <th>Genre</th>
+                <td><%= game.genre %></td>
+              </tr>
+              <tr>
+                <th>Developer</th>
+                <td><%= game.developer %></td>
+              </tr>
+              <tr>
+                <th>Publisher</th>
+                <td><%= game.publisher %></td>
+              </tr>
+              <tr>
+                <th>ESRB Rating</th>
+                <td><%= game.rating %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <div class="box">
+            <form action=<%- `/lists/add-list-game/${game._id}?_method=PUT` %> method="post">
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label for="listId" class="label">Add to List</label>
+                </div>
+                <div class="field-body">
+                  <div class="field has-addons">
+                    <div class="control is-expanded">
+                      <div class="select is-fullwidth">
+                        <select name="listId" id="listId">
+                          <% for (let list of lists) { %>
+                            <option value=<%- `${list._id}` %>>
+                              <%= list.name %>
+                            </option>
+                          <% } %>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  <div class="control">
-                    <button data-target="add-game-modal" class="button is-primary has-text-weight-bold">
-                      Add
-                    </button>
+                    <div class="control">
+                      <button data-target="add-game-modal" class="button is-primary has-text-weight-bold">
+                        Add
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+        <div class="box">
+          <% if (userReview) { %>
+            <h2 class="title">Your Review</h2>
+            <%- include("../partials/review.ejs", { review: userReview }) %>
+          <% } else { %>
+            <h2 class="title">You haven't written a review of this game</h2>
+            <a href=<%- `/reviews/edit-review/${game._id}` %> class="button is-primary has-text-weight-bold">Write a Review</a>
+          <% } %>
         </div>
-      <div class="box">
-        <% if (userReview) { %>
-          <h2 class="title">Your Review</h2>
-          <%- include("../partials/review.ejs", { review: userReview }) %>
-        <% } else { %>
-          <h2 class="title">You haven't written a review of this game</h2>
-          <a href=<%- `/reviews/edit-review/${game._id}` %> class="button is-primary has-text-weight-bold">Write a Review</a>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-two-thirds">
+        <h2 class="title">All Reviews</h2>
+        <% for (let review of allReviews) { %>
+          <div class="box">
+            <%- include("../partials/review.ejs", { review }) %>
+          </div>
         <% } %>
       </div>
     </div>
+    <% } %>
   </div>
-  <div class="columns">
-    <div class="column is-two-thirds">
-      <h2 class="title">All Reviews</h2>
-      <% for (let review of allReviews) { %>
-        <div class="box">
-          <%- include("../partials/review.ejs", { review }) %>
-        </div>
-      <% } %>
-    </div>
-  </div>
-  <% } %>
 </main>
 <%- include("../partials/footer.ejs") %>

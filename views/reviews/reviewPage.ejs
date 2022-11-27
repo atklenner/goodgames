@@ -1,34 +1,36 @@
 <%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
 %>
-<main class="container section">
-  <div class="columns">
-    <div class="column is-two-thirds is-offset-2">
-      <div class="box">
-        <div class="is-flex is-justify-content-space-between block">
-          <div>
-            <h1 class="title">
-              <a href=<%- `/games/${review.game._id}` %>>
-                <%= review.game.name %>
-              </a> Review
-            </h1>
-            <p class="subtitle">
-              <%= review.dateReviewed.toLocaleDateString() %>
-            </p>
+<main class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-two-thirds is-offset-2">
+        <div class="box">
+          <div class="is-flex is-justify-content-space-between block">
+            <div>
+              <h1 class="title">
+                <a href=<%- `/games/${review.game._id}` %>>
+                  <%= review.game.name %>
+                </a> Review
+              </h1>
+              <p class="subtitle">
+                <%= review.dateReviewed.toLocaleDateString() %>
+              </p>
+            </div>
+            <div class="is-flex is-align-items-baseline">
+              <span class="mr-4"><%= shouldThereBeAnS(review.likes, "Like") %> </span>
+              <%- editLikeButton(review, user, "review") %>
+            </div>
           </div>
-          <div class="is-flex is-align-items-baseline">
-            <span class="mr-4"><%= shouldThereBeAnS(review.likes, "Like") %> </span>
-            <%- editLikeButton(review, user, "review") %>
+  
+          <div class="block">
+              <a href=<%- `/users/${review.user._id}` %>>
+              <span class="has-text-weight-bold"><%= review.user.username %></span>
+              </a>
+              <%- scoreStars(review.score) %>
           </div>
+          <p class="block"><%= review.body %></p>
+          <p class="block">Played for <%- shouldThereBeAnS(review.timeSpentPlaying, "hour") %></p>
         </div>
-
-        <div class="block">
-            <a href=<%- `/users/${review.user._id}` %>>
-            <span class="has-text-weight-bold"><%= review.user.username %></span>
-            </a>
-            <%- scoreStars(review.score) %>
-        </div>
-        <p class="block"><%= review.body %></p>
-        <p class="block">Played for <%- shouldThereBeAnS(review.timeSpentPlaying, "hour") %></p>
       </div>
     </div>
   </div>
