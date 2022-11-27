@@ -1,10 +1,10 @@
 let scoreValues = [
   "Unrated",
-  "Did Not Like",
-  "It Was OK",
-  "Liked It",
-  "Really Liked It",
-  "Loved It",
+  "1 - Did Not Like",
+  "2 - It Was OK",
+  "3 - Liked It",
+  "4 - Really Liked It",
+  "5 - Loved It",
 ];
 let ratingValues = [
   "Rating Pending",
