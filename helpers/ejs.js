@@ -31,7 +31,7 @@ module.exports = {
         class="button is-primary has-text-weight-bold"
       >Edit ${type[0].toUpperCase() + type.slice(1)}</a>`;
     } else {
-      return `<form action=/${type}s/like-${type}/${data._id}?_method=PUT %> method="post">
+      return `<form action=/${type}s/like-${type}/${data._id}?_method=PUT method="post">
         <button class="button is-primary has-text-weight-bold" type="submit">Like</button>
       </form>`;
     }
