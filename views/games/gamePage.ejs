@@ -15,7 +15,11 @@
         <div class="box">
           <div class="is-flex is-justify-content-space-between">
             <h2 class="title"><%= game.name %></h2>
-            <a href=<%= `edit-game/${game._id}` %> class="button has-text-weight-bold">Update Game Info</a>
+            <a href=<%= `edit-game/${game._id}` %> class="button has-text-weight-bold">
+              <span class="icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </span>
+            </a>
           </div>
           <table class="table is-fullwidth">
             <tbody>
@@ -63,7 +67,9 @@
                     </div>
                     <div class="control">
                       <button data-target="add-game-modal" class="button is-primary has-text-weight-bold">
-                        Add
+                        <span class="icon">
+                          <i class="fa-solid fa-plus"></i>
+                        </span>
                       </button>
                     </div>
                   </div>

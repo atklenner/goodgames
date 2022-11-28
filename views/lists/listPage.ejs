@@ -19,7 +19,7 @@
             </a>
             <% if (list.user._id.toString() === user._id.toString()) { %>
               <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
-                <button class="delete"></button>
+                <button class="delete is-large"></button>
               </form>
             <% } %>
           </div>

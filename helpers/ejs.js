@@ -26,13 +26,20 @@ module.exports = {
     return newStr + "...";
   },
   editLikeButton: (data, user, type) => {
-    if (data.user._id.toString() === user._id.toString()) {
+    if (type !== "game" && data.user._id.toString() === user._id.toString()) {
       return `<a href=/${type}s/edit-${type}/${data._id}
-        class="button is-primary has-text-weight-bold"
-      >Edit ${type[0].toUpperCase() + type.slice(1)}</a>`;
+        class="button has-text-weight-bold">
+          <span class="icon">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </span>
+        </a>`;
     } else {
       return `<form action=/${type}s/like-${type}/${data._id}?_method=PUT method="post">
-        <button class="button is-primary has-text-weight-bold" type="submit">Like</button>
+        <button class="button is-primary" type="submit">
+          <span class="icon">
+            <i class="fa-solid fa-thumbs-up"></i>
+          </span>
+        </button>
       </form>`;
     }
   },
@@ -71,7 +78,9 @@ module.exports = {
     } else if (type === "delete") {
       return `<div class="control">
         <button type="button" data-target="delete-modal" class="button modal-button is-danger has-text-weight-bold">
-          Delete
+          <span class="icon">
+            <i class="fa-solid fa-trash"></i>
+          </span>
         </button>
       </div>`;
     } else {
