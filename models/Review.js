@@ -26,6 +26,7 @@ let reviewSchema = new Schema({
   dateGameCompleted: { type: Date },
   timeSpentPlaying: { type: Number },
   likes: { type: Number, default: 0 },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 module.exports = mongoose.model("Review", reviewSchema);
