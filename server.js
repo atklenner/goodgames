@@ -57,7 +57,7 @@ app.use("/lists", listsRouter);
 app.use("/reviews", reviewsRouter);
 
 app.all("*", (req, res) => {
-  res.status(404).render("404.ejs");
+  res.status(404).render("404.ejs", { user: req.user });
 });
 
 app.listen(process.env.PORT, () => console.log("server is running"));
