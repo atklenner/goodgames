@@ -39,6 +39,10 @@ module.exports = {
     try {
       if (req.params.id) {
         let list = await List.findById(req.params.id).lean();
+
+        // returns 404 if req.user is not the list creator
+        if (list.user._id.toString() !== req.user._id.toString()) next();
+
         res.render("lists/listForm", { ...list, user: req.user });
       } else {
         res.render("lists/listForm", { user: req.user });
@@ -72,7 +76,12 @@ module.exports = {
       ? { ...req.body, private: true }
       : { ...req.body, private: false };
     try {
-      let updatedList = await List.findByIdAndUpdate(req.params.id, req.body, {
+      let updatedList = await List.findById(req.params.id);
+
+      // returns 404 is req.user is not the list creator
+      if (updatedList.user._id.toString() !== req.user._id.toString()) next()
+
+      await updatedList.updateOne(req.body, {
         new: true,
         runValidators: true,
       });
@@ -86,9 +95,13 @@ module.exports = {
       console.error(error);
     }
   },
-  addListGame: async (req, res) => {
+  addListGame: async (req, res, next) => {
     try {
       let list = await List.findById(req.body.listId);
+
+      // returns 404 if req.user is not the list creator
+      if (list.user._id.toString() !== req.user._id.toString()) next();
+
       if (!list.games.find((elt) => elt._id == req.params.gameId)) {
         list.games.push(req.params.gameId);
         await list.save();
@@ -100,7 +113,12 @@ module.exports = {
   },
   deleteList: async (req, res) => {
     try {
-      await List.findByIdAndRemove(req.params.id);
+      let list = await List.findById(req.params.id);
+
+      // returns 404 is req.user is not the list creator
+      if (list.user._id.toString() !== req.user._id.toString()) next();
+
+      await list.remove();
       res.redirect("/lists/my-lists");
     } catch (error) {
       console.error(error);
@@ -109,6 +127,10 @@ module.exports = {
   removeListGame: async (req, res) => {
     try {
       let list = await List.findById(req.params.id);
+
+      // returns 404 is req.user is not list creator
+      if (list.user._id.toString() !== req.user._id.toString()) next();
+      
       list.games = list.games.filter((elt) => {
         if (elt._id != req.params.gameId) return true;
         return false;
@@ -121,7 +143,12 @@ module.exports = {
   },
   likeList: async (req, res) => {
     try {
-      await List.findByIdAndUpdate(req.params.id, { $inc: { likes: 1 } });
+      let list = await List.findById(req.params.id);
+
+      // returns 404 is list creator likes their own list, no free clout!
+      if (list.user._id.toString() === req.user._id.toString()) next();
+
+      await list.updateOne({ $inc: { likes: 1 } });
       res.redirect(`/lists/${req.params.id}`);
     } catch (error) {
       console.log(error);
