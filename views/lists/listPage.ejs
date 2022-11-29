@@ -5,14 +5,16 @@
     <div class="columns">
       <div class="column is-two-thirds is-offset-2">
         <div class="content">
-          <div class="is-flex is-justify-content-space-between">
-            <h1 class="title"><%= list.name %></h1>
-            <%- editLikeButton(list, user, "list") %>
+          <div class="is-flex is-justify-content-space-between block">
+            <div>
+              <h1 class="title"><%= list.name %></h1>
+              <p class="subtitle"><%= list.description %></p>
+            </div>
+            <div class="is-flex is-align-items-baseline">
+              <span class="mr-4"><%- shouldThereBeAnS(list.likes, "Like") %> </span>
+              <%- editLikeButton(list, user, "list") %>
+            </div>
           </div>
-          <p class=""><%= list.description %></p>
-          <p class=""><%= list.user.username %></p>
-          <p class=""><%= list.private ? "private list" : "public list" %></p>
-          <p>Likes: <%= list.likes %></p>
           <% for (let game of list.games) { %>
             <div class="box">
               <div class="is-flex is-justify-content-space-between">
