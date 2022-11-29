@@ -1,5 +1,6 @@
 const Review = require("../models/Review");
 const Game = require("../models/Game");
+const Comment = require("../models/Comment");
 
 module.exports = {
   addReviewPage: async (req, res, next) => {
@@ -22,6 +23,7 @@ module.exports = {
     try {
       const review = await Review.findOne({ _id: req.params.id })
         .populate("game")
+        .populate("comments")
         .lean();
       res.render("./reviews/reviewPage", { review, user: req.user });
     } catch (error) {
@@ -91,4 +93,18 @@ module.exports = {
       console.log(error);
     }
   },
+  addComment: async (req, res) => {
+    try {
+      let newComment = await Comment.create({
+        user: { _id: req.user._id, username: req.user.username },
+        body: req.body.body,
+      })
+      let review = await Review.findById(req.params.id);
+      review.comments.push(newComment._id);
+      review.save();
+      res.redirect(`/reviews/${req.params.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };

@@ -2,34 +2,39 @@
 %>
 <main class="section">
   <div class="container">
-    <div class="content">
-      <div class="is-flex is-justify-content-space-between">
-        <h1 class="title"><%= list.name %></h1>
-        <%- editLikeButton(list, user, "list") %>
-      </div>
-      <p class=""><%= list.description %></p>
-      <p class=""><%= list.user.username %></p>
-      <p class=""><%= list.private ? "private list" : "public list" %></p>
-      <p>Likes: <%= list.likes %></p>
-      <% for (let game of list.games) { %>
-        <div class="box">
+    <div class="columns">
+      <div class="column is-two-thirds is-offset-2">
+        <div class="content">
           <div class="is-flex is-justify-content-space-between">
-            <a href=<%- `/games/${game._id}` %>>
-              <h2 class="title"><%= game.name %></h2>
-            </a>
-            <% if (list.user._id.toString() === user._id.toString()) { %>
-              <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
-                <button class="delete is-large"></button>
-              </form>
-            <% } %>
+            <h1 class="title"><%= list.name %></h1>
+            <%- editLikeButton(list, user, "list") %>
           </div>
-          <p class="subtitle"><%= game.genre %></p>
+          <p class=""><%= list.description %></p>
+          <p class=""><%= list.user.username %></p>
+          <p class=""><%= list.private ? "private list" : "public list" %></p>
+          <p>Likes: <%= list.likes %></p>
+          <% for (let game of list.games) { %>
+            <div class="box">
+              <div class="is-flex is-justify-content-space-between">
+                <a href=<%- `/games/${game._id}` %>>
+                  <h2 class="title"><%= game.name %></h2>
+                </a>
+                <% if (list.user._id.toString() === user._id.toString()) { %>
+                  <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
+                    <button class="delete is-large"></button>
+                  </form>
+                <% } %>
+              </div>
+              <p class="subtitle"><%= game.genre %></p>
+            </div>
+          <% } %>
+          <% if (list.games.length === 0) { %>
+            <h2 class="title">There are no games in this list</h2>
+          <% } %>
         </div>
-      <% } %>
-      <% if (list.games.length === 0) { %>
-        <h2 class="title">There are no games in this list</h2>
-      <% } %>
+      </div>
     </div>
+    <%- include("../partials/comments.ejs", { comments: list.comments, type: "list", post: list }) %>
   </div>
 </main>
 <%- include("../partials/footer.ejs") %>

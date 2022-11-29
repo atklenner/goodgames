@@ -27,4 +27,8 @@ router.put("/like-review/:id", ensureAuth, reviewsController.likeReview);
 // removes review from DB
 router.delete("/delete-review/:id", ensureAuth, reviewsController.deleteReview);
 
+// /reviews/review-comment/:id
+// adds a new comment to the review
+router.put("/review-comment/:id", ensureAuth, reviewsController.addComment);
+
 module.exports = router;

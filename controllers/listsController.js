@@ -1,6 +1,7 @@
 const List = require("../models/List");
 const User = require("../models/User");
 const Game = require("../models/Game");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getAllLists: async (req, res) => {
@@ -17,7 +18,10 @@ module.exports = {
   },
   getOneList: async (req, res) => {
     try {
-      let list = await List.findById(req.params.id).populate("games").lean();
+      let list = await List.findById(req.params.id)
+        .populate("games")
+        .populate("comments")
+        .lean();
       res.render("lists/listPage", { list, user: req.user });
     } catch (error) {
       console.error(error);
@@ -154,4 +158,18 @@ module.exports = {
       console.log(error);
     }
   },
+  addComment: async (req, res) => {
+    try {
+      let newComment = await Comment.create({
+        user: { _id: req.user._id, username: req.user.username },
+        body: req.body.body,
+      })
+      let list = await List.findById(req.params.id);
+      list.comments.push(newComment._id);
+      list.save();
+      res.redirect(`/lists/${req.params.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };

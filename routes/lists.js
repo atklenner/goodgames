@@ -51,4 +51,8 @@ router.delete(
   listsController.removeListGame
 );
 
+// /lists/list-comment/:id
+// add a comment to the list
+router.put("/list-comment/:id", ensureAuth, listsController.addComment);
+
 module.exports = router;
