@@ -9,6 +9,7 @@ const gamesRouter = require("./routes/games");
 const usersRouter = require("./routes/users");
 const listsRouter = require("./routes/lists");
 const reviewsRouter = require("./routes/reviews");
+const commentsRouter = require("./routes/comments");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -55,6 +56,7 @@ app.use("/games", gamesRouter);
 app.use("/users", usersRouter);
 app.use("/lists", listsRouter);
 app.use("/reviews", reviewsRouter);
+app.use("/comments", commentsRouter);
 
 app.all("*", (req, res) => {
   res.status(404).render("404.ejs", { user: req.user });
