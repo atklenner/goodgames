@@ -1,31 +1,40 @@
 <div class="columns">
   <div class="column is-two-thirds is-offset-2">
+  <h2 class="title">
+    <%- shouldThereBeAnS(post.comments.length, "Comment") %>
+  </h2>
+  <% for (let comment of comments) { %>
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <p>
-            <strong>Barbara Middleton</strong>
-            <br>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-            <br>
-            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+          <p class="has-text-weight-bold">
+            <a href=<%= `/users/${comment.user._id}` %>>
+              <%= comment.user.username %>
+            </a>
           </p>
+          <p>
+            <%= comment.body %>
+          </p>
+          <p><%- shouldThereBeAnS(comment.likes, "Like") %></p>
         </div>
       </div>
     </article>
-
+  <% } %>
     <article class="media">
       <div class="media-content">
-        <div class="field">
-          <p class="control">
-            <textarea class="textarea" ></textarea>
-          </p>
-        </div>
-        <div class="field">
-          <p class="control">
-            <button class="button">Post comment</button>
-          </p>
-        </div>
+        <form action=<%- `/${type}s/${type}-comment/${post._id}?_method=PUT` %> method="POST">
+          <div class="field">
+            <label for="body" class="label">Comment</label>
+            <div class="control">
+              <textarea name="body" id="body" class="textarea" ></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <p class="control">
+              <button class="button is-primary has-text-weight-bold">Post comment</button>
+            </p>
+          </div>
+        </form>
       </div>
     </article>
   </div>
