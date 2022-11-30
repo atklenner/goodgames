@@ -1,0 +1,7 @@
+<label class="label">Genres</label>
+<div class="is-flex is-flex-wrap-wrap" style="column-gap: 0.75rem;">
+  <% for (let genre of gameGenres) { %>
+    <%- include("./checkboxInput.ejs", { name: "genres", value: genre, text: genre, checked: checkedGenres && checkedGenres.includes(genre) }) %>
+  <% } %>
+</div>
+

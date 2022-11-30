@@ -5,6 +5,7 @@ const {
   options,
   button,
   scoreStars,
+  gameGenres,
 } = require("./ejs");
 
 module.exports = (app) => {
@@ -14,4 +15,5 @@ module.exports = (app) => {
   app.locals.options = options;
   app.locals.button = button;
   app.locals.scoreStars = scoreStars;
+  app.locals.gameGenres = gameGenres;
 };

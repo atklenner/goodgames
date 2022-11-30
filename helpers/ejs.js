@@ -1,3 +1,4 @@
+let ejs = require("ejs");
 let scoreValues = [
   "Unrated",
   "1 - Did Not Like",
@@ -14,6 +15,24 @@ let ratingValues = [
   "Mature 17+",
   "Adults Only 18+",
 ];
+let genres = [
+  "Action",
+  "Adventure",
+  "Arcade",
+  "Education",
+  "Fighting",
+  "FPS",
+  "Multiplayer",
+  "Music",
+  "Party",
+  "Platformer",
+  "Puzzle",
+  "Racing",
+  "RPG",
+  "Simulation",
+  "Sports",
+  "Strategy",
+];
 
 module.exports = {
   truncate: (str, limit) => {
@@ -26,7 +45,7 @@ module.exports = {
     return newStr + "...";
   },
   editLikeButton: (data, user, type) => {
-    if (type !== "game" && data.user._id.toString() === user._id.toString()) {
+    if (data.user._id.toString() === user._id.toString()) {
       return `<a href=/${type}s/edit-${type}/${data._id}
         class="button has-text-weight-bold">
           <span class="icon">
@@ -99,4 +118,5 @@ module.exports = {
     }
     return `rated it <span aria-label="${scoreName}">${html}</span>`;
   },
+  gameGenres: genres,
 };
