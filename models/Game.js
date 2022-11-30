@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
   name: { type: String, required: true },
-  genre: { type: String, required: true },
+  genres: [{ type: String }],
   developer: { type: String, required: true },
   publisher: { type: String, required: true },
   rating: {
