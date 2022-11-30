@@ -1,10 +1,11 @@
 <div class="field">
     <div class="control">
-      <label for="<%- name %>" class="checkbox">
+      <label for="<%- value %>" class="checkbox has-text-weight-bold">
         <input 
           type="checkbox" 
           name="<%- name %>" 
-          id="<%- name %>" 
+          id="<%- value %>" 
+          value="<%- value %>"
           <% if (locals.checked) { %>
             checked="checked"
           <% } %>
