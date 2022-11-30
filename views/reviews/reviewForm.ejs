@@ -19,7 +19,7 @@
                     <textarea name="body" id="body" cols="30" rows="10" class="textarea"><%- locals.body %></textarea>
                 </div>
             </div>
-            <%- include("../partials/checkboxInput.ejs", { name: "completed", checked: locals.completed, text: "Completed"}) %>
+            <%- include("../partials/checkboxInput.ejs", { name: "completed", value: "completed", checked: locals.completed, text: "Completed"}) %>
             <div class="field is-grouped is-justify-content-space-between">
               <%- button("submit") %>
               <% if (locals._id) { %>

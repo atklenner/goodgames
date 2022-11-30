@@ -17,6 +17,7 @@
             <%- include("../partials/textInput.ejs", { name: "genre", data: locals.genre, type: "text", label: "Genre" }) %>
             <%- include("../partials/textInput.ejs", { name: "developer", data: locals.developer, type: "text", label: "Developer" }) %>
             <%- include("../partials/textInput.ejs", { name: "publisher", data: locals.publisher, type: "text", label: "Publisher" }) %>
+            <%- include("../partials/gameGenres.ejs", { checkedGenres: locals.genres }) %>
             <%- include("../partials/selectInput.ejs", { name: "rating" , value: locals.rating, label: "ESRB Rating", }) %>
             <div class="field">
               <div class="file has-name">
