@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const List = require("../models/List");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -84,6 +85,8 @@ exports.postSignup = (req, res, next) => {
     password: req.body.password,
   });
 
+  
+
   User.findOne(
     { $or: [{ email: req.body.email }, { username: req.body.username }] },
     (err, existingUser) => {
@@ -96,17 +99,58 @@ exports.postSignup = (req, res, next) => {
         });
         return res.redirect("../signup");
       }
-      user.save((err) => {
-        if (err) {
-          return next(err);
-        }
-        req.logIn(user, (err) => {
+      Promise.all(addDefaultLists(user)).then(
+        user.save((err) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/");
-        });
-      });
+          req.logIn(user, (err) => {
+            if (err) {
+              return next(err);
+            }
+            res.redirect("/");
+          });
+        })
+      )
     }
   );
 };
+
+// this will create the lists even if the user creation fails...
+function addDefaultLists(user) {
+  try {
+    // all of these could be done in parallel...
+    let completed = new List({ 
+      name: "Completed", 
+      user: { 
+        _id: user._id, 
+        username: user.username 
+      }, 
+      description: "All the games I have completed", 
+      private: true 
+    });
+    let wantToPlay = new List({ 
+      name: "Want to play", 
+      user: { 
+        _id: user._id, 
+        username: user.username 
+      }, 
+      description: "All the games I want to play", 
+      private: true 
+    });
+    let playing = new List({ 
+      name: "Currently Playing", 
+      user: { 
+        _id: user._id, 
+        username: user.username 
+      }, 
+      description: "All the games I playing right now", 
+      private: true 
+    });
+    user.mainList = playing._id;
+    user.lists = [playing._id, wantToPlay._id, completed._id];
+    return [playing.save(), wantToPlay.save(), completed.save()];
+  } catch (error) {
+    console.log(error);
+  }
+}
