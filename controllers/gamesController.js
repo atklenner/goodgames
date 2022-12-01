@@ -15,7 +15,7 @@ module.exports = {
   getOneGame: async (req, res) => {
     try {
       let gameReq = Game.findById(req.params.id).lean();
-      let allReviewsReq = Review.find({ game: req.params.id }).lean();
+      let allReviewsReq = Review.find({ game: req.params.id }).sort({ likes: -1 }).lean();
       let userReviewReq = Review.findOne({
         game: req.params.id,
         "user._id": req.user._id,

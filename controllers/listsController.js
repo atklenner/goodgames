@@ -6,7 +6,7 @@ const Comment = require("../models/Comment");
 module.exports = {
   getAllLists: async (req, res) => {
     try {
-      let lists = await List.find({ private: false }).lean();
+      let lists = await List.find({ private: false }).sort({ likes: -1 }).lean();
       res.render("lists/allLists", {
         lists,
         title: "All Lists",
