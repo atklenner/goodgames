@@ -25,11 +25,11 @@
             <tbody>
               <tr>
                 <th>Released</th>
-                <td><%= game.dateReleased.toLocaleDateString() %></td>
+                 <td><%- game.dateReleased.toLocaleDateString() %></td>
               </tr>
               <tr>
                 <th>Genre</th>
-                <td><%= game.genres %></td>
+                <td><%- include("../partials/genreLinks.ejs", { genres: game.genres }) %></td>
               </tr>
               <tr>
                 <th>Developer</th>

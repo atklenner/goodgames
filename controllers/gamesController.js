@@ -5,8 +5,12 @@ const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
   getAllGames: async (req, res) => {
+    let query = {};
+    if (req.query.genres) {
+      query = { genres: { $in: req.query.genres } };
+    }
     try {
-      let games = await Game.find();
+      let games = await Game.find(query);
       res.render("games/allGames", { games, user: req.user });
     } catch (error) {
       console.error(error);
