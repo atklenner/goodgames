@@ -7,11 +7,13 @@
         <div class="content">
           <div class="is-flex is-justify-content-space-between block">
             <div>
-              <h1 class="title"><%= list.name %></h1>
+              <h1 class="title"><%= list.name %> <%= list.private ? "(private)" : "" %></h1>
               <p class="subtitle"><%= list.description %></p>
             </div>
             <div class="is-flex is-align-items-baseline">
-              <span class="mr-4"><%- shouldThereBeAnS(list.likes, "Like") %> </span>
+              <% if (!list.private) { %>
+                <span class="mr-4"><%- shouldThereBeAnS(list.likes, "Like") %> </span>
+              <% } %>
               <%- editLikeButton(list, user, "list") %>
             </div>
           </div>
@@ -36,7 +38,9 @@
         </div>
       </div>
     </div>
-    <%- include("../partials/comments.ejs", { comments: list.comments, type: "list", post: list }) %>
+    <% if (!list.private) { %>
+      <%- include("../partials/comments.ejs", { comments: list.comments, type: "list", post: list }) %>
+    <% } %>
   </div>
 </main>
 <%- include("../partials/footer.ejs") %>

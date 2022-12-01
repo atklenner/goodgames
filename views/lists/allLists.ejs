@@ -14,10 +14,13 @@
         <% for (let list of lists) { %>
           <div class="box">
             <a href=<%- `/lists/${list._id}` %>>
-              <h2 class="title"><%= list.name %></h2>
+              <h2 class="title"><%= list.name %> <%= list.private ? "(private)" : "" %></h2>
             </a>
-            <p>Likes: <%= list.likes %></p>
-            <p>Comments: <%= list.comments.length %></p>
+            <% if (!list.private) { %>
+              <span><%= shouldThereBeAnS(list.likes, "Like") %> - </span>
+              <span><%= shouldThereBeAnS(list.comments.length, "Comment") %> - </span>
+            <% } %>
+            <span><%= shouldThereBeAnS(list.games.length, "Game") %></span>
           </div>
         <% } %> <% if (lists.length === 0) { %>
       <p>THERE ARE NO LISTS!!!</p>
