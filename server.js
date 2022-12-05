@@ -17,6 +17,7 @@ const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const methodOverride = require("method-override");
 const helpers = require("./helpers/helpers");
+const compression = require("compression");
 
 require("./config/passport")(passport);
 
@@ -25,6 +26,8 @@ connectDB();
 app.set("view engine", "ejs");
 
 app.use(cors());
+
+app.use(compression());
 
 app.use(express.static("public"));
 
