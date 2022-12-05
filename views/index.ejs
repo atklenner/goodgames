@@ -2,25 +2,29 @@
 <main class="section">
   <div class="container">
     <h1 class="title">Dashboard</h1>
-    <div class="tile is-ancestor">
-      <div class="tile is-4 is-parent is-danger">
-        <div class="tile is-child box">
+    <div class="columns">
+      <div class="column is-4">
+        <div class="box">
           <% if (locals.mainList) { %>
             <a href=<%- `/lists/${mainList._id}` %>>
               <h2 class="title"><%= mainList.name %></h2>
             </a>
-            <ul>
+            <% if (mainList.games.length > 0) { %>
+            <ul class="mt-4">
               <% for (let game of mainList.games) { %>
-              <li><a href=<%- `/games/${game._id}` %>><%= game.name %></a></li>
+                <li><a href=<%- `/games/${game._id}` %>><%= game.name %></a></li>
               <% } %>
             </ul>
+            <% } else { %>
+              <p class="subtitle mt-4">There are no games in this list.</p>
+            <% } %>
           <% } else { %>
             <h2 class="title">No Main List</h2>
           <% } %>
         </div>
       </div>
-      <div class="tile is-8 is-parent is-info">
-        <div class="tile is-child box">
+      <div class="column is-8">
+        <div class="box">
           <div class="is-flex is-justify-content-space-between">
             <h2 class="title">Your Lists</h2>
             <a href="/lists/edit-list" class="button is-primary has-text-weight-bold">
