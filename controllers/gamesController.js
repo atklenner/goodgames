@@ -11,7 +11,7 @@ module.exports = {
     }
     try {
       let games = await Game.find(query);
-      res.render("games/allGames", { games, user: req.user });
+      res.render("games/allGames", { games, user: req.user, checkedGenres: req.query.genres ?? []});
     } catch (error) {
       console.error(error);
     }
