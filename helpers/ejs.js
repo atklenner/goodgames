@@ -119,4 +119,9 @@ module.exports = {
     return `rated it <span aria-label="${scoreName}">${html}</span>`;
   },
   gameGenres: genres,
+  dateValue: (date) => {
+    let month = date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+    let day = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+    return `${date.getFullYear()}-${month}-${day}`
+  }
 };

@@ -1,4 +1,5 @@
 const {
+  dateValue,
   truncate,
   editLikeButton,
   shouldThereBeAnS,
@@ -16,4 +17,5 @@ module.exports = (app) => {
   app.locals.button = button;
   app.locals.scoreStars = scoreStars;
   app.locals.gameGenres = gameGenres;
+  app.locals.dateValue = dateValue;
 };

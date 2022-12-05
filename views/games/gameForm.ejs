@@ -17,7 +17,7 @@
             <div class="field">
               <label class="label" for="dateReleased">Date Released</label>
               <div class="control">
-                <input type="date" id="dateReleased" name="dateReleased" />
+                <input type="date" id="dateReleased" name="dateReleased" value="<%= dateValue(locals.dateReleased) %>" />
               </div>
             </div>
             <%- include("../partials/textInput.ejs", { name: "developer", data: locals.developer, type: "text", label: "Developer" }) %>
