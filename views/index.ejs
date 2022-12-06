@@ -22,6 +22,27 @@
             <h2 class="title">No Main List</h2>
           <% } %>
         </div>
+        <div class="box">
+          <h2 class="title">Recent Games</h2>
+          <% for (let game of recentGames) { %>
+            <div class="media">
+              <div class="media-left" style="width: 5rem;">
+                <figure class="image is-2by3">
+                  <img
+                    style="object-fit: contain;"
+                    src="<%- game.image %>"
+                    alt="<%- game.name %>"
+                  />
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <a href=<%- `/games/${game._id}` %>><p class="subtitle"><%= game.name %></p></a>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </div>
       </div>
       <div class="column is-8">
         <div class="box">
