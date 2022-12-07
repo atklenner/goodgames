@@ -12,3 +12,8 @@ body {
 
 @import "../../node_modules/bulma/bulma.sass";
 // @import "bulma-prefers-dark.sass";
+
+html {
+  visibility: visible;
+  opacity: 1;
+}
