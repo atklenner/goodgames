@@ -1,3 +1,14 @@
 @charset "utf-8";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#wrapper {
+  flex: 1;
+}
+
 @import "../../node_modules/bulma/bulma.sass";
 // @import "bulma-prefers-dark.sass";
