@@ -5,26 +5,25 @@
     <div class="columns">
       <div class="column is-4">
         <div class="box">
-          <% if (locals.mainList) { %>
-            <a href=<%- `/lists/${mainList._id}` %>>
-              <h2 class="title"><%= mainList.name %></h2>
+          <div class="is-flex is-justify-content-space-between">
+            <h2 class="title">Your Lists</h2>
+            <a href="/lists/edit-list" class="button is-primary has-text-weight-bold">
+              <span class="icon is-medium">
+                <i class="fa-solid fa-plus"></i>
+              </span>
             </a>
-            <% if (mainList.games.length > 0) { %>
-            <ul class="mt-4">
-              <% for (let game of mainList.games) { %>
-                <li><a href=<%- `/games/${game._id}` %>><%= game.name %></a></li>
-              <% } %>
-            </ul>
-            <% } else { %>
-              <p class="subtitle mt-4">There are no games in this list.</p>
+          </div>
+          <ul>
+            <% for (let list of lists) { %>
+            <li>
+              <a href=<%- `/lists/${list._id}` %>><%= list.name %></a>
+            </li>
             <% } %>
-          <% } else { %>
-            <h2 class="title">No Main List</h2>
-          <% } %>
+          </ul>
         </div>
         <div class="box">
-          <h2 class="title">Recent Games</h2>
-          <% for (let game of recentGames) { %>
+          <h2 class="title">New Games</h2>
+          <% for (let game of newGames) { %>
             <div class="media">
               <div class="media-left" style="width: 5rem;">
                 <figure class="image is-2by3">
@@ -46,21 +45,44 @@
       </div>
       <div class="column is-8">
         <div class="box">
-          <div class="is-flex is-justify-content-space-between">
-            <h2 class="title">Your Lists</h2>
-            <a href="/lists/edit-list" class="button is-primary has-text-weight-bold">
-              <span class="icon is-medium">
-                <i class="fa-solid fa-plus"></i>
-              </span>
+          <% if (locals.mainList) { %>
+            <a href=<%- `/lists/${mainList._id}` %>>
+              <h2 class="title mb-5"><%= mainList.name %></h2>
             </a>
-          </div>
-          <ul>
-            <% for (let list of lists) { %>
-            <li>
-              <a href=<%- `/lists/${list._id}` %>><%= list.name %></a>
-            </li>
+            <% if (mainList.games.length > 0) { %>
+              <% for (let game of mainList.games) { %>
+                <div class="media">
+                  <div class="media-left" style="width: 5rem;">
+                    <figure class="image is-2by3">
+                      <img
+                        style="object-fit: contain;"
+                        src="<%- game.image %>"
+                        alt="<%- game.name %>"
+                      />
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <div class="content">
+                      <a href=<%- `/games/${game._id}` %>><p class="subtitle"><%= game.name %></p></a>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            <% } else { %>
+              <p class="subtitle mt-4">There are no games in this list.</p>
             <% } %>
-          </ul>
+          <% } else { %>
+            <h2 class="title">No Main List</h2>
+          <% } %>
+        </div>
+        <div class="box">
+          <h2 class="title">Recent Reviews</h2>
+          <% for (let review of recentReviews) { %>
+            <a href=<%- `/games/${review.game._id}` %>>
+              <h3 class="is-size-5 has-text-weight-bold has-text-black"><%= review.game.name %></h3>
+            </a>
+            <%- include("./partials/review.ejs", { review }) %>
+          <% }%>
         </div>
       </div>
     </div>
