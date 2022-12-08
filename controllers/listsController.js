@@ -4,7 +4,7 @@ const Game = require("../models/Game");
 const Comment = require("../models/Comment");
 
 module.exports = {
-  getAllLists: async (req, res) => {
+  getAllLists: async (req, res, next) => {
     try {
       let lists = await List.find({ private: false }).sort({ likes: -1 }).lean();
       res.render("lists/allLists", {
@@ -14,6 +14,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
+      next(error);
     }
   },
   getOneList: async (req, res) => {

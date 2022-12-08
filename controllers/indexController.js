@@ -4,7 +4,7 @@ const Game = require("../models/Game");
 const Review = require("../models/Review");
 
 module.exports = {
-  getHomePage: async (req, res) => {
+  getHomePage: async (req, res, next) => {
     try {
       let user = await User.findById(req.user._id).populate("lists").lean();
       let mainList = await List.findById(user.mainList)
@@ -21,6 +21,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(error);
+      next(error);
     }
   },
 };

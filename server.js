@@ -18,6 +18,7 @@ const flash = require("express-flash");
 const methodOverride = require("method-override");
 const helpers = require("./helpers/helpers");
 const compression = require("compression");
+const errorHandler = require("./middleware/errorHandler");
 
 require("./config/passport")(passport);
 
@@ -62,7 +63,9 @@ app.use("/reviews", reviewsRouter);
 app.use("/comments", commentsRouter);
 
 app.all("*", (req, res) => {
-  res.status(404).render("404.ejs", { user: req.user });
+  throw new Error("Not sure what you did, don't do it again.")
 });
+
+app.use(errorHandler);
 
 app.listen(process.env.PORT, () => console.log("server is running"));

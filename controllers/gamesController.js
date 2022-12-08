@@ -4,7 +4,7 @@ const User = require("../models/User");
 const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
-  getAllGames: async (req, res) => {
+  getAllGames: async (req, res, next) => {
     let query = {};
     if (req.query.genres) {
       query = { genres: { $in: req.query.genres } };
@@ -14,9 +14,10 @@ module.exports = {
       res.render("games/allGames", { games, user: req.user, checkedGenres: req.query.genres ?? []});
     } catch (error) {
       console.error(error);
+      next(error);
     }
   },
-  getOneGame: async (req, res) => {
+  getOneGame: async (req, res, next) => {
     try {
       let gameReq = Game.findById(req.params.id).lean();
       let allReviewsReq = Review.find({ game: req.params.id }).sort({ likes: -1 }).lean();
@@ -39,13 +40,15 @@ module.exports = {
         user: req.user,
       });
     } catch (error) {
+      error.type = "game";
       console.error(error);
+      next(error);
     }
   },
   addGamePage: (req, res) => {
     res.render("games/gameForm", { user: req.user });
   },
-  addNewGame: async (req, res) => {
+  addNewGame: async (req, res, next) => {
     try {
       let image = await cloudinary.uploader.upload(req.file.path);
       let addedGame = await Game.create({
@@ -56,22 +59,22 @@ module.exports = {
       res.redirect(`/games/${addedGame._id}`);
     } catch (error) {
       console.error(error);
+      next(error);
     }
   },
-  updateGamePage: async (req, res) => {
+  updateGamePage: async (req, res, next) => {
     try {
       let game = await Game.findById({ _id: req.params.id }).lean();
-      if (game) {
-        res.render("games/gameForm", { ...game, user: req.user });
-      } else {
-        res.render("404");
-      }
+      res.render("games/gameForm", { ...game, user: req.user });
     } catch (error) {
+      error.type = "game";
       console.log(error);
+      next(error);
     }
   },
-  updateGame: async (req, res) => {
+  updateGame: async (req, res, next) => {
     try {
+      let updatedGame = await Game.findById(req.params.id);
       let game = { ...req.body };
       if (req.file) {
         let image = await cloudinary.uploader.upload(req.file.path);
@@ -81,27 +84,29 @@ module.exports = {
           cloudinaryId: image.public_id,
         };
       }
-      let updatedGame = await Game.findOneAndUpdate(
-        { _id: req.params.id },
+      await updatedGame.updateOne(
         game,
         {
-          new: true,
           runValidators: true,
           lean: true,
         }
       );
       res.redirect(`/games/${updatedGame._id}`);
     } catch (error) {
+      error.type = "game";
       console.error(error);
+      next(error);
     }
   },
-  deleteGame: async (req, res) => {
+  deleteGame: async (req, res, next) => {
     try {
       let game = await Game.findByIdAndRemove({ _id: req.params.id });
       await cloudinary.uploader.destroy(game.cloudinaryId);
       res.redirect("/games");
     } catch (error) {
+      error.type = "game";
       console.error(error);
+      next(error);
     }
   },
 };
