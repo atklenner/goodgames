@@ -13,6 +13,7 @@
     <div class="columns">
       <div class="column is-2">
         <form method="get" action="games">
+          <%- include("../partials/textInput.ejs", { name: "name", type: "text", data: name, label: "Name"}) %>
           <%- include("../partials/gameGenres.ejs", { checkedGenres }) %>
           <button type="submit" class="button is-primary has-text-weight-bold">Filter</button>
         </form>

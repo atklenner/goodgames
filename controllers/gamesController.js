@@ -2,16 +2,20 @@ const Game = require("../models/Game");
 const Review = require("../models/Review");
 const User = require("../models/User");
 const cloudinary = require("../middleware/cloudinary");
+const { queryBuilder } = require('../helpers/query');
 
 module.exports = {
   getAllGames: async (req, res, next) => {
-    let query = {};
-    if (req.query.genres) {
-      query = { genres: { $in: req.query.genres } };
-    }
+    let query = queryBuilder(req);
     try {
-      let games = await Game.find(query);
-      res.render("games/allGames", { games, user: req.user, checkedGenres: req.query.genres ?? []});
+      // let games = await Game.find(query);
+      let games = await Game.aggregate(query)
+      res.render("games/allGames", { 
+        games, 
+        user: req.user, 
+        checkedGenres: req.query.genres ?? [],
+        name: req.query.name ?? "",
+      });
     } catch (error) {
       console.error(error);
       next(error);
