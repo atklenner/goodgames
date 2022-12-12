@@ -8,7 +8,6 @@ module.exports = {
   getAllGames: async (req, res, next) => {
     let query = queryBuilder(req);
     try {
-      // let games = await Game.find(query);
       let games = await Game.aggregate(query)
       res.render("games/allGames", { 
         games, 
@@ -104,8 +103,9 @@ module.exports = {
   },
   deleteGame: async (req, res, next) => {
     try {
-      let game = await Game.findByIdAndRemove({ _id: req.params.id });
+      let game = await Game.findByIdAndRemove(req.params.id);
       await cloudinary.uploader.destroy(game.cloudinaryId);
+      await Review.deleteMany({ game: req.params.id });
       res.redirect("/games");
     } catch (error) {
       error.type = "game";
