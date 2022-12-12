@@ -1,10 +1,11 @@
 module.exports = (err, req, res, next) => {
-  if (err.type) {
-    res.status(404);
+  let status = 500;
+  if (err.type === "auth") {
+    err.message = "You must be logged in as that user.";
+    status = 403;
+  } else if (err.type) {
     err.message = `That ${err.type} does not exist.`;
-    err.status = 404;
-  } else {
-    res.status(err.status || 500);
+    status = 404;
   }
-  res.render("../views/404.ejs", { status: err.status, message: err.message || "Internal Server Error", user: req.user });
+  res.status(status).render("../views/404.ejs", { status, message: err.message || "Internal Server Error", user: req.user });
 }
