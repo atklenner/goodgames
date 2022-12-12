@@ -23,7 +23,9 @@ module.exports = {
         }
       })
     }
-    query.push({"$sort": { name: 1 }})
+    if (!req.query.name) {
+      query.push({"$sort": { name: 1 }})
+    }
     return query;
   }
 }
