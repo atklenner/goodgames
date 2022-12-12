@@ -1,6 +1,31 @@
 <%- include("../partials/header") %> <%- include("../partials/navbar") %>
-<main>
-  <h1>User Profile</h1>
-  <span><%= user %></span>
+<main class="section">
+  <div class="container">
+  <h1 class="title"><%- user.username %>'s Profile</h1>
+    <div class="columns">
+      <div class="column is-6">
+        <div class="box">
+          <h2 class="title"><%= user.username %>'s reviews</h2>
+          <% for (let review of reviews) { %>
+            <a href=<%- `/games/${review.game._id}` %>>
+              <h3 class="is-size-5 has-text-weight-bold has-text-black"><%= review.game.name %></h3>
+            </a>
+            <%- include("../partials/review.ejs", { review }) %>
+          <% } %>
+          <% if (reviews.length === 0) { %>
+            <p class="subtitle">This user has not reviewed anything yet.</p>
+          <% } %>
+        </div>
+      </div>
+      <div class="column is-6">
+        <div class="box">
+          <h2 class="title"><%= user.username %>'s lists</h2>
+          <% for (let list of lists) { %>
+            <p><%= list.name %></p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 <%- include("../partials/footer") %>
