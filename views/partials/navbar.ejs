@@ -42,16 +42,24 @@
       </div>
 
       <div class="navbar-end">
-        <div class="navbar-item">
-          <a href=<%- `/users/${user._id}` %>>
-          <%= user.username %>
-          </a>
-        </div>
-        <div class="navbar-item">
-          <a href="/logout" class="button is-primary has-text-weight-bold">
-            Logout
-          </a>
-        </div>
+        <% if (user) { %>
+          <div class="navbar-item">
+            <a href=<%- `/users/${user._id}` %>>
+            <%= user.username %>
+            </a>
+          </div>
+          <div class="navbar-item">
+            <a href="/logout" class="button is-primary has-text-weight-bold">
+              Logout
+            </a>
+          </div>
+        <% } else { %>
+          <div class="navbar-item">
+            <a href="/login" class="button is-primary has-text-weight-bold">
+              Login
+            </a>
+          </div>
+        <% } %>
       </div>
     </div>
   </div>
