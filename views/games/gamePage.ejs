@@ -81,9 +81,12 @@
           <% if (userReview) { %>
             <h2 class="title">Your Review</h2>
             <%- include("../partials/review.ejs", { review: userReview }) %>
-          <% } else { %>
+          <% } else if (user) { %>
             <h2 class="title">You haven't written a review of this game</h2>
             <a href=<%- `/reviews/edit-review/${game._id}` %> class="button is-primary has-text-weight-bold">Write a Review</a>
+          <% } else { %>
+            <h2 class="title">Sign up to review this game</h2>
+            <a href="/signup" class="button is-primary has-text-weight-bold">Sign Up</a>
           <% } %>
         </div>
       </div>
@@ -95,6 +98,9 @@
           <div class="box">
             <%- include("../partials/review.ejs", { review }) %>
           </div>
+        <% } %>
+        <% if (allReviews.length === 0) { %>
+          <p class="subtitle">There are no reviews of this game yet.</p>
         <% } %>
       </div>
     </div>
