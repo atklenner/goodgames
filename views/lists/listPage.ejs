@@ -1,5 +1,5 @@
-<%- include("../partials/header.ejs") %> <%- include("../partials/navbar.ejs")
-%>
+<%- include("../partials/header.ejs") %> 
+<%- include("../partials/navbar.ejs") %>
 <main class="section">
   <div class="container">
     <div class="columns">
@@ -9,6 +9,7 @@
             <div>
               <h1 class="title"><%= list.name %> <%= list.private ? "(private)" : "" %></h1>
               <p class="subtitle"><%= list.description %></p>
+              <a href=<%- `/users/${list.user._id}` %> class=""><%= list.user.username %></a>
             </div>
             <div class="is-flex is-align-items-baseline">
               <% if (!list.private) { %>
@@ -33,7 +34,7 @@
             </div>
           <% } %>
           <% if (list.games.length === 0) { %>
-            <h2 class="title">There are no games in this list</h2>
+            <h2 class="subtitle is-4">There are no games in this list</h2>
           <% } %>
         </div>
       </div>
