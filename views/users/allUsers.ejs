@@ -1,10 +1,17 @@
-<%- include("./partials/header") %> <%- include("./partials/navbar") %>
-<main>
-  <h1>ALL USERS</h1>
-  <ul>
-    <% for (let user of users) { %>
-    <li><%= user %></li>
-    <% } %>
-  </ul>
+<%- include("../partials/header") %> 
+<%- include("../partials/navbar") %>
+<main class="section">
+  <div class="container">
+  <h1 class="title">All Users</h1>
+    <ul>
+      <% for (let user of users) { %>
+        <a href=<%- `/users/${user._id}` %>>
+          <p class="subtitle">
+            <%= user.username %>
+          </p>
+        </a>
+      <% } %>
+    </ul>
+  </div>
 </main>
-<%- include("./partials/footer") %>
+<%- include("../partials/footer") %>

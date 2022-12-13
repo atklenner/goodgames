@@ -4,8 +4,8 @@ const Review = require("../models/Review");
 module.exports = {
   getAllUsers: async (req, res, next) => {
     try {
-      let users = await User.find();
-      res.render("users/allUsers", { users });
+      let users = await User.find({});
+      res.render("users/allUsers", { user: req.user, users });
     } catch (error) {
       console.error(error);
       next(error);
@@ -13,13 +13,13 @@ module.exports = {
   },
   getOneUser: async (req, res, next) => {
     try {
-      let user = await User.findById(req.params.id).populate("lists").lean();
-      let lists = user.lists;
-      if (user._id.toString !== req.user._id.toString()) {
+      let userProfile = await User.findById(req.params.id).populate("lists").lean();
+      let lists = userProfile.lists;
+      if (userProfile._id.toString() !== req.user._id.toString()) {
         lists = lists.filter((list) => !list.private);
       }
-      let reviews = await Review.find({ "user._id": user._id }).lean();
-      res.render("users/userProfile", { user, reviews, lists: user.lists });
+      let reviews = await Review.find({ "user._id": userProfile._id }).populate("game").lean();
+      res.render("users/userProfile", { user: req.user, reviews, lists, userProfile });
     } catch (error) {
       console.error(error);
       next(error);
