@@ -1,16 +1,21 @@
-<%- include("../partials/header") %> <%- include("../partials/navbar") %>
+<%- include("../partials/header") %> 
+<%- include("../partials/navbar") %>
 <main class="section">
   <div class="container">
-  <h1 class="title"><%- user.username %>'s Profile</h1>
+  <h1 class="title"><%- userProfile.username %>'s Profile</h1>
     <div class="columns">
       <div class="column is-6">
         <div class="box">
-          <h2 class="title"><%= user.username %>'s reviews</h2>
+          <h2 class="title"><%= userProfile.username %>'s reviews</h2>
           <% for (let review of reviews) { %>
-            <a href=<%- `/games/${review.game._id}` %>>
-              <h3 class="is-size-5 has-text-weight-bold has-text-black"><%= review.game.name %></h3>
-            </a>
-            <%- include("../partials/review.ejs", { review }) %>
+            <div class="media">
+              <div class="media-content">
+                <a href=<%- `/games/${review.game._id}` %>>
+                  <h3 class="title is-5"><%= review.game.name %></h3>
+                </a>
+                <%- include("../partials/review.ejs", { review }) %>
+              </div>
+            </div>
           <% } %>
           <% if (reviews.length === 0) { %>
             <p class="subtitle">This user has not reviewed anything yet.</p>
@@ -19,9 +24,12 @@
       </div>
       <div class="column is-6">
         <div class="box">
-          <h2 class="title"><%= user.username %>'s lists</h2>
+          <h2 class="title"><%= userProfile.username %>'s lists</h2>
           <% for (let list of lists) { %>
-            <p><%= list.name %></p>
+            <%- include("../partials/list.ejs", { list, size: "is-5" }) %>
+          <% } %>
+          <% if (lists.length === 0) { %>
+            <p class="subtitle">This user has no public lists.</p>
           <% } %>
         </div>
       </div>

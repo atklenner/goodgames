@@ -78,10 +78,14 @@
         <div class="box">
           <h2 class="title">Recent Reviews</h2>
           <% for (let review of recentReviews) { %>
-            <a href=<%- `/games/${review.game._id}` %>>
-              <h3 class="is-size-5 has-text-weight-bold has-text-black"><%= review.game.name %></h3>
-            </a>
-            <%- include("./partials/review.ejs", { review }) %>
+            <div class="media">
+              <div class="media-content">
+                <a href=<%- `/games/${review.game._id}` %>>
+                  <h3 class="title is-5"><%= review.game.name %></h3>
+                </a>
+                <%- include("./partials/review.ejs", { review }) %>
+              </div>
+            </div>
           <% }%>
         </div>
       </div>
