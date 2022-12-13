@@ -21,9 +21,13 @@
           <% for (let game of list.games) { %>
             <div class="box">
               <div class="is-flex is-justify-content-space-between">
-                <a href=<%- `/games/${game._id}` %>>
-                  <h2 class="title"><%= game.name %></h2>
-                </a>
+                <% if (game.name) { %>
+                  <a href=<%- `/games/${game._id}` %>>
+                    <h2 class="title"><%= game.name %></h2>
+                  </a>
+                <% } else { %>
+                  <p>Deleted Game</p>
+                <% } %>
                 <% if (list.user._id.toString() === user._id.toString()) { %>
                   <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
                     <button class="delete is-large"></button>

@@ -7,36 +7,40 @@
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <p class="has-text-weight-bold">
-            <a href=<%= `/users/${comment.user._id}` %>>
-              <%= comment.user.username %>
-            </a>
-          </p>
-          <p>
-            <%= comment.body %>
-          </p>
-          <div class="is-flex">
-            <span class="my-2">
-              <%- shouldThereBeAnS(comment.likes, "Like") %>
-            </span>
-            <% if (user._id.toString() !== comment.user._id.toString()) { %>
-              <form action=<%- `/comments/like-comment/${comment._id}?_method=PUT` %> method="POST">
-                <button class="button is-primary ml-4" type="submit">
-                  <span class="icon">
-                    <i class="fa-solid fa-thumbs-up"></i>
-                  </span>
-                </button>
-              </form>
-            <% } else { %>
-              <form action=<%- `/comments/delete-comment/${comment._id}?_method=DELETE` %> method="POST">
-                <button class="button is-danger ml-4" type="submit">
-                  <span class="icon">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </span>
-                </button>
-              </form>
-            <% } %>
-          </div>
+          <% if (comment.user) { %>
+            <p class="has-text-weight-bold">
+              <a href=<%= `/users/${comment.user._id}` %>>
+                <%= comment.user.username %>
+              </a>
+            </p>
+            <p>
+              <%= comment.body %>
+            </p>
+            <div class="is-flex">
+              <span class="my-2">
+                <%- shouldThereBeAnS(comment.likes, "Like") %>
+              </span>
+              <% if (comment.user && user._id.toString() !== comment.user._id.toString()) { %>
+                <form action=<%- `/comments/like-comment/${comment._id}?_method=PUT` %> method="POST">
+                  <button class="button is-primary ml-4" type="submit">
+                    <span class="icon">
+                      <i class="fa-solid fa-thumbs-up"></i>
+                    </span>
+                  </button>
+                </form>
+              <% } else { %>
+                <form action=<%- `/comments/delete-comment/${comment._id}?_method=DELETE` %> method="POST">
+                  <button class="button is-danger ml-4" type="submit">
+                    <span class="icon">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </span>
+                  </button>
+                </form>
+              <% } %>
+            </div>
+          <% } else { %>
+            <p>Deleted comment</p>
+          <% } %>
         </div>
       </div>
     </article>

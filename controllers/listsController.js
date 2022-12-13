@@ -21,8 +21,10 @@ module.exports = {
   getOneList: async (req, res, next) => {
     try {
       let list = await List.findById(req.params.id)
-        .populate("games")
-        .populate("comments")
+        .populate({ 
+          path: "games comments", 
+          transform: (doc, id) => doc == null ? id : doc 
+        })
         .lean();
       res.render("lists/listPage", { list, user: req.user });
     } catch (error) {
