@@ -1,0 +1,12 @@
+<div class="media">
+  <div class="media-content">
+    <a href=<%- `/lists/${list._id}` %>>
+      <h2 class="title <%- size %>"><%= list.name %> <%= list.private ? "(private)" : "" %></h2>
+    </a>
+    <% if (!list.private) { %>
+      <span><%= shouldThereBeAnS(list.likes, "Like") %> - </span>
+      <span><%= shouldThereBeAnS(list.comments.length, "Comment") %> - </span>
+    <% } %>
+    <span><%= shouldThereBeAnS(list.games.length, "Game") %></span>
+  </div>
+</div>
