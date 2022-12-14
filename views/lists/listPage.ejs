@@ -19,23 +19,30 @@
             </div>
           </div>
           <% for (let game of list.games) { %>
-            <div class="box">
-              <div class="is-flex is-justify-content-space-between">
+              <div class="media">
                 <% if (game.name) { %>
-                  <a href=<%- `/games/${game._id}` %>>
-                    <h2 class="title"><%= game.name %></h2>
-                  </a>
+                  <div class="media-left" style="width: 5rem;">
+                    <figure class="image is-2by3">
+                      <%- include("../partials/gameImage.ejs", { game, style: "object-fit: contain;" }) %>
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <a href=<%- `/games/${game._id}` %>>
+                      <h2 class="title"><%= game.name %></h2>
+                      <p class="subtitle is-6"><%= game.genres %></p>
+                    </a>
+                  </div>
                 <% } else { %>
-                  <p>Deleted Game</p>
+                  <div class="media-content">
+                    <p>Deleted Game</p>
+                  </div>
                 <% } %>
                 <% if (list.user._id.toString() === user._id.toString()) { %>
-                  <form action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
+                  <form class="media-right" action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
                     <button class="delete is-large"></button>
                   </form>
                 <% } %>
               </div>
-              <p class="subtitle"><%= game.genre %></p>
-            </div>
           <% } %>
           <% if (list.games.length === 0) { %>
             <h2 class="subtitle is-4">There are no games in this list</h2>
