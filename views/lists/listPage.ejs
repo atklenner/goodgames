@@ -44,7 +44,7 @@
       </div>
     </div>
     <% if (!list.private) { %>
-      <%- include("../partials/comments.ejs", { comments: list.comments, type: "list", post: list }) %>
+      <%- include("../partials/comments.ejs", { comments: list.comments, type: "list", post: list, user }) %>
     <% } %>
   </div>
 </main>

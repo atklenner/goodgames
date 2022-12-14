@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <%- include("../partials/comments.ejs", { comments: review.comments, type: "review", post: review }) %>
+    <%- include("../partials/comments.ejs", { comments: review.comments, type: "review", post: review, user }) %>
   </div>
 </main>
 <%- include("../partials/footer.ejs") %>

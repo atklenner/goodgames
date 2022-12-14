@@ -4,7 +4,7 @@
     <%- shouldThereBeAnS(post.comments.length, "Comment") %>
   </h2>
   <% for (let comment of comments) { %>
-    <article class="media">
+    <div class="media">
       <div class="media-content">
         <div class="content">
           <% if (comment.user) { %>
@@ -43,9 +43,10 @@
           <% } %>
         </div>
       </div>
-    </article>
+    </div>
   <% } %>
-    <article class="media">
+  <% if (user) { %>
+    <div class="media">
       <div class="media-content">
         <form action=<%- `/${type}s/${type}-comment/${post._id}?_method=PUT` %> method="POST">
           <div class="field">
@@ -61,6 +62,13 @@
           </div>
         </form>
       </div>
-    </article>
+    </div>
+  <% } else { %>
+    <div class="media">
+      <div class="media-content">
+        <p><a href="/signup">Sign up</a> to comment.</p>
+      </div>
+    </div>
+  <% } %>
   </div>
 </div>
