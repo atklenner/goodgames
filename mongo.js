@@ -32,8 +32,10 @@ let games = [
   { name: "Fallout: New Vegas", genres: ["Action", "RPG"] },
   { name: "Kirby and the Forgotten Land", genres: ["Action", "Platformer"] },
 ];
-let image = "https://res.cloudinary.com/dvrfafdas/image/upload/v1669920387/qi0ueaydyjn6zn4b1f8e.png";
-let cloudinaryId = "qi0ueaydyjn6zn4b1f8e";
+// let image = "https://res.cloudinary.com/dvrfafdas/image/upload/v1669920387/qi0ueaydyjn6zn4b1f8e.png";
+// let cloudinaryId = "qi0ueaydyjn6zn4b1f8e";
+let image = "";
+let cloudinaryId = "";
 // Simple program to seed my database with data
 
 // Create a new MongoClient
