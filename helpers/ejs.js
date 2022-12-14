@@ -45,7 +45,9 @@ module.exports = {
     return newStr + "...";
   },
   editLikeButton: (data, user, type) => {
-    if (data.user._id.toString() === user._id.toString()) {
+    if (!user) {
+      return "";
+    } else if (data.user._id.toString() === user._id.toString()) {
       return `<a href=/${type}s/edit-${type}/${data._id}
         class="button has-text-weight-bold">
           <span class="icon">
