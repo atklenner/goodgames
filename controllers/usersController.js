@@ -15,7 +15,7 @@ module.exports = {
     try {
       let userProfile = await User.findById(req.params.id).populate("lists").lean();
       let lists = userProfile.lists;
-      if (userProfile._id.toString() !== req.user._id.toString()) {
+      if (!req.user || userProfile._id.toString() !== req.user._id.toString()) {
         lists = lists.filter((list) => !list.private);
       }
       let reviews = await Review.find({ "user._id": userProfile._id }).populate("game").lean();
