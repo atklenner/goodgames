@@ -23,11 +23,7 @@
           <div class="media">
             <div class="media-left" style="width: 10rem;">
               <figure class="image is-2by3">
-                <img
-                  style="object-fit: contain;"
-                  src="<%- game.image %>"
-                  alt="<%- game.name %>"
-                />
+                <%- include("../partials/gameImage.ejs", { game, style: "object-fit: contain;" }) %>
               </figure>
             </div>
             <div class="media-content">

@@ -8,7 +8,7 @@
     <div class="columns">
       <div class="column is-half">
         <figure class="image">
-          <img src=<%-`${game.image}`%> alt="<%-`${game.name}`%>" />
+          <%- include("../partials/gameImage.ejs", { game, style: "" }) %>
         </figure>
       </div>
       <div class="column is-half">
