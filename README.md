@@ -8,6 +8,9 @@ Potential features:
 - Figure out a better way to sort lists so users can use them for recommendations based on genre/developer/some other metric
 - Filter games by publisher and develope 
 - Dark theme, there are some solutions for this but none of them are very good, would require a rewrite of the Bulma framework and I Am Not Going To Do That
+- URL Slugs for the games
+- track when a user has finished a game and tally up all the games they have finished in the year, let them set a goal for games played
+- add pagination to lists, games, reviews to make viewing easier/loading faster
 
 # GoodGames
 
@@ -19,7 +22,7 @@ Think GoodReads but for video games. Users can create lists to track the games t
 
 ## How It's Made:
 
-**Tech used:** EJS, Bulma, Node, Express, MongoDB
+**Tech used:** EJS, Bulma, Sass, Node, Express, MongoDB
 
 Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write *something*. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
 
