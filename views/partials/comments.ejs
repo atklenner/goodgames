@@ -32,7 +32,7 @@
                 </span>
               </button>
             </form>
-          <% } else { %>
+          <% } else if (comment.user) { %>
             <form action=<%- `/comments/delete-comment/${comment._id}?_method=DELETE` %> method="POST">
               <button class="button is-danger ml-4" type="submit">
                 <span class="icon">
