@@ -27,8 +27,8 @@
                 </div>
                 <div class="media-content">
                   <a href=<%- `/games/${game._id}` %>>
-                    <h2 class="title"><%= game.name %></h2>
-                    <p class="subtitle is-6"><%= game.genres %></p>
+                    <h2 class="title is-size-5-mobile is-size-4-tablet is-size-3-desktop"><%= game.name %></h2>
+                    <p class="subtitle is-size-6-mobile is-size-5-tablet"><%= game.genres %></p>
                   </a>
                 </div>
               <% } else { %>
@@ -36,7 +36,7 @@
                   <p>Deleted Game</p>
                 </div>
               <% } %>
-              <% if (list.user._id.toString() === user._id.toString()) { %>
+              <% if (user && list.user._id.toString() === user._id.toString()) { %>
                 <form class="media-right" action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
                   <button class="delete is-large"></button>
                 </form>

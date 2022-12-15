@@ -6,10 +6,10 @@
       <div class="column is-two-thirds is-offset-2">
         <div class="box p-5">
           <% if (locals._id) { %>
-            <h1 class="title is-1">Update List Info</h1>
+            <h1 class="title is-3">Update List Info</h1>
             <form action=<%- `/lists/update-list/${_id}?_method=PUT` %> method="post"> 
           <% } else { %>
-            <h1 class="title is-1">New List Form</h1>
+            <h1 class="title is-3">New List Form</h1>
             <form action="/lists/new-list" method="post">
           <% } %>
             <%- include("../partials/textInput.ejs", { name: "name", data: locals.name, type: "text", label: "Name" }) %>

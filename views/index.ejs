@@ -3,7 +3,7 @@
   <div class="container">
     <h1 class="title">Dashboard</h1>
     <div class="columns">
-      <div class="column is-4">
+      <div class="column is-4-widescreen is-half-tablet">
         <div class="box">
           <div class="is-flex is-justify-content-space-between">
             <h2 class="title">Your Lists</h2>
@@ -31,15 +31,14 @@
                 </figure>
               </div>
               <div class="media-content">
-                <div class="content">
-                  <a href=<%- `/games/${game._id}` %>><p class="subtitle"><%= game.name %></p></a>
-                </div>
+                <a href=<%- `/games/${game._id}` %>><p class="title is-5"><%= game.name %></p></a>
+                <p class="subtitle is-6"><%= game.genres %></p>
               </div>
             </div>
           <% } %>
         </div>
       </div>
-      <div class="column is-8">
+      <div class="column is-8-widescreen is-half-tablet">
         <div class="box">
           <% if (locals.mainList) { %>
             <a href=<%- `/lists/${mainList._id}` %>>
@@ -55,7 +54,8 @@
                   </div>
                   <div class="media-content">
                     <div class="content">
-                      <a href=<%- `/games/${game._id}` %>><p class="subtitle"><%= game.name %></p></a>
+                      <a href=<%- `/games/${game._id}` %>><p class="title is-size-5-mobile is-size-4-tablet"><%= game.name %></p></a>
+                      <p class="subtitle is-size-6-mobile is-size-5-tablet"><%= game.genres %></p>
                     </div>
                   </div>
                 </div>

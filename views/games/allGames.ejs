@@ -11,14 +11,14 @@
       </a>
     </div>
     <div class="columns">
-      <div class="column is-2">
+      <div class="column is-3-desktop is-4-tablet">
         <form method="get" action="games">
           <%- include("../partials/textInput.ejs", { name: "name", type: "text", data: name, label: "Name"}) %>
           <%- include("../partials/gameGenres.ejs", { checkedGenres }) %>
           <button type="submit" class="button is-primary has-text-weight-bold">Filter</button>
         </form>
       </div>
-      <div class="column is-10">
+      <div class="column is-9-desktop is-8-tablet">
         <% for (let game of games) { %>
           <div class="media">
             <div class="media-left" style="width: 10rem;">
@@ -29,9 +29,9 @@
             <div class="media-content">
               <div class="content">
                 <a href=<%- `/games/${game._id}` %>>
-                  <h2 class="title"><%= game.name %></h2>
+                  <h2 class="title is-size-5-mobile is-size-4-tablet is-size-3-desktop"><%= game.name %></h2>
                 </a>
-                <p class="subtitle"><%= game.genres %></p>
+                <p class="subtitle is-size-6-mobile is-size-5-tablet"><%= game.genres %></p>
               </div>
             </div>
           </div>

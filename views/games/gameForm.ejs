@@ -6,7 +6,7 @@
       <div class="column is-two-thirds is-offset-2">
         <div class="box p-5">
           <% if (locals._id) { %>
-            <h1 class="title is-1">Update Game Info</h1>
+            <h1 class="title is-3">Update Game Info</h1>
             <form action=<%- `/games/update-game/${_id}?_method=PUT` %>
                   enctype="multipart/form-data" method="post"> 
           <% } else { %>

@@ -82,7 +82,7 @@
             <h2 class="title">Your Review</h2>
             <%- include("../partials/review.ejs", { review: userReview }) %>
           <% } else if (user) { %>
-            <h2 class="title">You haven't written a review of this game</h2>
+            <h2 class="title is-size-5-mobile is-size-4-tablet">You haven't written a review of this game</h2>
             <a href=<%- `/reviews/edit-review/${game._id}` %> class="button is-primary has-text-weight-bold">Write a Review</a>
           <% } else { %>
             <h2 class="title">Sign up to review this game</h2>
@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="columns">
-      <div class="column is-two-thirds">
+      <div class="column is-two-thirds is-offset-2">
         <h2 class="title">All Reviews</h2>
         <% for (let review of allReviews) { %>
           <div class="box">

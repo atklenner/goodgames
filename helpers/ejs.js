@@ -123,6 +123,7 @@ module.exports = {
   },
   gameGenres: genres,
   dateValue: (date) => {
+    if (!date) return "";
     let month = date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
     let day = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
     return `${date.getFullYear()}-${month}-${day}`
