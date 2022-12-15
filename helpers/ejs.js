@@ -65,6 +65,7 @@ module.exports = {
     }
   },
   shouldThereBeAnS: (num, word) => {
+    if (num == undefined) return "";
     if (num === 1) return `1 ${word}`;
     return `${num} ${word}s`;
   },
