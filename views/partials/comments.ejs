@@ -24,6 +24,7 @@
           <span class="my-2">
             <%- shouldThereBeAnS(comment.likes, "Like") %>
           </span>
+          <% if (user) { %>
           <% if (comment.user && user._id.toString() !== comment.user._id.toString()) { %>
             <form action=<%- `/comments/like-comment/${comment._id}?_method=PUT` %> method="POST">
               <button class="button is-primary ml-4" type="submit">
@@ -40,6 +41,7 @@
                 </span>
               </button>
             </form>
+          <% } %>
           <% } %>
         </div>
       </div>
