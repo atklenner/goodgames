@@ -4,50 +4,48 @@
   <div class="container">
     <div class="columns">
       <div class="column is-two-thirds is-offset-2">
-        <div class="content">
-          <div class="is-flex is-justify-content-space-between block">
-            <div>
-              <h1 class="title"><%= list.name %> <%= list.private ? "(private)" : "" %></h1>
-              <p class="subtitle"><%= list.description %></p>
-              <a href=<%- `/users/${list.user._id}` %> class=""><%= list.user.username %></a>
-            </div>
-            <div class="is-flex is-align-items-baseline">
-              <% if (!list.private) { %>
-                <span class="mr-4"><%- shouldThereBeAnS(list.likes, "Like") %> </span>
-              <% } %>
-              <%- editLikeButton(list, user, "list") %>
-            </div>
+        <div class="is-flex is-justify-content-space-between block">
+          <div>
+            <h1 class="title"><%= list.name %> <%= list.private ? "(private)" : "" %></h1>
+            <p class="subtitle"><%= list.description %></p>
+            <a href=<%- `/users/${list.user._id}` %> class=""><%= list.user.username %></a>
           </div>
-          <% for (let game of list.games) { %>
-              <div class="media">
-                <% if (game.name) { %>
-                  <div class="media-left" style="width: 5rem;">
-                    <figure class="image is-2by3">
-                      <%- include("../partials/gameImage.ejs", { game, style: "object-fit: contain;" }) %>
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <a href=<%- `/games/${game._id}` %>>
-                      <h2 class="title"><%= game.name %></h2>
-                      <p class="subtitle is-6"><%= game.genres %></p>
-                    </a>
-                  </div>
-                <% } else { %>
-                  <div class="media-content">
-                    <p>Deleted Game</p>
-                  </div>
-                <% } %>
-                <% if (list.user._id.toString() === user._id.toString()) { %>
-                  <form class="media-right" action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
-                    <button class="delete is-large"></button>
-                  </form>
-                <% } %>
-              </div>
-          <% } %>
-          <% if (list.games.length === 0) { %>
-            <h2 class="subtitle is-4">There are no games in this list</h2>
-          <% } %>
+          <div class="is-flex is-align-items-baseline">
+            <% if (!list.private) { %>
+              <span class="mr-4"><%- shouldThereBeAnS(list.likes, "Like") %> </span>
+            <% } %>
+            <%- editLikeButton(list, user, "list") %>
+          </div>
         </div>
+        <% for (let game of list.games) { %>
+            <div class="media">
+              <% if (game.name) { %>
+                <div class="media-left" style="width: 6rem;">
+                  <figure class="image is-2by3">
+                    <%- include("../partials/gameImage.ejs", { game, style: "object-fit: contain;" }) %>
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <a href=<%- `/games/${game._id}` %>>
+                    <h2 class="title"><%= game.name %></h2>
+                    <p class="subtitle is-6"><%= game.genres %></p>
+                  </a>
+                </div>
+              <% } else { %>
+                <div class="media-content">
+                  <p>Deleted Game</p>
+                </div>
+              <% } %>
+              <% if (list.user._id.toString() === user._id.toString()) { %>
+                <form class="media-right" action=<%- `/lists/remove-list-game/${list._id}/${game._id}?_method=DELETE` %> method="post">
+                  <button class="delete is-large"></button>
+                </form>
+              <% } %>
+            </div>
+        <% } %>
+        <% if (list.games.length === 0) { %>
+          <h2 class="subtitle is-4">There are no games in this list</h2>
+        <% } %>
       </div>
     </div>
     <% if (!list.private) { %>
