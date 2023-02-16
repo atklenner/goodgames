@@ -24,3 +24,7 @@ I learned how to separate my server code into logical chunks using MVC and how m
 Take a look at these couple examples that I have in my own portfolio:
 
 **Bouncing DVD Logo:** https://github.com/atklenner/BouncingDVDLogo
+
+**Uniform Resource Locator Extender:** https://github.com/atklenner/uniform-resource-locator-extender-3000-extreme-edition
+
+**Homepage:** https://github.com/atklenner/homepage
