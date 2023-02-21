@@ -4,7 +4,9 @@ Think GoodReads but for video games with a user editable database. Users can cre
 
 **Link:** https://goodgames.cyclic.app/
 
-![alt tag](http://placecorgi.com/1200/650)
+![GoodGames user dashboard screenshot](https://github.com/atklenner/atklenner/blob/main/images/gg-dashboard.png)
+
+![GoodGames game page screenshot](https://github.com/atklenner/atklenner/blob/main/images/gg-ff7-good.png)
 
 ## How It's Made:
 
