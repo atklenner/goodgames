@@ -24,14 +24,8 @@ module.exports = {
     try {
       let gameReq = Game.findById(req.params.id).lean();
       let allReviewsReq = Review.find({ game: req.params.id }).sort({ likes: -1 }).lean();
-      // let userReviewReq = Review.findOne({
-      //   game: req.params.id,
-      //   "user._id": req.user._id,
-      // }).lean();
-      // let userReq = User.findById(req.user._id).populate("lists");
       let userReviewReq = Promise.resolve(null);
       let userReq = Promise.resolve(null);
-      console.log("req.user", req.user);
       if (req.user) {
         userReviewReq = Review.findOne({
           game: req.params.id,

@@ -35,7 +35,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(morgan("tiny"));
+// app.use(morgan("tiny"));
 
 app.use(methodOverride("_method"));
 
