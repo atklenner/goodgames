@@ -8,7 +8,14 @@
     <div class="columns">
       <div class="column is-half">
         <figure class="image">
-          <%- include("../partials/gameImage.ejs", { game, style: "" }) %>
+          <img 
+            src="<%-`${game.image}`%>"
+            alt="<%-`${game.name}`%>" 
+            <% if (locals.style) { %>
+              style="<%= style %>"
+            <% } %>
+            onerror="this.onerror=null;this.src='https://res.cloudinary.com/dvrfafdas/image/upload/v1671043235/shenmue4x3_rwegjn.jpg';"
+          />
         </figure>
       </div>
       <div class="column is-half">
