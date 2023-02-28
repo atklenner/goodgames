@@ -1,6 +1,6 @@
 # GoodGames
 
-Think GoodReads but for video games with a user editable database. Users can create lists to track the games they are playing or want to play and review them as well.
+Think GoodReads but for video games. Users can create lists to track the games they are playing or want to play and review them as well. There is also a user editable database of video games so if anyone wants to keep track of a game they can add it themselves.
 
 **Link:** https://goodgames.cyclic.app/
 
@@ -12,7 +12,7 @@ Think GoodReads but for video games with a user editable database. Users can cre
 
 **Tech used:** EJS, Bulma, Sass, Node, Express, MongoDB, Mongoose
 
-This application is server side rendered using Express running in Node with EJS as a templating language. I used MongoDB to store all my data and took advantage of the MongoDB Atlas Search to search for games by name, developer, or publisher. All of the UI comes from the Bulma CSS framework.
+This application is server side rendered using Express running in Node with EJS as a templating language. I used MongoDB to store all my data and took advantage of the MongoDB Atlas Search to search for games by name, developer, or publisher. All of the UI styling comes from the Bulma CSS framework.
 
 ## Optimizations
 
