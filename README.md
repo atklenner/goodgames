@@ -18,6 +18,8 @@ This application is server side rendered using Express running in Node with EJS 
 
 When I come back to this project I would add more features like an average review score for games, more ways to filter games, and a counter that tracks the number of games played in a year so users can set a goal for themselves.
 
+Another thing that I would like to do is create a system for users that rewards them for adding games to the database. The more they add or update existing games the more responsibilities and features they have access to. 
+
 ## Lessons Learned:
 
 I learned how to separate my server code into logical chunks using MVC and how much it pays off in the long run to spend some time planning and organizing my project.
